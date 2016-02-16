@@ -2,7 +2,8 @@
   "scripts": {
     "test": "npm run compile && jasmine-node ui/ --junitreport",
     "start": "npm run compile && node server.js",
-    "compile": "tsc"
+    "compile": "tsc",
+    "postinstall": "typings install"
   },
   "dependencies": {
     "express": "^3.2.6",
@@ -13,7 +14,8 @@
   "devDependencies": {
     "jasmine-core": "^2.4.1",
     "jasmine-node": "^1.14.5",
-    "typescript": "^1.7.5"
+    "typescript": "^1.7.5",
+    "typings": "^0.6.8"
   },
   "engines": {
     "node": "^5.6"

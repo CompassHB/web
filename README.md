@@ -19,9 +19,4 @@ The directory structure attempts to match the URL structure if possible.
 Examples:
 
 * `/` -- ui/pages/index.js
-* `/sermons/:slug' -- ui/pages/sermons/single.js
-
-## TODOs
-
-* Explore JSX
-* Explore TypeScript
+* `/sermons/:slug` -- ui/pages/sermons/single.js
