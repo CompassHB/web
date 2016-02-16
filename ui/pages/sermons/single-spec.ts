@@ -1,6 +1,5 @@
-/*global expect*/
-var ReactDOMServer = require('react-dom/server');
-var sermonpage = require('./single');
+import * as ReactDOMServer from 'react-dom/server';
+import sermonpage from './single';
 
 describe('ui/pages/sermons/single', function() {
     it('Shows the sermon title', function() {

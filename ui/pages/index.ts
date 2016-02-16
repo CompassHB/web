@@ -1,16 +1,9 @@
-var React = require('react');
-var div = React.DOM.div;
-var ul = React.DOM.ul;
-var li = React.DOM.li;
-var h1 = React.DOM.h1;
-var html = React.DOM.html;
-var head = React.DOM.head;
-var body = React.DOM.body;
-var a = React.DOM.a;
+import * as React from "react";
+import header from "../components/header";
 
-var header = require('../components/header');
+var {div,ul,li,h1,html,head,body,a} = React.DOM;
 
-module.exports = function homepage(posts) {
+export default function homepage(posts) {
   return html({}, [
     head({key: 'head'}, []),
     body({key: 'body'}, div({key: 'container'}, [

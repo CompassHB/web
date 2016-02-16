@@ -1,8 +1,8 @@
 /*global expect*/
-var ReactDOMServer = require('react-dom/server');
-var homepage = require('./index');
+import * as ReactDOMServer from 'react-dom/server';
+import homepage from './index';
 
-describe('homepage', function() {
+describe('ui/pages/index', function() {
     it('shows the latest sermon titles', function() {
         var result = ReactDOMServer.renderToStaticMarkup(homepage([
             {id: 'foo', title: 'Foo sermon'},

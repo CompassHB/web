@@ -4,6 +4,7 @@ This will be the new website for https://compasshb.com!
 
 ## Development commands
 
+* Compile TypeScript to JS: `npm run compile`
 * Start server on port `process.env.PORT`: `npm start`
 * Run Jasmine tests: `npm test`
 

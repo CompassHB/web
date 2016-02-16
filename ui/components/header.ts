@@ -1,14 +1,9 @@
-var React = require('react');
+import * as React from 'react';
+import logo from "./logo";
 
-var nav = React.DOM.nav;
-var button = React.DOM.button;
-var a = React.DOM.a;
-var ul = React.DOM.ul;
-var li = React.DOM.li;
+const {nav,button,a,ul,li} = React.DOM;
 
-var logo = require('./logo');
-
-module.exports = function header() {
+export default function header() {
     return nav({}, [
         button({key: 'open-nav'}, 'Menu'),
         logo({key: 'logo'}),

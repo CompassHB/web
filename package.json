@@ -1,17 +1,21 @@
 {
-  "main": "server.js",
   "scripts": {
-    "test": "jasmine-node ui/ --junitreport"
+    "test": "npm run compile && jasmine-node ui/ --junitreport",
+    "start": "npm run compile && node server.js",
+    "compile": "tsc"
   },
   "dependencies": {
     "express": "^3.2.6",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "typescript": "^1.7.5",
     "wpcom": "^4.8.3"
   },
   "devDependencies": {
     "jasmine-core": "^2.4.1",
-    "jasmine-node": "^1.14.5"
+    "jasmine-node": "^1.14.5",
+    "typescript": "^1.7.5"
+  },
+  "engines": {
+    "node": "^5.6"
   }
 }

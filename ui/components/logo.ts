@@ -1,6 +1,5 @@
-var React = require('react');
-var a = React.DOM.a;
-var img = React.DOM.img;
+import * as React from 'react';
+const {a,img} = React.DOM;
 
 var styles = {
     img: {
@@ -9,7 +8,7 @@ var styles = {
     },
 };
 
-module.exports = function logo(props) {
+export default function logo(props) {
     return a({key: props.key, href: '/'}, [
         img({
             src: 'https://www.compasshb.com/CBC-HB-logo.png',
