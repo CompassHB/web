@@ -8,7 +8,7 @@ var styles = {
   },
 };
 
-export default function logo(props) {
+export default function logo(props: { key?: string } = {}) {
   return a({ key: props.key, href: '/' }, [
     img({
       src: 'https://www.compasshb.com/CBC-HB-logo.png',

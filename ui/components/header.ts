@@ -1,15 +1,21 @@
+import * as bs from "../bootstrap";
 import * as React from 'react';
 import logo from "./logo";
-
 const {nav, button, a, ul, li} = React.DOM;
 
 export default function header() {
-  return nav({}, [
-    button({ key: 'open-nav' }, 'Menu'),
-    logo({ key: 'logo' }),
-    ul({ key: 'menu' }, [
-      li({ key: 'who-we-are' }, [
-        a({ href: 'https://www.compasshb.com/who-we-are' }, 'Who We Are'),
+  return bs.navbar({}, [
+    bs.navbarHeader({}, [
+      bs.navbarBrand({}, [
+        logo(),
+      ]),
+    ]),
+
+    bs.nav({}, [
+      bs.navDropdown({ title: 'Who we are' }, [
+        bs.navItem({ href: '/who-we-are' }, 'Who we are'),
+        bs.navItem({ href: '/what-we-believe' }, 'What we believe'),
+        bs.navItem({ href: '/eight-distinctives' }, '8 distinctives'),
       ]),
     ]),
   ]);
