@@ -6,7 +6,7 @@ var app = express();
 var site = wpcom.site('compasshb.wordpress.com');
 
 
-var homepage = require('.ui/pages/index');
+var homepage = require('./ui/pages/index');
 
 app.get('/', function (req, res) {
   site.postsList().then(function(data) {
