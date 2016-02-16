@@ -25,6 +25,12 @@ Examples:
 
 Commands to test changes to the Dockerfile locally:
 
-* docker build -t www .
-* docker run -p 1743:1743 -d www
-* docker-machine ip default # Mac only
+* `docker build -t www .`
+* `docker run -p 1743:1743 -d www`
+* `docker-machine ip default` -- OSx only
+
+Commands for the CI server:
+
+* `docker build -t revival-containers .`
+* `docker tag revival-containers:www 427935221337.dkr.ecr.us-east-1.amazonaws.com/revival-containers:www`
+* `docker push 427935221337.dkr.ecr.us-east-1.amazonaws.com/revival-containers:www`
