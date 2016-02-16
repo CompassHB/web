@@ -7,6 +7,13 @@
     "removeComments": false,
     "noImplicitAny": false
   },
+  "filesGlob": [
+    "**/*.ts",
+    "!node_modules/**",
+    "!.c9/**",
+    "!.git/**",
+    "!typings/**"
+  ],
   "exclude": [
     ".c9",
     ".git",

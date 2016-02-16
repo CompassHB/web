@@ -1,18 +1,18 @@
 import * as React from 'react';
 import logo from "./logo";
 
-const {nav,button,a,ul,li} = React.DOM;
+const {nav, button, a, ul, li} = React.DOM;
 
 export default function header() {
-    return nav({}, [
-        button({key: 'open-nav'}, 'Menu'),
-        logo({key: 'logo'}),
-        ul({key: 'menu'}, [
-            li({key: 'who-we-are'}, [
-                a({href: 'https://www.compasshb.com/who-we-are'}, 'Who We Are'),
-            ]),
-        ]),
-    ]);
+  return nav({}, [
+    button({ key: 'open-nav' }, 'Menu'),
+    logo({ key: 'logo' }),
+    ul({ key: 'menu' }, [
+      li({ key: 'who-we-are' }, [
+        a({ href: 'https://www.compasshb.com/who-we-are' }, 'Who We Are'),
+      ]),
+    ]),
+  ]);
 };
 
 /*

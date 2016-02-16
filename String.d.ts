@@ -1,3 +1,3 @@
 interface String {
-    includes(substr: string): boolean;
+  includes(substr: string): boolean;
 }

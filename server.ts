@@ -7,7 +7,7 @@ import sermonpage from "./ui/pages/sermons/single";
 const app = express();
 const site = wpcom().site('compasshb.wordpress.com');
 
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
   site.postsList().then(function({posts: sermons}) {
     res.send(200, ReactDOMServer.renderToStaticMarkup(homepage(sermons)));
   }).catch(function(e) {
@@ -15,11 +15,10 @@ app.get('/', function (req, res) {
   });
 });
 
-app.get('/sermons/:slug', function (req, res) {
-  site.post({slug: req.params.slug}).get().then(function(sermon) {
+app.get('/sermons/:slug', function(req, res) {
+  site.post({ slug: req.params.slug }).get().then(function(sermon) {
     res.send(ReactDOMServer.renderToStaticMarkup(sermonpage(sermon)));
   });
 });
-
 
 app.listen(process.env.PORT || 1743);
