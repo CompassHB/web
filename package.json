@@ -1,7 +1,7 @@
 {
   "main": "server.js",
   "scripts": {
-    "test": "jasmine-node specs/"
+    "test": "jasmine-node ui/ --junitreport"
   },
   "dependencies": {
     "express": "^3.2.6",

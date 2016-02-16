@@ -1,6 +1,6 @@
 /*global expect*/
 var ReactDOMServer = require('react-dom/server');
-var homepage = require('../homepage');
+var homepage = require('./index');
 
 describe('homepage', function() {
     it('shows the latest sermon titles', function() {
