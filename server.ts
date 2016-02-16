@@ -22,4 +22,4 @@ app.get('/sermons/:slug', function (req, res) {
 });
 
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 1743);
