@@ -38,3 +38,5 @@ docker build -t revival-containers:www .
 docker tag revival-containers:www 427935221337.dkr.ecr.us-east-1.amazonaws.com/revival-containers:www
 docker push 427935221337.dkr.ecr.us-east-1.amazonaws.com/revival-containers:www
 ```
+
+Testing post-commit hook
