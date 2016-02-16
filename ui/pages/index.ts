@@ -1,22 +1,29 @@
 import * as React from "react";
 import header from "../components/header";
+import latestSermon from "../components/latestSermon";
 
-var {div,ul,li,h1,html,head,body,a} = React.DOM;
+var {div,ul,li,h1,html,head,img,body,a,span} = React.DOM;
 
-export default function homepage(posts) {
+export default function homepage([sermon, ...sermons]) {
   return html({}, [
     head({key: 'head'}, []),
-    body({key: 'body'}, div({key: 'container'}, [
+    body({key: 'body'}, div({}, [
       header(),
+      div({}, [
+        div({style: {padding:'1em'}}, [
+          latestSermon(sermon),
+        ]),
+        
+      ]),
       div({}, [
         h1({key: 'title'}, "Latest sermons"),
     
-        ul({key: 'list'}, posts.map(function(post) {
-          return li({key: post.id},
-            a({href: "/sermons/" + post.slug}, post.title)
+        ul({key: 'list'}, sermons.map(function(sermon) {
+          return li({key: sermon.id},
+            a({href: "/sermons/" + sermon.slug}, sermon.title)
           );
         })),
       ]),
-    ]))
+    ])),
   ]);
 };

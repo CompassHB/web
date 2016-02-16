@@ -8,10 +8,10 @@ const app = express();
 const site = wpcom().site('compasshb.wordpress.com');
 
 app.get('/', function (req, res) {
-  site.postsList().then(function(data) {
-    var content = ReactDOMServer.renderToStaticMarkup(homepage(data.posts));
-    
-    res.send(content);
+  site.postsList().then(function({posts: sermons}) {
+    res.send(200, ReactDOMServer.renderToStaticMarkup(homepage(sermons)));
+  }).catch(function(e) {
+    res.send(500, '<pre>' + e + '</pre>');
   });
 });
 
