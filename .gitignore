@@ -3,7 +3,4 @@ node_modules
 reports
 typings
 npm-debug.log
-
-# We use typescript, so don't need any JS source files
-*.js
-*.js.map
+_out

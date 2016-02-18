@@ -2,11 +2,13 @@ import * as React from "react";
 import header from "../components/header";
 import latestSermon from "../components/latestSermon";
 
-var {div, ul, li, h1, html, head, img, body, a, span} = React.DOM;
+var {div, ul, li, link, h1, html, head, img, body, a, span} = React.DOM;
 
 export default function homepage([sermon, ...sermons]) {
   return html({}, [
-    head({ key: 'head' }, []),
+    head({ key: 'head' }, [
+      link({rel:'stylesheet', href: '/ui/common.css'}),
+    ]),
     body({ key: 'body' }, div({}, [
       header(),
       div({}, [

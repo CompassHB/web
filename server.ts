@@ -21,4 +21,8 @@ app.get('/sermons/:slug', function(req, res) {
   });
 });
 
-app.listen(process.env.PORT || 1743);
+app.use(express.static('_out'));
+
+const server = app.listen(process.env.PORT || 1743, function() {
+  console.log(`CompassHB ready for requests on port ${server.address().port}!`);
+});

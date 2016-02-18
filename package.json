@@ -1,13 +1,15 @@
 {
   "scripts": {
-    "test": "npm run compile && jasmine-node ui/ --junitreport",
-    "start": "npm run compile && node server.js",
-    "compile": "tsc",
+    "test": "npm run build && jasmine-node _out/ui/ --junitreport",
+    "start": "npm run build && node _out/server.js",
+    "build": "tsc && node _out/build.js",
     "postinstall": "typings install",
     "fix": "tsfmt -r"
   },
   "dependencies": {
+    "bootstrap-sass": "^3.3.6",
     "express": "^3.2.6",
+    "node-sass": "^3.4.2",
     "react": "~0.14.7",
     "react-bootstrap": "0.28.3",
     "react-dom": "~0.14.7",
