@@ -15,7 +15,6 @@ COPY . /src
 
 WORKDIR /src
 RUN npm run build
-RUN ls -al; less package.json
 
 # Load environment variables from S3 if production
 RUN yum install -y python-pip
