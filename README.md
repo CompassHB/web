@@ -20,21 +20,3 @@ Examples:
 
 * `/` -- ui/pages/index.js
 * `/sermons/:slug` -- ui/pages/sermons/single.js
-
-## Docker Reference
-
-Commands to test changes to the Dockerfile locally:
-
-```
-docker build -t www .
-docker run -p 1743:1743 -d www
-docker-machine ip default
-```
-
-Commands for the CI server:
-
-```
-docker build -t revival-containers:www .
-docker tag revival-containers:www 427935221337.dkr.ecr.us-east-1.amazonaws.com/revival-containers:www
-docker push 427935221337.dkr.ecr.us-east-1.amazonaws.com/revival-containers:www
-```
