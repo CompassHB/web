@@ -1,11 +1,11 @@
 # https://docs.docker.com/engine/examples/nodejs_web_app/
-FROM    centos:centos6
-
+FROM centos:centos7
 
 # Enable Extra Packages for Enterprise Linux (EPEL) for CentOS
-RUN     yum install -y epel-release
+RUN yum install -y epel-release
+
 # Install Node.js and npm
-RUN     yum install -y nodejs npm
+RUN yum install -y nodejs npm
 
 # Install app dependencies
 COPY package.json /src/package.json
@@ -21,7 +21,7 @@ RUN ls -al; less package.json
 RUN yum install -y python-pip
 RUN pip install --upgrade awscli
 ARG GET_ENV
-RUN if [ "${GET_ENV}" == "S3" ]; then aws s3 cp s3://revival_secrets/www_prod_env www_prod_env; source www_prod_env; fi
+RUN if [ "${GET_ENV}" == "S3" ]; then aws s3 cp s3://revival_secrets/www_prod_env /src/www_prod_env; source /src/www_prod_env; fi
 
 EXPOSE  8080
 CMD ["npm", "start"]
