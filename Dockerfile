@@ -10,8 +10,11 @@ RUN     yum install -y nodejs npm
 COPY package.json /src/package.json
 RUN cd /src; npm install
 
-# Bundle app source
 COPY . /src
 
+WORKDIR /src
+RUN npm run build
+RUN ls -al; less package.json
+
 EXPOSE  8080
-CMD ["node", "/src/server.js"]
+CMD ["npm", "start"]
