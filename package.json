@@ -7,13 +7,14 @@
     "fix": "tsfmt -r"
   },
   "dependencies": {
-    "bootstrap-sass": "^3.3.6",
+    "bootstrap": "4.0.0-alpha.2",
     "express": "^3.2.6",
     "node-sass": "^3.4.2",
     "react": "~0.14.7",
     "react-bootstrap": "0.28.3",
     "react-dom": "~0.14.7",
-    "wpcom": "^4.8.3"
+    "typescript": "1.8.0",
+    "wpcom": "4.8.4"
   },
   "devDependencies": {
     "jasmine-core": "^2.4.1",
