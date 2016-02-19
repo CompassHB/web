@@ -1,3 +1,10 @@
+//TODO(ewinslow): code review
+switch(process.env.NODE_ENV) {
+  case 'production':
+    require('newrelic');
+    break;
+}
+
 import * as wpcom from "wpcom";
 import * as express from "express";
 import * as ReactDOMServer from "react-dom/server";
