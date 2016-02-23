@@ -18,7 +18,7 @@ export default function homepage([sermon, ...sermons]) {
 
       ]),
       div({}, [
-        h1({ key: 'title' }, "Latest sermons"),
+        h1({ key: 'title' }, "Latest Sermons"),
 
         ul({ key: 'list' }, sermons.map(function(sermon) {
           return li({ key: sermon.id },
