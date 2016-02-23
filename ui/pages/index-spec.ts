@@ -20,6 +20,6 @@ describe('ui/pages/index', function() {
       title: 'The sermon',
     }]));
 
-    expect(result.includes('Latest sermons')).toBe(true);
+    expect(result.includes('Latest Sermons')).toBe(true);
   });
 });
