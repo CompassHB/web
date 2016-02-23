@@ -1,6 +1,7 @@
 //TODO(ewinslow): code review
 switch(process.env.NODE_ENV) {
   case 'production':
+    require('./../production.js');
     require('newrelic');
     break;
 }
