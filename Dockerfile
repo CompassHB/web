@@ -20,7 +20,7 @@ RUN npm run build
 RUN yum install -y python-pip
 RUN pip install --upgrade awscli
 ARG GET_ENV
-RUN if [ "${GET_ENV}" == "S3" ]; then aws s3 cp s3://revival_secrets/www_prod_env /src/www_prod_env; source /src/www_prod_env; fi
+RUN if [ "${GET_ENV}" == "S3" ]; then aws s3 cp s3://compasshb-config/web/production.js /src/production.js; fi
 
 EXPOSE  8080
 CMD ["npm", "start"]
