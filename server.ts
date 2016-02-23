@@ -3,6 +3,8 @@ switch(process.env.NODE_ENV) {
   case 'production':
     require('./../production.js');
     require('newrelic');
+    var bugsnag = require("bugsnag");
+    bugsnag.register(process.env.BUGSNAG_API_KEY);
     break;
 }
 
