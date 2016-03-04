@@ -47,26 +47,26 @@ const styles = {
 
 export default function latestSermon(sermon) {
   // TODO(ewinslow): Parameterize this URL
-  return a({ href: '/sermons/' + sermon.slug, style: styles.link('https://i.vimeocdn.com/video/556184684_640.jpg') }, [
+  return a({ href: '/sermons/' + sermon.slug, style: styles.link('https://i.vimeocdn.com/video/556184684_640.jpg') },
     span({ style: styles.label }, `Latest sermon`),
 
-    div({ style: styles.aligner }, [
+    div({ style: styles.aligner },
       h1({ style: styles.title }, sermon.title),
 
-      div({ style: { textAlign: 'center' } }, [
+      div({ style: { textAlign: 'center' } },
         img({
           src: material.icons.svg.playCircleOutline.white.src,
           width: 72,
           height: 72,
           alt: 'Play',
-        }),
-      ]),
-    ]),
+        })
+      )
+    ),
 
-    div({ style: styles.metadata }, [
+    div({ style: styles.metadata },
       div({}, 'Bill Blakey'),
       div({}, 'Romans 5:6-8'),
-      div({}, 'February 14, 2016'),
-    ]),
-  ]);
+      div({}, 'February 14, 2016')
+    )
+  );
 }

@@ -1,9 +1,10 @@
+import * as React from "react";
 import * as ReactDOMServer from 'react-dom/server';
-import sermonpage from './single';
+import {SermonPage} from './single';
 
-describe('ui/pages/sermons/single', function() {
+describe('SermonPage', function() {
   it('Shows the sermon title', function() {
-    var result = ReactDOMServer.renderToStaticMarkup(sermonpage({
+    const result = ReactDOMServer.renderToStaticMarkup(React.createElement(SermonPage, {
       title: 'Foobar',
       content: 'Foobar',
     }));

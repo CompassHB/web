@@ -1,31 +1,43 @@
+import * as wpcom from "wpcom";
 import * as React from "react";
 import header from "../components/header";
 import latestSermon from "../components/latestSermon";
 
-var {div, ul, li, link, h1, html, head, img, body, a, span} = React.DOM;
+const {div, ul, li, link, h1, html, head, img, body, a, meta, script, span} = React.DOM;
 
-export default function homepage([sermon, ...sermons]) {
-  return html({}, [
-    head({ key: 'head' }, [
-      link({rel:'stylesheet', href: '/ui/common.css'}),
-    ]),
-    body({ key: 'body' }, div({}, [
+export interface Sermon {
+  slug: string;
+  title: string;
+}
+
+export class IndexPage extends React.Component<{recentSermons: Array<Sermon>}, void> {
+  render() {
+    const [sermon, ...sermons] = this.props.recentSermons;
+
+    return div({},
       header(),
-      div({}, [
-        div({ style: { padding: '1em' } }, [
-          latestSermon(sermon),
-        ]),
+      sermon && div({},
+        div({ style: { padding: '1em' } },
+          latestSermon(sermon)
+        )
+      ),
+      sermons[0] && div({},
+        h1({}, "Latest sermons"),
 
-      ]),
-      div({}, [
-        h1({ key: 'title' }, "Latest Sermons"),
-
-        ul({ key: 'list' }, sermons.map(function(sermon) {
-          return li({ key: sermon.id },
+        ul({}, sermons.map((sermon, i) => (
+          li({ key: i },
             a({ href: "/sermons/" + sermon.slug }, sermon.title)
-          );
-        })),
-      ]),
-    ])),
-  ]);
-};
+          )
+        )))
+      )
+    );
+  }
+
+  static urlPattern = '/';
+
+  static render(): Promise<React.ReactElement<any>> {
+    return wpcom().site('compasshb.wordpress.com').postsList()
+        .then((result) => result.posts)
+        .then((recentSermons) => React.createElement(IndexPage, {recentSermons}));
+  }
+}

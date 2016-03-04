@@ -1,22 +1,27 @@
+import * as wpcom from "wpcom";
 import * as React from "react";
-import header from '../../components/header';
-var {html, head, body, main, h1, div} = React.DOM;
 
-/**
- * @param sermon The sermon to be displayed
- * 
- * @return
- */
-export default function sermonpage({title, content}) {
-  return html({}, [
-    head({}, []),
-    body({}, [
+const {div, header, main, h1} = React.DOM;
+
+
+export class SermonPage extends React.Component<{title:string,content:string},void> {
+  render() {
+    const {title, content} = this.props;
+
+    return div({},
       header(),
-      main({}, [
+      main({},
         h1({}, title),
         // TODO(ewinslow): Use an HTML sanitizer or something
-        div({ dangerouslySetInnerHTML: { __html: content } }),
-      ]),
-    ]),
-  ]);
+        div({ dangerouslySetInnerHTML: { __html: content } })
+      )
+    );
+  }
+
+  static urlPattern = '/sermons/:slug';
+
+  static render({slug}): Promise<React.ReactElement<any>> {
+    return wpcom().site('compasshb.wordpress.com').post({slug}).get()
+        .then((post) => React.createElement(SermonPage, post));
+  }
 }
