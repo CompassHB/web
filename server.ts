@@ -1,22 +1,12 @@
 
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
-import * as bugsnag from "bugsnag";
 import * as express from "express";
 import * as wpcom from "wpcom";
 import {IndexPage} from "./ui/pages/index";
 import {SermonPage} from "./ui/pages/sermons/single";
-import "newrelic";
 
 const app = express();
-
-switch (process.env.NODE_ENV) {
-  case 'production':
-    require('./../production.js');
-    bugsnag.register(process.env.BUGSNAG_API_KEY);
-    break;
-}
-
 
 function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Promise<string> {
   return render()
