@@ -7,10 +7,8 @@
     "fix": "tsfmt -r"
   },
   "dependencies": {
-    "bugsnag": "^1.7.0",
     "express": "^4.13.4",
     "material-ui": "^0.14.4",
-    "newrelic": "^1.25.4",
     "react": "0.14.7",
     "react-dom": "0.14.7",
     "react-tap-event-plugin": "0.2.2",
