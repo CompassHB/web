@@ -9,6 +9,12 @@ import {IceCreamEvangelismPage} from "./ui/pages/ice-cream-evangelism";
 import {AboutBeliefsPage} from "./ui/pages/about/beliefs";
 import {AboutDistinctivesPage} from "./ui/pages/about/distinctives";
 import {AboutUsPage} from "./ui/pages/about/us";
+import {CollegePage} from "./ui/pages/college";
+import {FellowshipsPage} from "./ui/pages/fellowships";
+import {KidsPage} from "./ui/pages/kids";
+import {MenPage} from "./ui/pages/men";
+import {WomenPage} from "./ui/pages/women";
+import {YouthPage} from "./ui/pages/youth";
 
 const app = express();
 
@@ -32,12 +38,18 @@ function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Pro
 }
 
 var routes = [
-  SermonPage,
-  IndexPage,
   AboutUsPage,
   AboutBeliefsPage,
   AboutDistinctivesPage,
+  SermonPage,
+  CollegePage,
+  FellowshipsPage,
+  IndexPage,
   IceCreamEvangelismPage,
+  KidsPage,
+  MenPage,
+  WomenPage,
+  YouthPage,
 ];
 
 routes.forEach(pageConfig => {
