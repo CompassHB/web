@@ -1,7 +1,9 @@
 import * as wpcom from "wpcom";
 import * as React from "react";
+import header from "../../components/header";
+import footer from "../../components/footer";
 
-const {div, header, main, h1} = React.DOM;
+const {div, main, h1} = React.DOM;
 
 
 export class SermonPage extends React.Component<{title:string,content:string},void> {
@@ -14,7 +16,8 @@ export class SermonPage extends React.Component<{title:string,content:string},vo
         h1({}, title),
         // TODO(ewinslow): Use an HTML sanitizer or something
         div({ dangerouslySetInnerHTML: { __html: content } })
-      )
+      ),
+      footer()
     );
   }
 
