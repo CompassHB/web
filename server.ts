@@ -3,16 +3,20 @@ import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import * as express from "express";
 import * as wpcom from "wpcom";
-import {IndexPage} from "./ui/pages/index";
-import {SermonPage} from "./ui/pages/sermons/single";
-import {IceCreamEvangelismPage} from "./ui/pages/ice-cream-evangelism";
 import {AboutBeliefsPage} from "./ui/pages/about/beliefs";
 import {AboutDistinctivesPage} from "./ui/pages/about/distinctives";
 import {AboutUsPage} from "./ui/pages/about/us";
 import {CollegePage} from "./ui/pages/college";
 import {FellowshipsPage} from "./ui/pages/fellowships";
+import {IndexPage} from "./ui/pages/index";
+import {IceCreamEvangelismPage} from "./ui/pages/ice-cream-evangelism";
+import {GivingPage} from "./ui/pages/giving";
 import {KidsPage} from "./ui/pages/kids";
 import {MenPage} from "./ui/pages/men";
+import {ReadPage} from "./ui/pages/read";
+import {SermonPage} from "./ui/pages/sermons/single";
+import {SermonsPage} from "./ui/pages/sermons";
+import {SongsPage} from "./ui/pages/songs";
 import {WomenPage} from "./ui/pages/women";
 import {YouthPage} from "./ui/pages/youth";
 
@@ -38,16 +42,20 @@ function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Pro
 }
 
 var routes = [
-  AboutUsPage,
   AboutBeliefsPage,
   AboutDistinctivesPage,
-  SermonPage,
+  AboutUsPage,
   CollegePage,
   FellowshipsPage,
+  GivingPage,
   IndexPage,
   IceCreamEvangelismPage,
   KidsPage,
   MenPage,
+  ReadPage,
+  SermonsPage,
+  SermonPage,
+  SongsPage,
   WomenPage,
   YouthPage,
 ];
