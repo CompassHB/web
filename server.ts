@@ -5,6 +5,10 @@ import * as express from "express";
 import * as wpcom from "wpcom";
 import {IndexPage} from "./ui/pages/index";
 import {SermonPage} from "./ui/pages/sermons/single";
+import {IceCreamEvangelismPage} from "./ui/pages/ice-cream-evangelism";
+import {AboutBeliefsPage} from "./ui/pages/about/beliefs";
+import {AboutDistinctivesPage} from "./ui/pages/about/distinctives";
+import {AboutUsPage} from "./ui/pages/about/us";
 
 const app = express();
 
@@ -30,6 +34,10 @@ function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Pro
 var routes = [
   SermonPage,
   IndexPage,
+  AboutUsPage,
+  AboutBeliefsPage,
+  AboutDistinctivesPage,
+  IceCreamEvangelismPage,
 ];
 
 routes.forEach(pageConfig => {
