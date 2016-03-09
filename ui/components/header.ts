@@ -6,7 +6,7 @@ import {LeftNav} from 'material-ui';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-const {img, ul, li, nav, button} = React.DOM;
+const {img, ul, li, nav, button, style} = React.DOM;
 
 function leftNav(props, ...children) {
   return React.createElement(LeftNav, props, ...children);
@@ -41,6 +41,12 @@ class Header extends React.Component<void,{isLeftNavOpen:boolean}> {
 
   render() {
     return React.DOM.header({},
+
+      //TODO: find a better home for this
+      style({},
+        'body {font-family: Roboto, sans-serif}'
+      ),
+
       button({onClick: this.toggleNav},
         img({src: md.icons.svg.menu.black.src, height: 24, width: 24, alt: "Menu"})
       ),
