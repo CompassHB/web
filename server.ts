@@ -31,6 +31,7 @@ function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Pro
           <head>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <script src="/ui/client.bundle.js" async></script>
+            <link href='https://fonts.googleapis.com/css?family=Roboto|Fira+Sans:700' rel='stylesheet' type='text/css'>
           </head>
           <body>
             <div id="root">
