@@ -9,7 +9,8 @@ export class CollegePage extends React.Component<{}, void> {
   render() {
     return div({},
       header(),
-      '/college page'
+      '/college page',
+      footer()
     );
   }
 
