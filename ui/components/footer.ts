@@ -22,9 +22,9 @@ function col(props, ...children) {
 
 class Footer extends React.Component<void, void> {
   render() {
-    return React.DOM.footer({style: {display: 'flex', flexWrap: 'wrap', margin: 20, paddingTop: 40, borderTop: '1px solid #EEE', padding: '40 0', lineHeight: '2em'}},
+    return React.DOM.footer({},
 
-      grid({},
+      grid({style: {paddingTop: 40, borderTop: '1px solid #EEE', lineHeight: '2em'}},
 
         row({},
           col({md: 2},
@@ -32,7 +32,7 @@ class Footer extends React.Component<void, void> {
           ),
           col({md: 2},
             h4({}, 'Ministries'),
-            ul({style: {listStyleType: 'none'}},
+            ul({style: {listStyle: 'none', padding: 0}},
               li({}, a({href: '/kids'},  'Kids')),
               li({}, a({href: '/youth'}, 'Youth')),
               li({}, a({href: '/college'}, 'College')),
@@ -41,7 +41,7 @@ class Footer extends React.Component<void, void> {
           ),
           col({md: 2},
             h4({}, 'Resources'),
-            ul({style: {listStyleType: 'none'}},
+            ul({style: {listStyle: 'none', padding: 0}},
               li({}, a({href: '/read'}, 'Scripture of the Day')),
               li({}, a({href: '/sermons'}, 'Sermons')),
               li({}, a({href: '/songs'}, 'Worship')),
@@ -50,7 +50,7 @@ class Footer extends React.Component<void, void> {
           ),
           col({md: 2},
             h4({}, 'Social'),
-            ul({style: {listStyleType: 'none'}},
+            ul({style: {listStyle: 'none', padding: 0}},
               li({}, a({href: 'https://www.facebook.com/compasshb'}, 'Facebook')),
               li({}, a({href: 'https://instagram.com/compasshb'}, 'Instagram')),
               li({}, a({href: 'https://twitter.com/compasshb'}, 'Twitter')),
@@ -60,12 +60,11 @@ class Footer extends React.Component<void, void> {
             )
           ),
           col({md: 4},
+            h4({}, 'Contact'),
             a({href: "/giving"},
               raisedButton({label: "Give", style: {margin: 12, padding: '0 50px'}})
             ),
-
-            h4({}, 'Contact'),
-            ul({},
+            ul({style: {listStyle: 'none', padding: 0}},
               li({}, '5082 Argosy, Huntington Beach, CA 92649'),
               li({}, '(714) 895-0034'),
               li({}, 'info@compasshb.com')
