@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as ReactDOMServer from 'react-dom/server';
 import {IndexPage} from './index';
-/*
+
 describe('IndexPage', function() {
   it("shows the latest sermon's title", function() {
-    const result = ReactDOMServer.renderToStaticMarkup(React.createElement(IndexPage, {
+    const result = ReactDOMServer.renderToStaticMarkup(React.createElement<any>(IndexPage, {
       recentSermons: [{
         id: '1345',
         slug: 'foo-sermon',
@@ -16,15 +16,19 @@ describe('IndexPage', function() {
   });
 
   it('Has a section for "Latest sermons"', function() {
-    const result = ReactDOMServer.renderToStaticMarkup(React.createElement(IndexPage, {
+    const result = ReactDOMServer.renderToStaticMarkup(React.createElement<any>(IndexPage, {
       recentSermons: [{
         id: '1234',
         slug: 'the-sermon',
         title: 'The sermon',
+      }, {
+        id: '1235',
+        slug: 'the-next-sermon',
+        title: 'The next sermon',
       }],
     }));
 
-    expect(result.includes('Latest Sermons')).toBe(true);
+    expect(result.includes('Latest sermons')).toBe(true);
   });
 });
-*/
+
