@@ -20,3 +20,9 @@ Examples:
 
 * `/` -- ui/pages/index.js
 * `/sermons/:slug` -- ui/pages/sermons/single.js
+
+## Contributing
+
+Install: `npm install`
+Run tests: `npm test`
+Local server: `npm start`

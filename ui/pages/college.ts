@@ -1,4 +1,3 @@
-import * as wpcom from "wpcom";
 import * as React from "react";
 import header from "../components/header";
 import footer from "../components/footer";
@@ -9,7 +8,8 @@ export class CollegePage extends React.Component<{}, void> {
   render() {
     return div({},
       header(),
-      '/college page'
+      '/college page',
+      footer()
     );
   }
 

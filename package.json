@@ -2,7 +2,7 @@
   "scripts": {
     "test": "npm run build && jasmine-node _out/ui/ --junitreport",
     "start": "npm run build && node _out/server.js",
-    "build": "tsc && node _out/build.js",
+    "build": "npm run fix && tsc && node _out/build.js",
     "postinstall": "typings install",
     "fix": "tsfmt -r"
   },
@@ -10,11 +10,11 @@
     "express": "^4.13.4",
     "material-ui": "^0.14.4",
     "react": "0.14.7",
+    "react-bootstrap": "0.28.3",
     "react-dom": "0.14.7",
     "react-tap-event-plugin": "0.2.2",
     "typescript": "^1.8.7",
-    "typescript-formatter": "^2.1.0",
-    "wpcom": "^4.8.5"
+    "typescript-formatter": "^2.1.0"
   },
   "devDependencies": {
     "browserify": "^13.0.0",

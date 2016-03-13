@@ -62,7 +62,7 @@ class Header extends React.Component<void, void> {
 
       grid({},
 
-        row({style: {borderTop: '5px solid #497f9e'}},
+        row({ style: { borderTop: '5px solid #497f9e' } },
           navbar({},
             navbarheader({},
               navbarbrand({},
@@ -71,16 +71,16 @@ class Header extends React.Component<void, void> {
               navbartoggle({})
             ),
             navbarcollapse({},
-              nav({pullRight: true},
+              nav({ pullRight: true },
                 navitem({},
                   'Who We Are'
                 ),
-                navdropdown({title: 'Ministries'},
+                navdropdown({ title: 'Ministries' },
                   menuitem({},
                     'menuitem1'
                   )
                 ),
-                navdropdown({title: 'Sermons'},
+                navdropdown({ title: 'Sermons' },
                   menuitem({},
                     'menuitem1'
                   )
@@ -92,7 +92,6 @@ class Header extends React.Component<void, void> {
             )
           )
         )
-
       )
     );
   }

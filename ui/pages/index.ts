@@ -1,4 +1,3 @@
-import * as wpcom from "wpcom";
 import * as React from "react";
 import header from "../components/header";
 import latestSermon from "../components/latestSermon";
@@ -11,7 +10,7 @@ export interface Sermon {
   title: string;
 }
 
-export class IndexPage extends React.Component<{recentSermons: Array<Sermon>}, void> {
+export class IndexPage extends React.Component<{ recentSermons: Array<Sermon> }, void> {
   render() {
     const [sermon, ...sermons] = this.props.recentSermons;
 
@@ -38,8 +37,10 @@ export class IndexPage extends React.Component<{recentSermons: Array<Sermon>}, v
   static urlPattern = '/';
 
   static render(): Promise<React.ReactElement<any>> {
-    return wpcom().site('compasshb.wordpress.com').postsList()
-        .then((result) => result.posts)
-        .then((recentSermons) => React.createElement(IndexPage, {recentSermons}));
+    return Promise.resolve(React.createElement<any>(IndexPage, {
+      recentSermons: [
+        { title: "Sample Sermon Title", id: "sample-id", slug: 'sample-slug' },
+      ],
+    }));
   }
 }
