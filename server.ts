@@ -2,7 +2,6 @@
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import * as express from "express";
-import * as wpcom from "wpcom";
 import {AboutBeliefsPage} from "./ui/pages/about/beliefs";
 import {AboutDistinctivesPage} from "./ui/pages/about/distinctives";
 import {AboutUsPage} from "./ui/pages/about/us";
@@ -17,6 +16,8 @@ import {ReadPage} from "./ui/pages/read";
 import {SermonPage} from "./ui/pages/sermons/single";
 import {SermonsPage} from "./ui/pages/sermons";
 import {SongsPage} from "./ui/pages/songs";
+import {SundaySchoolPage} from "./ui/pages/sundayschool";
+import {VideosPage} from "./ui/pages/videos";
 import {WomenPage} from "./ui/pages/women";
 import {YouthPage} from "./ui/pages/youth";
 
@@ -24,8 +25,8 @@ const app = express();
 
 function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Promise<string> {
   return render()
-      .then((reactElement) => ReactDOMServer.renderToStaticMarkup(reactElement))
-      .then((markup) => `
+    .then((reactElement) => ReactDOMServer.renderToStaticMarkup(reactElement))
+    .then((markup) => `
         <!DOCTYPE html>
         <html>
           <head>
@@ -43,7 +44,13 @@ function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Pro
       `);
 }
 
-var routes = [
+interface PageConfig {
+  redirects?: { [url: string]: number };
+  urlPattern: string;
+  render(params: any): Promise<React.ReactElement<any>>;
+}
+
+var routes: Array<PageConfig> = [
   AboutBeliefsPage,
   AboutDistinctivesPage,
   AboutUsPage,
@@ -58,16 +65,26 @@ var routes = [
   SermonsPage,
   SermonPage,
   SongsPage,
+  SundaySchoolPage,
+  VideosPage,
   WomenPage,
   YouthPage,
 ];
 
 routes.forEach(pageConfig => {
-  app.get(pageConfig.urlPattern, function (req, res) {
+  app.get(pageConfig.urlPattern, function(req, res) {
     return renderFullHtmlPage(() => pageConfig.render(req.params))
-        .then((content) => res.send(content))
-        .catch(({stack}) => res.send(`<pre>${stack}</pre>`));
+      .then((content) => res.send(content))
+      .catch(({stack}) => res.send(`<pre>${stack}</pre>`));
   });
+
+  for (var url of Object.keys(pageConfig.redirects || {})) {
+    var status = pageConfig.redirects[url];
+
+    app.get(url, function(req, res) {
+      res.redirect(status, pageConfig.urlPattern);
+    });
+  }
 });
 
 app.use(express.static('_out'));

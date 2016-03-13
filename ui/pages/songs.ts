@@ -1,4 +1,3 @@
-import * as wpcom from "wpcom";
 import * as React from "react";
 import header from "../components/header";
 import footer from "../components/footer";

@@ -4,18 +4,18 @@ import footer from "../components/footer";
 
 const {div, ul, li, link, h1, html, head, img, body, a, meta, script, span} = React.DOM;
 
-export class ReadPage extends React.Component<{}, void> {
+export class SundaySchoolPage extends React.Component<{}, void> {
   render() {
     return div({},
       header(),
-      '/read page',
+      '/sundayschool page',
       footer()
     );
   }
 
-  static urlPattern = '/read';
+  static urlPattern = '/sundayschool';
 
   static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(React.createElement(ReadPage, {}));
+    return Promise.resolve(React.createElement(SundaySchoolPage, {}));
   }
 }
