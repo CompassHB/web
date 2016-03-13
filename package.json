@@ -2,7 +2,7 @@
   "scripts": {
     "test": "npm run build && jasmine-node _out/ui/ --junitreport",
     "start": "npm run build && node _out/server.js",
-    "build": "tsc && node _out/build.js",
+    "build": "npm run fix && tsc && node _out/build.js",
     "postinstall": "typings install",
     "fix": "tsfmt -r"
   },
