@@ -2,7 +2,6 @@
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
 import * as express from "express";
-import * as wpcom from "wpcom";
 import {AboutBeliefsPage} from "./ui/pages/about/beliefs";
 import {AboutDistinctivesPage} from "./ui/pages/about/distinctives";
 import {AboutUsPage} from "./ui/pages/about/us";
