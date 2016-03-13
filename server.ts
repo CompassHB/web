@@ -17,6 +17,8 @@ import {ReadPage} from "./ui/pages/read";
 import {SermonPage} from "./ui/pages/sermons/single";
 import {SermonsPage} from "./ui/pages/sermons";
 import {SongsPage} from "./ui/pages/songs";
+import {SundaySchoolPage} from "./ui/pages/sundayschool";
+import {VideosPage} from "./ui/pages/videos";
 import {WomenPage} from "./ui/pages/women";
 import {YouthPage} from "./ui/pages/youth";
 
@@ -56,6 +58,8 @@ var routes = [
   SermonsPage,
   SermonPage,
   SongsPage,
+  SundaySchoolPage,
+  VideosPage,
   WomenPage,
   YouthPage,
 ];
