@@ -32,6 +32,8 @@ function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Pro
           <head>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <script src="/ui/client.bundle.js" async></script>
+            <link href='https://fonts.googleapis.com/css?family=Roboto|Fira+Sans:700' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
           </head>
           <body>
             <div id="root">

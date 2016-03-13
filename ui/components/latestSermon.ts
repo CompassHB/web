@@ -25,8 +25,13 @@ const styles = {
   },
   title: {
     color: 'white',
+    fontFamily: 'Fira Sans',
+    fontSize: '2.4em',
+    fontWeight: 500,
+    letterSpacing: '-0.01em',
     margin: '2em',
     textAlign: 'center',
+    textTransform: 'uppercase',
   },
   metadata: {
     bottom: 0,
