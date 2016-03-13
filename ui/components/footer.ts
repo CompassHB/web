@@ -24,47 +24,47 @@ class Footer extends React.Component<void, void> {
   render() {
     return React.DOM.footer({},
 
-      grid({style: {paddingTop: 40, borderTop: '1px solid #EEE', lineHeight: '2em'}},
+      grid({ style: { paddingTop: 40, borderTop: '1px solid #EEE', lineHeight: '2em' } },
 
         row({},
-          col({md: 2},
-            img({src: 'https://www.compasshb.com/CBC-HB-logo.png', alt: 'Compass Bible Church Huntington Beach, CompassHB', style: {height: 40}})
+          col({ md: 2 },
+            img({ src: 'https://www.compasshb.com/CBC-HB-logo.png', alt: 'Compass Bible Church Huntington Beach, CompassHB', style: { height: 40 } })
           ),
-          col({md: 2},
+          col({ md: 2 },
             h4({}, 'Ministries'),
-            ul({style: {listStyle: 'none', padding: 0}},
-              li({}, a({href: '/kids'},  'Kids')),
-              li({}, a({href: '/youth'}, 'Youth')),
-              li({}, a({href: '/college'}, 'College')),
-              li({}, a({href: '/sundayschool'}, 'Adult Sunday School'))
+            ul({ style: { listStyle: 'none', padding: 0 } },
+              li({}, a({ href: '/kids' }, 'Kids')),
+              li({}, a({ href: '/youth' }, 'Youth')),
+              li({}, a({ href: '/college' }, 'College')),
+              li({}, a({ href: '/sundayschool' }, 'Adult Sunday School'))
             )
           ),
-          col({md: 2},
+          col({ md: 2 },
             h4({}, 'Resources'),
-            ul({style: {listStyle: 'none', padding: 0}},
-              li({}, a({href: '/read'}, 'Scripture of the Day')),
-              li({}, a({href: '/sermons'}, 'Sermons')),
-              li({}, a({href: '/songs'}, 'Worship')),
-              li({}, a({href: '/videos'}, 'Videos'))
+            ul({ style: { listStyle: 'none', padding: 0 } },
+              li({}, a({ href: '/read' }, 'Scripture of the Day')),
+              li({}, a({ href: '/sermons' }, 'Sermons')),
+              li({}, a({ href: '/songs' }, 'Worship')),
+              li({}, a({ href: '/videos' }, 'Videos'))
             )
           ),
-          col({md: 2},
+          col({ md: 2 },
             h4({}, 'Social'),
-            ul({style: {listStyle: 'none', padding: 0}},
-              li({}, a({href: 'https://www.facebook.com/compasshb'}, 'Facebook')),
-              li({}, a({href: 'https://instagram.com/compasshb'}, 'Instagram')),
-              li({}, a({href: 'https://twitter.com/compasshb'}, 'Twitter')),
-              li({}, a({href: 'https://vimeo.com/compasshb'}, 'Vimeo')),
-              li({}, a({href: 'https://appsto.re/us/n_WA6.i'}, 'iPhone App')),
-              li({}, a({href: 'https://play.google.com/store/apps/details?id=com.compasshb.mobile'}, 'Android App'))
+            ul({ style: { listStyle: 'none', padding: 0 } },
+              li({}, a({ href: 'https://www.facebook.com/compasshb' }, 'Facebook')),
+              li({}, a({ href: 'https://instagram.com/compasshb' }, 'Instagram')),
+              li({}, a({ href: 'https://twitter.com/compasshb' }, 'Twitter')),
+              li({}, a({ href: 'https://vimeo.com/compasshb' }, 'Vimeo')),
+              li({}, a({ href: 'https://appsto.re/us/n_WA6.i' }, 'iPhone App')),
+              li({}, a({ href: 'https://play.google.com/store/apps/details?id=com.compasshb.mobile' }, 'Android App'))
             )
           ),
-          col({md: 4},
+          col({ md: 4 },
             h4({}, 'Contact'),
-            a({href: "/giving"},
-              raisedButton({label: "Give", style: {margin: 12, padding: '0 50px'}})
+            a({ href: "/giving" },
+              raisedButton({ label: "Give", style: { margin: 12, padding: '0 50px' } })
             ),
-            ul({style: {listStyle: 'none', padding: 0}},
+            ul({ style: { listStyle: 'none', padding: 0 } },
               li({}, '5082 Argosy, Huntington Beach, CA 92649'),
               li({}, '(714) 895-0034'),
               li({}, 'info@compasshb.com')
@@ -72,8 +72,8 @@ class Footer extends React.Component<void, void> {
           )
         ),
 
-        row({style: {padding: 10, textAlign: "right", backgroundColor: "#222222", color: "#A9A9A9"}},
-            'Copyright 2014-2016 Compass Bible Church Huntington Beach'
+        row({ style: { padding: 10, textAlign: "right", backgroundColor: "#222222", color: "#A9A9A9" } },
+          'Copyright 2014-2016 Compass Bible Church Huntington Beach'
         )
       )
     );
