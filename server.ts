@@ -25,8 +25,8 @@ const app = express();
 
 function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Promise<string> {
   return render()
-      .then((reactElement) => ReactDOMServer.renderToStaticMarkup(reactElement))
-      .then((markup) => `
+    .then((reactElement) => ReactDOMServer.renderToStaticMarkup(reactElement))
+    .then((markup) => `
         <!DOCTYPE html>
         <html>
           <head>
@@ -42,7 +42,13 @@ function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Pro
       `);
 }
 
-var routes = [
+interface PageConfig {
+  redirects?: { [url: string]: number };
+  urlPattern: string;
+  render(params: any): Promise<React.ReactElement<any>>;
+}
+
+var routes: Array<PageConfig> = [
   AboutBeliefsPage,
   AboutDistinctivesPage,
   AboutUsPage,
@@ -64,11 +70,19 @@ var routes = [
 ];
 
 routes.forEach(pageConfig => {
-  app.get(pageConfig.urlPattern, function (req, res) {
+  app.get(pageConfig.urlPattern, function(req, res) {
     return renderFullHtmlPage(() => pageConfig.render(req.params))
-        .then((content) => res.send(content))
-        .catch(({stack}) => res.send(`<pre>${stack}</pre>`));
+      .then((content) => res.send(content))
+      .catch(({stack}) => res.send(`<pre>${stack}</pre>`));
   });
+
+  for (var url of Object.keys(pageConfig.redirects || {})) {
+    var status = pageConfig.redirects[url];
+
+    app.get(url, function(req, res) {
+      res.redirect(status, pageConfig.urlPattern);
+    });
+  }
 });
 
 app.use(express.static('_out'));

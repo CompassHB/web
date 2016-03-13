@@ -5,7 +5,7 @@ import footer from "../../components/footer";
 const {div, main, h1} = React.DOM;
 
 
-export class SermonPage extends React.Component<{title:string,content:string},void> {
+export class SermonPage extends React.Component<{ title: string, content: string }, void> {
   render() {
     const {title, content} = this.props;
 

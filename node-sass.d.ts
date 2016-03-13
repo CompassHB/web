@@ -7,8 +7,8 @@ declare module "node-sass" {
   }
 
   interface RenderResult {
-    map: {toString():string},
-    css: {toString():string},
+    map: { toString(): string },
+    css: { toString(): string },
     stats: Object,
   }
 

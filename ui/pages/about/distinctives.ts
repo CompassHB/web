@@ -15,6 +15,10 @@ export class AboutDistinctivesPage extends React.Component<{}, void> {
 
   static urlPattern = '/about/distinctives';
 
+  static redirects = {
+    '/eight-distinctives': 301,
+  };
+
   static render(): Promise<React.ReactElement<any>> {
     return Promise.resolve(React.createElement(AboutDistinctivesPage, {}));
   }

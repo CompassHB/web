@@ -15,6 +15,10 @@ export class AboutBeliefsPage extends React.Component<{}, void> {
 
   static urlPattern = '/about/beliefs';
 
+  static redirects = {
+    '/what-we-believe': 301,
+  };
+
   static render(): Promise<React.ReactElement<any>> {
     return Promise.resolve(React.createElement(AboutBeliefsPage, {}));
   }

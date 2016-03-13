@@ -10,7 +10,7 @@ export interface Sermon {
   title: string;
 }
 
-export class IndexPage extends React.Component<{recentSermons: Array<Sermon>},void> {
+export class IndexPage extends React.Component<{ recentSermons: Array<Sermon> }, void> {
   render() {
     const [sermon, ...sermons] = this.props.recentSermons;
 
@@ -39,7 +39,7 @@ export class IndexPage extends React.Component<{recentSermons: Array<Sermon>},vo
   static render(): Promise<React.ReactElement<any>> {
     return Promise.resolve(React.createElement<any>(IndexPage, {
       recentSermons: [
-        {title: "Sample Sermon Title", id: "sample-id", slug: 'sample-slug'},
+        { title: "Sample Sermon Title", id: "sample-id", slug: 'sample-slug' },
       ],
     }));
   }

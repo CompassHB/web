@@ -20,36 +20,36 @@ const styles = {
       left: 0,
       bottom: 0,
       transition: 'transform 200ms ease-in-out',
-      transform: isOpen ? 'translateX(0)': 'translateX(-100%)',
+      transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
       zIndex: 1,
       backgroundColor: 'white',
     };
   },
 };
 
-class Header extends React.Component<void,{isLeftNavOpen:boolean}> {
+class Header extends React.Component<void, { isLeftNavOpen: boolean }> {
   constructor(props) {
     super(props);
 
-    this.state = {isLeftNavOpen: false};
+    this.state = { isLeftNavOpen: false };
   }
 
   toggleNav = (e) => {
     const willBeOpen = !this.state.isLeftNavOpen;
-    this.setState({isLeftNavOpen: willBeOpen});
+    this.setState({ isLeftNavOpen: willBeOpen });
   }
 
   render() {
     return React.DOM.header({},
-      button({onClick: this.toggleNav},
-        img({src: md.icons.svg.menu.black.src, height: 24, width: 24, alt: "Menu"})
+      button({ onClick: this.toggleNav },
+        img({ src: md.icons.svg.menu.black.src, height: 24, width: 24, alt: "Menu" })
       ),
 
       logo(),
 
-      leftNav({open: this.state.isLeftNavOpen, docked: false},
-        bs.nav({onClick: this.toggleNav}, [
-          bs.navDropdown({ key: 'who-we-are', title: 'Who we are', id: 'header-who-we-are'}, [
+      leftNav({ open: this.state.isLeftNavOpen, docked: false },
+        bs.nav({ onClick: this.toggleNav }, [
+          bs.navDropdown({ key: 'who-we-are', title: 'Who we are', id: 'header-who-we-are' }, [
             bs.navItem({ key: 'who-we-are', href: '/who-we-are' }, 'Who we are'),
             bs.navItem({ key: 'beliefs', href: '/what-we-believe' }, 'What we believe'),
             bs.navItem({ key: 'distinctives', href: '/eight-distinctives' }, '8 distinctives'),

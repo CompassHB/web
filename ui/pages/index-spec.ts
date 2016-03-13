@@ -22,13 +22,12 @@ describe('IndexPage', function() {
         slug: 'the-sermon',
         title: 'The sermon',
       }, {
-        id: '1235',
-        slug: 'the-next-sermon',
-        title: 'The next sermon',
-      }],
+          id: '1235',
+          slug: 'the-next-sermon',
+          title: 'The next sermon',
+        }],
     }));
 
     expect(result.includes('Latest sermons')).toBe(true);
   });
 });
-
