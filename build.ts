@@ -19,7 +19,7 @@ const pages = [
 ];
 
 pages.forEach(page => {
-  return browserify(__dirname + `/ui/pages/${page}-browser.js`).bundle((err, buffer) => {
-    fs.writeFileSync(__dirname + `/ui/pages/${page}-browser.bundle.js`, buffer);
+  return browserify(__dirname + `/ui/pages/${page}.js`).bundle((err, buffer) => {
+    fs.writeFileSync(__dirname + `/ui/pages/${page}-client.bundle.js`, buffer);
   });
 });
