@@ -2,10 +2,10 @@ import * as React from 'react';
 import logo from "./logo";
 
 import {Grid, Row, Col, MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react-bootstrap';
-import * as injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
+// import * as injectTapEventPlugin from 'react-tap-event-plugin';
+// injectTapEventPlugin();
 
-const {a} = React.DOM;
+const {a, img} = React.DOM;
 
 //TODO: long list of functions
 function grid(props, ...children) {
@@ -65,27 +65,30 @@ class Header extends React.Component<void, void> {
         row({ style: { borderTop: '5px solid #497f9e' } },
           navbar({},
             navbarheader({},
+              navbartoggle({}),
               navbarbrand({},
-                'logo'
-              ),
-              navbartoggle({})
+                logo()
+              )
             ),
             navbarcollapse({},
               nav({ pullRight: true },
-                navitem({},
+                navitem({ href: '/about/us' },
                   'Who We Are'
                 ),
-                navdropdown({ title: 'Ministries' },
+                navdropdown({ title: 'Ministries', id: 'basic-nav-dropdown' },
                   menuitem({},
-                    'menuitem1'
+                    'Kids Ministry'
                   )
                 ),
-                navdropdown({ title: 'Sermons' },
+                navdropdown({ title: 'Sermons', id: 'basic-nav-dropdown' },
                   menuitem({},
-                    'menuitem1'
+                    'Sermons'
+                  ),
+                  menuitem({},
+                    'Scripture of the Day'
                   )
                 ),
-                navitem({},
+                navitem({ href: '/ice-cream-evangelism' },
                   'Ice Cream Evangelism'
                 )
               )
