@@ -20,7 +20,7 @@ function col(props, ...children) {
   return React.createElement(Col, props, ...children);
 }
 
-class Footer extends React.Component<{}, {}> {
+export class Footer extends React.Component<{}, {}> {
   render() {
     return React.DOM.footer({},
 
