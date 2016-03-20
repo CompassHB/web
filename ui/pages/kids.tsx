@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Header} from "../components/header";
 import {Footer} from "../components/footer";
+import {MinistriesNav} from "../components/ministriesNav";
 
 export class KidsPage extends React.Component<{}, {}> {
   render() {
@@ -91,19 +92,7 @@ export class KidsPage extends React.Component<{}, {}> {
             </div>
             <style dangerouslySetInnerHTML={{__html: " .col-md-4 img { border: 6px solid #FFF; } " }} />
           </div>
-          <div className="col-sm-3 col-sm-pull-9">
-            <section className="Settings utility-flex-container">
-              <nav id="main-nav" className="Box Box--Large Box--bright">
-                <ul>
-                  <li className="active"> <a href="https://www.compasshb.com/kids">Kids Ministry</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className> <a href="https://www.compasshb.com/youth">Youth Ministry</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className> <a href="https://www.compasshb.com/college">College Ministry</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className> <a href="https://www.compasshb.com/sundayschool">Adult Sunday School</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className> <a href="https://www.compasshb.com/fellowship">Home Fellowship Groups</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                </ul>
-              </nav>
-            </section>
-          </div>
+          <MinistriesNav active="kids" />
         </div>
       </div>
       <Footer/>
