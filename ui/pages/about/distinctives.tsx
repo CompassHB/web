@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Header} from "../../components/header";
 import {Footer} from "../../components/footer";
+import {SideNav} from "../../components/sideNav"
 
 export class AboutDistinctivesPage extends React.Component<{}, {}> {
   render() {
@@ -70,18 +71,7 @@ export class AboutDistinctivesPage extends React.Component<{}, {}> {
               <p>Acts 1:8</p>
             </div>
           </div>
-
-          <div className="col-sm-3 col-sm-pull-9">
-            <section className="Settings utility-flex-container">
-              <nav id="main-nav" className="Box Box--Large Box--bright">
-                <ul>
-                  <li className> <a href="https://www.compasshb.com/who-we-are">Who We Are</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className="active"> <a href="https://www.compasshb.com/eight-distinctives">8 Distinctives</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className> <a href="https://www.compasshb.com/what-we-believe">What We Believe</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                </ul>
-              </nav>
-            </section>
-          </div>
+          <SideNav/>
         </div>
       </div>
       <Footer/>
