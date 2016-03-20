@@ -6,7 +6,7 @@ import {AboutBeliefsPage} from "./ui/pages/about/beliefs";
 import {AboutDistinctivesPage} from "./ui/pages/about/distinctives";
 import {AboutUsPage} from "./ui/pages/about/us";
 import {CollegePage} from "./ui/pages/college";
-import {FellowshipsPage} from "./ui/pages/fellowships";
+import {FellowshipPage} from "./ui/pages/fellowship";
 import {IndexPage} from "./ui/pages/index";
 import {IceCreamEvangelismPage} from "./ui/pages/ice-cream-evangelism";
 import {GivingPage} from "./ui/pages/giving";
@@ -59,7 +59,7 @@ var routes: Array<PageConfig> = [
   AboutDistinctivesPage,
   AboutUsPage,
   CollegePage,
-  FellowshipsPage,
+  FellowshipPage,
   GivingPage,
   IndexPage,
   IceCreamEvangelismPage,
