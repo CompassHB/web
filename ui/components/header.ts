@@ -56,7 +56,7 @@ function navdropdown(props, ...children) {
   return React.createElement(NavDropdown, props, ...children);
 }
 
-class Header extends React.Component<void, void> {
+class Header extends React.Component<{}, { isLeftNavOpen: boolean }> {
   render() {
     return React.DOM.header({},
 
@@ -100,6 +100,6 @@ class Header extends React.Component<void, void> {
   }
 }
 
-export default function footer() {
+export default function header() {
   return React.createElement(Header);
 };

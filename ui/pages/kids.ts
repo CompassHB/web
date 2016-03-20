@@ -13,7 +13,7 @@ function row(props, ...children) {
   return React.createElement(Row, props, ...children);
 }
 
-export class KidsPage extends React.Component<{}, void> {
+export class KidsPage extends React.Component<{}, {}> {
   render() {
     return div({},
       header(),

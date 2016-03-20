@@ -10,7 +10,7 @@ export interface Sermon {
   title: string;
 }
 
-export class IndexPage extends React.Component<{ recentSermons: Array<Sermon> }, void> {
+export class IndexPage extends React.Component<{ recentSermons: Array<Sermon> }, {}> {
   render() {
     const [sermon, ...sermons] = this.props.recentSermons;
 
