@@ -2,7 +2,7 @@ import * as React from "react";
 import {Header} from "../../components/header";
 import {Footer} from "../../components/footer";
 import {SideNav} from "../../components/sideNav"
-
+    
 export class AboutDistinctivesPage extends React.Component<{}, {}> {
   render() {
     return (<div>
