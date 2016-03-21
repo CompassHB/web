@@ -1,56 +1,266 @@
 import * as React from "react";
 import {Header} from "../components/header";
 import {Footer} from "../components/footer";
-import {latestSermon} from "../components/latestSermon";
 
-export interface Sermon {
-  slug: string;
-  title: string;
-}
-
-export class IndexPage extends React.Component<{ recentSermons: Array<Sermon> }, {}> {
+export class IndexPage extends React.Component<{}, {}> {
   render() {
-    const [sermon, ...sermons] = this.props.recentSermons;
-
-    return
-    <p>test < / p >
-  }
-
-    
-
-
-
-export class IndexPage extends React.Component<{ recentSermons: Array<Sermon> }, {}> {
-  render() {
-    const [sermon, ...sermons] = this.props.recentSermons;
-
-    return div({},
-      header(),
-      sermon && div({},
-        div({ style: { padding: '1em' } },
-          latestSermon(sermon)
-        )
-      ),
-      sermons[0] && div({},
-        h1({}, "Latest sermons"),
-
-        ul({}, sermons.map((sermon, i) => (
-          li({ key: i },
-            a({ href: "/sermons/" + sermon.slug }, sermon.title)
-          )
-        )))
-      ),
-      footer()
-    );
+    return <div>
+        <Header/>
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="drawer row">
+                <div className="col-sm-9">
+                  <div className="Box--shadow--big" style={{width: '100%'}}>
+                    <span className="Box--shadow--wrap">
+                       <a className="clickable latestsermon" href="https://www.compasshb.com/sermons/out-of-time" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/561543900_640.jpg)', backgroundPosition: 'center'}}>
+                       <p style={{position: 'absolute', textTransform: 'none', top: '-20px', left: 45, padding: '4px 10px', fontSize: '1.1em', backgroundColor: '#DD3F2E'}}>Latest Sermon</p>
+                       <br /><br />
+                       <h1 className="tk-seravek-web">Out of Time</h1>
+                       <p style={{padding: 20}} />
+                       <p><i className="material-icons" style={{fontSize: '3em'}}>play_circle_outline</i></p>
+                        <div style={{position: 'absolute', bottom: 0, left: 0, textAlign: 'left', padding: 30, color: '#BBB'}}>Bobby Blakey <br />John 11:1-16<br />March 20, 2016</div>
+                     </a>
+                  </span>
+                </div>
+              </div>
+          <div className="col-sm-3">
+            <div className="Box--shadow" style={{width: '100%'}}>
+              <span className="Box--shadow--wrap">
+                <a className="clickable boxer" href="https://www.compasshb.com/read" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://compasshb.smugmug.com/photos/i-w6dnZK2/0/S/i-w6dnZK2-S.jpg)'}}>
+                  <h4 className="tk-seravek-web">1 Peter 5</h4>
+                  <p>Scripture of the Day</p>
+                </a>
+              </span>
+            </div>
+          </div>
+          <div className="col-sm-3">
+            <div className="Box--shadow" style={{width: '100%'}}>
+              <span className="Box--shadow--wrap">
+                <a className="clickable featuredblog boxer" href="/events/23749515440/good-friday-service/" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://img.evbuc.com/https%3A%2F%2Fimg.evbuc.com%2Fhttp%253A%252F%252Fcdn.evbuc.com%252Fimages%252F19646568%252F143787969150%252F1%252Foriginal.jpg%3Frect%3D0%252C133%252C1600%252C800%26s%3D4ac30af77481a687ac5261098bb46b89?h=200&w=450&s=49cc083121fd46252faddf9c81e79a0d)'}}>
+                  <h4 className="tk-seravek-web">Good  Friday Service</h4>
+                  <p> March 25</p>
+                </a>
+              </span>
+            </div>
+          </div>
+          <div className="col-sm-3">
+            <div className="Box--shadow" style={{width: '100%'}}>
+              <span className="Box--shadow--wrap">
+                <a className="clickable featuredblog boxer" href="/events/23750001895/easter-sunday/" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://img.evbuc.com/https%3A%2F%2Fimg.evbuc.com%2Fhttp%253A%252F%252Fcdn.evbuc.com%252Fimages%252F19646646%252F143787969150%252F1%252Foriginal.jpg%3Frect%3D0%252C133%252C1600%252C800%26s%3Db6fb23b411113aaa92eb563812291a34?h=200&w=450&s=2cf993b22bcaa8a8a97c95f8f3936f54)'}}>
+                  <h4 className="tk-seravek-web">Easter Sunday</h4>
+                  <p> March 27</p>
+                </a>
+              </span>
+           </div>
+          </div>
+        </div>
+        <div className="row commission">
+          <div className="col-sm-10 col-sm-offset-1">
+            <p>
+              <span className="title">Compass HB exists to make disciples of Jesus Christ</span><br />by
+              <span className="participle">reaching</span> as many people as possible for Christ,
+              <span className="participle">teaching</span> them to be like Christ, and
+              <span className="participle">training</span> them to serve Christ.<br />
+              <a href="https://www.compasshb.com/who-we-are" className="btn btn-default">Find out more about Compass HB</a>
+            </p>
+          </div>
+        </div>
+        <div className="row" style={{background: 'none', backgroundColor: '#f7f7f7', paddingTop: 30, paddingBottom: 30}}>
+          <div className="col-sm-10 col-sm-offset-1">
+            <div className="col-md-4 text-center">
+              <h2 className="tk-seravek-web">Sundays at<br /> 9am and 11am</h2>
+              <br />
+              <p>5082 Argosy Avenue<br />Huntington Beach, CA 92649</p>
+              <br />
+            </div>
+            <div className="col-md-4 text-center" style={{}}>
+              <h2 className="tk-seravek-web">Directions</h2>
+              <br />
+              <a href="https://www.google.com/maps?ll=33.74078,-118.040232&z=10&t=m&hl=en-US&gl=US&mapclient=embed&q=5082+Argosy+Ave+Huntington+Beach,+CA+92649"><img data-src="https://compasshb.smugmug.com/photos/i-WWb58Jn/0/M/i-WWb58Jn-M.png" width={300} height={262} alt="Map to Compass HB" className="lazyload" /></a>
+            </div>
+            <div className="col-md-4 text-center">
+              <h2 className="tk-seravek-web">Midweek</h2>
+              <br />
+            <h5><a href="https://www.compasshb.com/fellowship">Home Fellowship Groups</a></h5>
+            <p>Tuesday, Wednesday, Thursday, and Friday</p>
+            <br />
+            <h5><a href="https://www.compasshb.com/kids#awana">Awana for kids</a></h5>
+            <p>Wednesday</p>
+            <br />
+            <h5><a href="https://www.compasshb.com/youth">The United for Youth</a></h5>
+            <p>Thursday</p>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div style={{backgroundImage: 'url(https://compasshb.smugmug.com/photos/i-WMM77kp/0/X3/i-WMM77kp-X3.jpg)', paddingTop: 250, backgroundAttachment: 'fixed', backgroundPosition: '50% 0', WebkitBackgroundSize: 'cover', MozBackgroundSize: 'cover', OBackgroundSize: 'cover', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} />
+      </div>
+      <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
+        <div className="col-xs-10 col-xs-offset-1">
+          <h2 className="tk-seravek-web"><a href="https://www.compasshb.com/sermons">Sermons</a></h2>
+          <div className="col-sm-6 col-md-3">
+            <div className="Box--shadow" style={{width: '100%'}}>
+                    <span className="Box--shadow--wrap">
+                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/sermons/out-of-time" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/561543900_640.jpg)'}}>
+                        <h4 className="tk-seravek-web">Out of Time</h4>
+                        <p> March 20<br />John 11:1-16</p>
+                        <br /><br />
+                      </a>
+                    </span>
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-3">
+            <div className="Box--shadow" style={{width: '100%'}}>
+                    <span className="Box--shadow--wrap">
+                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/sermons/held" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560464621_1280.jpg)'}}>
+                        <h4 className="tk-seravek-web">Held </h4>
+                        <p> March 13<br />John 10:22-41</p>
+                        <br /><br />
+                      </a>
+                    </span>
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-3">
+            <div className="Box--shadow" style={{width: '100%'}}>
+                    <span className="Box--shadow--wrap">
+                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/sermons/the-good-shepherd" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/559326852_640.jpg)'}}>
+                        <h4 className="tk-seravek-web">The Good Shepherd</h4>
+                        <p> March 6<br />John 10:1-21</p>
+                        <br /><br />
+                      </a>
+                    </span>
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-3">
+            <div className="Box--shadow" style={{width: '100%'}}>
+                    <span className="Box--shadow--wrap">
+                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/sermons/the-twisted-thinking-of-this-world" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/561306746_1280.jpg)'}}>
+                        <h4 className="tk-seravek-web">The Twisted Thinking of This World </h4>
+                        <p> February 28<br />John 9:8-41</p>
+                        <br /><br />
+                      </a>
+                    </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row" style={{background: 'none', backgroundColor: '#dddddd', paddingBottom: 20}}>
+        <div className="col-xs-10 col-xs-offset-1">
+          <h2 className="tk-seravek-web"><a href="https://www.compasshb.com/blog">Videos</a></h2>
+          <div className="col-sm-6 col-md-6">
+            <div className="Box--shadow" style={{width: '100%'}}>
+                    <span className="Box--shadow--wrap">
+                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/blog/the-bunny-run" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'}}>
+                        <br /><br />
+                        <h4 className="tk-seravek-web">The Bunny Run </h4>
+                        <p> March 14</p>
+                        <br /><br /><br /><br />
+                      </a>
+                    </span>
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-6">
+            <div className="Box--shadow" style={{width: '100%'}}>
+                    <span className="Box--shadow--wrap">
+                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/blog/parenting-event" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'}}>
+                        <br /><br />
+                        <h4 className="tk-seravek-web">Parenting Event</h4>
+                        <p> March 2</p>
+                        <br /><br /><br /><br />
+                      </a>
+                    </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-xs-10 col-xs-offset-1">
+          <h2 className="tk-seravek-web"><a href="https://www.compasshb.com/photos">Photos</a></h2>
+          <div className="col-md-3" style={{paddingBottom: 10}}>
+            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-44qXNQg/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-44qXNQg/0/M/160228_DED_SS-085-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+          </div>
+          <div className="col-md-3" style={{paddingBottom: 10}}>
+            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-js2tQ9G/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-js2tQ9G/0/M/160228_DED_SS-077-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+          </div>
+          <div className="col-md-3" style={{paddingBottom: 10}}>
+            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-73Vc9pn/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-73Vc9pn/0/M/160228_DED_SS-063-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+          </div>
+          <div className="col-md-3" style={{paddingBottom: 10}}>
+            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-2SD9Bdb/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-2SD9Bdb/0/M/160228_DED_SS-062-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+          </div>
+          <div className="col-md-3" style={{paddingBottom: 10}}>
+            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-WZphmPD/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-WZphmPD/0/M/160228_DED_SS-022-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+          </div>
+          <div className="col-md-3" style={{paddingBottom: 10}}>
+            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-JLs3MXT/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-JLs3MXT/0/M/160228_DED_SS-044-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+          </div>
+          <div className="col-md-3" style={{paddingBottom: 10}}>
+            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-N6gBk9S/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-N6gBk9S/0/M/160228_DED_SS-018-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+          </div>
+          <div className="col-md-3" style={{paddingBottom: 10}}>
+            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-6rb2q5j/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-6rb2q5j/0/M/160228_DED_SS-008-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+          </div>
+        </div>
+      </div>
+      <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 40}}>
+        <div className="col-xs-10 col-xs-offset-1">
+          <div className="col-md-5">
+            <h2 className="tk-seravek-web"><a href="https://www.facebook.com/CompassHB">Facebook</a></h2>
+            <div className="fb-like-box" data-href="https://www.facebook.com/CompassHB" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="true" data-show-border="false" />
+          </div>
+          <div className="col-md-7">
+            <h2 className="tk-seravek-web"><a href="https://www.twitter.com/compasshb">Tweets</a></h2><br />
+            <a className="twitter-timeline" data-dnt="true" href="https://twitter.com/BradMSmith/lists/compasshb" data-widget-id={566872417012690945} data-chrome="noheader">Tweets from https://twitter.com/BradMSmith/lists/compasshb</a>   </div>
+          </div>
+          <br /><br />&nbsp;<br /><br />
+        </div>
+        <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
+          <div className="col-xs-10 col-xs-offset-1">
+            <h2 className="tk-seravek-web"><a href="https://www.instagram.com/compasshb">Instagram</a></h2>
+            <div className="col-sm-6 col-md-3">
+              <div className="thumbnail">
+                <a href="https://www.instagram.com/p/BDGk9FDTXcW/">
+                  <img data-src="https://scontent.cdninstagram.com/t51.2885-15/e15/12822567_1684502881815900_874786318_n.jpg?ig_cache_key=MTIwODgxNjA3Njk4MjE1NTAzMA%3D%3D.2" className="lazyload" alt="Compass HB Instagram" />
+                </a>
+                <p style={{padding: 10}}>The Bunny Run is TOMORROW!  Sign up today! </p>
+              </div>
+            </div>
+            <div className="col-sm-6 col-md-3">
+              <div className="thumbnail">
+                <a href="https://www.instagram.com/p/BCrr-d1TXX_/">
+                  <img data-src="https://scontent.cdninstagram.com/t51.2885-15/e35/11373758_518652378317471_2137181717_n.jpg?ig_cache_key=MTIwMTI0NzEzNDI2NDY4NjA3OQ%3D%3D.2" className="lazyload" alt="Compass HB Instagram" />
+                </a>
+                <p style={{padding: 10}}>The Bunny Run is a week and a half away. Sign up today. Link in profile. #5k #egghunt </p>
+              </div>
+            </div>
+            <div className="col-sm-6 col-md-3">
+              <div className="thumbnail">
+                <a href="https://www.instagram.com/p/BAIMr9wTXWf/">
+                  <img data-src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/1172298_1011539018903437_4968945_n.jpg?ig_cache_key=MTE1NTIyOTEwMjIyNDc5OTEzNQ%3D%3D.2.l" className="lazyload" alt="Compass HB Instagram" />
+                </a>
+                <p style={{padding: 10}}>Praise the Lord for answering our prayers and bringing @billblakey to be our new pastor! Now that 2016 is here let's ask God: SHOW ME YOUR GLORY! </p>
+              </div>
+            </div>
+            <div className="col-sm-6 col-md-3">
+              <div className="thumbnail">
+                <a href="https://www.instagram.com/p/-XDNzbTXbD/">
+                  <img data-src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/11917839_174590899555911_1386563803_n.jpg?ig_cache_key=MTEyMzM4MDc3NDc2Mzg1MzUwNw%3D%3D.2.l" className="lazyload" alt="Compass HB Instagram" />
+                </a>
+                <p style={{padding: 10}}>Do people still want ice cream in November? Why yes, yes they do!!! #icecreamevangelism </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div></div></div>
+        <Footer/>
+        </div>
   }
 
   static urlPattern = '/';
 
   static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(React.createElement<any>(IndexPage, {
-      recentSermons: [
-        { title: "Sample Sermon Title", id: "sample-id", slug: 'sample-slug' },
-      ],
-    }));
+    return Promise.resolve(<IndexPage />);
   }
+
 }
