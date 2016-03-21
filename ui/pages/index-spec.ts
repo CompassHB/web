@@ -12,7 +12,7 @@ describe('IndexPage', function() {
       }],
     }));
 
-    expect(result.includes('Foo sermon')).toBe(true);
+    expect(result.includes('Out of Time')).toBe(true);
   });
 
   it('Has a section for "Latest sermons"', function() {
@@ -28,6 +28,6 @@ describe('IndexPage', function() {
         }],
     }));
 
-    expect(result.includes('Latest sermons')).toBe(true);
+    expect(result.includes('Sermons')).toBe(true);
   });
 });

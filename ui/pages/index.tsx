@@ -1,14 +1,24 @@
 import * as React from "react";
-import header from "../components/header";
-import latestSermon from "../components/latestSermon";
-import footer from "../components/footer";
-
-const {div, ul, li, link, h1, html, head, img, body, a, meta, script, span} = React.DOM;
+import {Header} from "../components/header";
+import {Footer} from "../components/footer";
+import {latestSermon} from "../components/latestSermon";
 
 export interface Sermon {
   slug: string;
   title: string;
 }
+
+export class IndexPage extends React.Component<{ recentSermons: Array<Sermon> }, {}> {
+  render() {
+    const [sermon, ...sermons] = this.props.recentSermons;
+
+    return
+    <p>test < / p >
+  }
+
+    
+
+
 
 export class IndexPage extends React.Component<{ recentSermons: Array<Sermon> }, {}> {
   render() {
