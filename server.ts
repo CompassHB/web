@@ -13,6 +13,7 @@ import {GivingPage} from "./ui/pages/giving";
 import {KidsPage} from "./ui/pages/kids";
 import {MenPage} from "./ui/pages/men";
 import {ReadPage} from "./ui/pages/read";
+import {SeriesPage} from "./ui/pages/series";
 import {SermonPage} from "./ui/pages/sermons/single";
 import {SermonsPage} from "./ui/pages/sermons";
 import {SongsPage} from "./ui/pages/songs";
@@ -67,6 +68,7 @@ var routes: Array<PageConfig> = [
   KidsPage,
   MenPage,
   ReadPage,
+  SeriesPage,
   SermonsPage,
   SermonPage,
   SongsPage,
