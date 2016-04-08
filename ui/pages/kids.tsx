@@ -50,7 +50,7 @@ export class KidsPage extends React.Component<{}, {}> {
             </div>
             <div className="row" style={{background: 'none', backgroundColor: '#B9302B', padding: 30}}>
               <div className="col-md-6">
-                <img src="https://compasshb.smugmug.com/photos/i-T6NWJ7h/0/S/i-T6NWJ7h-S.jpg" alt />
+                <img src="https://compasshb.smugmug.com/photos/i-T6NWJ7h/0/S/i-T6NWJ7h-S.jpg" />
               </div>
               <div className="col-md-6">
                 <a name="awana" />

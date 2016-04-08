@@ -45,10 +45,10 @@ export class GivingPage extends React.Component<{}, {}> {
             <section className="Settings utility-flex-container">
               <nav id="main-nav" className="Box Box--Large Box--bright">
                 <ul>
-                  <li className> <a href="https://www.compasshb.com/read">Scripture of the Day</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className> <a href="https://www.compasshb.com/sermons">Sermons</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className> <a href="https://www.compasshb.com/songs">Worship</a> <i className="material-icons">keyboard_arrow_right</i> </li>
-                  <li className> <a href="https://www.compasshb.com/blog">Videos</a> <i className="material-icons">keyboard_arrow_right</i> </li>
+                  <li> <a href="https://www.compasshb.com/read">Scripture of the Day</a> <i className="material-icons">keyboard_arrow_right</i> </li>
+                  <li> <a href="https://www.compasshb.com/sermons">Sermons</a> <i className="material-icons">keyboard_arrow_right</i> </li>
+                  <li> <a href="https://www.compasshb.com/songs">Worship</a> <i className="material-icons">keyboard_arrow_right</i> </li>
+                  <li> <a href="https://www.compasshb.com/blog">Videos</a> <i className="material-icons">keyboard_arrow_right</i> </li>
                   <li className="active"> <a href="https://www.compasshb.com/giving">Give</a> <i className="material-icons">keyboard_arrow_right</i> </li>
                 </ul>
               </nav>
