@@ -19,7 +19,9 @@ export class CollegePage extends React.Component<{}, {}> {
               <img src="https://scontent-iad3-1.xx.fbcdn.net/hphotos-xfa1/t31.0-8/12244626_782033515239161_5841761662630853834_o.jpg" width={400} height={233} />
             </p>
           </div>
-          <MinistriesNav active="college"/>
+          <div className="col-sm-3 col-sm-pull-9">
+            <MinistriesNav active="college"/>
+          </div>
         </div>
       </div>
       <Footer/>

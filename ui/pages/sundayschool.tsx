@@ -77,8 +77,9 @@ export class SundaySchoolPage extends React.Component<{}, {}> {
               </div>
             </div>
           </div>
-          
-          <MinistriesNav active="sundayschool"/>
+          <div className="col-sm-3 col-sm-pull-9">
+            <MinistriesNav active="sundayschool" />
+          </div>
         </div>
       </div>
       <Footer/>

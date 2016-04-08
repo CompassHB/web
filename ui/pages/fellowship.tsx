@@ -42,7 +42,9 @@ export class FellowshipPage extends React.Component<{}, {}> {
               </div>
             </div>
           </div>
-          <MinistriesNav active="fellowship"/>
+          <div className="col-sm-3 col-sm-pull-9">
+            <MinistriesNav active="fellowship"/>
+          </div>
         </div>
       </div>
       <Footer/>

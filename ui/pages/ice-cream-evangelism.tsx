@@ -25,7 +25,7 @@ export class IceCreamEvangelismPage extends React.Component<{}, {}> {
   }
 
   static urlPattern = '/ice-cream-evangelism';
-  
+
   static render(): Promise<React.ReactElement<any>> {
     return Promise.resolve(<IceCreamEvangelismPage/>);
   }

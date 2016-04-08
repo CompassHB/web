@@ -41,7 +41,9 @@ export class SeriesPage extends React.Component<{seriesList: Array<Series>}, {}>
               <div style={{clear: 'left'}}></div>
             </div>
           </div>
-          <ContentNav active="sermons" />
+          <div className="col-sm-3 col-sm-pull-9">
+            <ContentNav active="sermons" />
+          </div>
         </div>
       </div>
       <Footer />

@@ -47,7 +47,9 @@ export class YouthPage extends React.Component<{}, {}> {
             </div>
             <style dangerouslySetInnerHTML={{__html: " .col-md-4 img { border: 6px solid #FFF; } .col-md-4 { color: #fff; } " }} />
           </div>
-          <MinistriesNav active="youth" />
+          <div className="col-sm-3 col-sm-pull-9">
+            <MinistriesNav active="youth" />
+          </div>
         </div>
       </div>
       <Footer/>
