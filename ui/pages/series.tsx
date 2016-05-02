@@ -1,6 +1,5 @@
 import * as React from "react";
-import {Header} from "../components/header";
-import {Footer} from "../components/footer";
+import {Page} from "../components/page";
 import {ContentNav} from "../components/contentNav";
 
 const {div, ul, li, link, h1, html, head, img, body, a, meta, script, span} = React.DOM;
@@ -16,38 +15,23 @@ export class SeriesPage extends React.Component<{seriesList: Array<Series>}, {}>
   render() {
     const {seriesList} = this.props;
 
-    return (<div className="page-container">
-      <Header />
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-sm-9 col-sm-push-3" style={{paddingTop: 20}}>
-            <div className="Setting Box Box--Large Box--bright utility-flex">
-              <h1 className="Setting__heading tk-seravek-web">Sermon Series</h1>
-
-              <ol style={{margin: 0, padding: 0, listStyleType: 'none'}}>
-                {seriesList.map(series => (
-                  <li key={series.alias} className="col-md-4" style={{clear: 'left'}}>
-                    <a href={`/series/${series.alias}`}>
-                      <img src={series.coverImage} width="200" height="125" alt={series.title} />
-                    </a>
-                    <h4 className="tk-seravek-web">
-                      <a href={`/series/${series.alias}`}>{series.title}</a>
-                    </h4>
-                    <p>{series.description}</p>
-                  </li>
-                ))}
-              </ol>
-
-              <div style={{clear: 'left'}}></div>
-            </div>
-          </div>
-          <div className="col-sm-3 col-sm-pull-9">
-            <ContentNav active="sermons" />
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </div>);
+    return (
+      <Page title="Sermon Series">
+        <ol style={{margin: 0, padding: 0, listStyleType: 'none'}}>
+          {seriesList.map(series => (
+            <li key={series.alias} className="col-md-4" style={{clear: 'left'}}>
+              <a href={`/series/${series.alias}`}>
+                <img src={series.coverImage} width="200" height="125" alt={series.title} />
+              </a>
+              <h4 className="tk-seravek-web">
+                <a href={`/series/${series.alias}`}>{series.title}</a>
+              </h4>
+              <p>{series.description}</p>
+            </li>
+          ))}
+        </ol>
+      </Page>
+    );
   }
 
   static urlPattern = '/series';
