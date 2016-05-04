@@ -21,6 +21,7 @@ import {SundaySchoolPage} from "./ui/pages/sundayschool";
 import {VideosPage} from "./ui/pages/videos";
 import {WomenPage} from "./ui/pages/women";
 import {YouthPage} from "./ui/pages/youth";
+import {route} from './model/route';
 
 const app = express();
 
@@ -95,6 +96,7 @@ routes.forEach(pageConfig => {
   }
 });
 
+app.use('/model.json', route);
 app.use(express.static('_out'));
 app.use('/node_modules/bootstrap/dist', express.static('node_modules/bootstrap/dist'));
 

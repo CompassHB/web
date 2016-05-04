@@ -11,5 +11,10 @@
     "react-bootstrap": "github:DefinitelyTyped/DefinitelyTyped/react-bootstrap/react-bootstrap.d.ts#56295f5058cac7ae458540423c50ac2dcf9fc711",
     "react-dom": "registry:dt/react-dom#0.14.0+20160316155526",
     "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#0fa4e9e61385646ea6a4cba2aef357353d2ce77f"
+  },
+  "dependencies": {
+    "falcor": "registry:npm/falcor#0.1.0+20160427193439",
+    "falcor-json-graph": "registry:npm/falcor-json-graph#1.1.0+20160427033401",
+    "falcor-router": "registry:npm/falcor-router#0.4.0+20160427212252"
   }
 }
