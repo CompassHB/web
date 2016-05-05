@@ -2,7 +2,7 @@ import * as React from "react";
 import {Page} from "../components/page";
 import {MinistriesNav} from "./ministries/nav";
 
-export class YouthPage extends React.Component<{}, {}> {
+export const YouthPage = {
   render() {
     return (
       <Page title="The United Student Ministry" nav={<MinistriesNav active="youth" />}>
@@ -43,11 +43,7 @@ export class YouthPage extends React.Component<{}, {}> {
         <style dangerouslySetInnerHTML={{__html: " .col-md-4 img { border: 6px solid #FFF; } .col-md-4 { color: #fff; } " }} />
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/youth';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<YouthPage />);
-  }
-}
+  urlPattern: '/youth',
+};

@@ -4,9 +4,9 @@ import {Nav} from '../../components/nav';
 export function AboutNav() {
   return (
     <Nav links={[
-      {href: 'about/us', label: 'Who We Are'},
-      {href: 'about/distinctives', label: '8 Distinctives'},
-      {href: 'about/beliefs', label: 'What We Believe'},
+      {href: 'about', label: 'Who We Are'},
+      {href: 'distinctives', label: '8 Distinctives'},
+      {href: 'beliefs', label: 'What We Believe'},
     ]} />
   );
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import {Page} from "../components/page";
 import {ContentNav} from "../components/contentNav";
 
-export class GivingPage extends React.Component<{}, {}> {
+export const GivingPage = {
   render() {
     return (
       <Page title="Give to Compass HB" nav={<ContentNav active="none" />}>
@@ -36,11 +36,7 @@ export class GivingPage extends React.Component<{}, {}> {
         </div>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/giving';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<GivingPage/>);
-  }
+  urlPattern: '/giving',
 }

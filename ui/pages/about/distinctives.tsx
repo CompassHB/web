@@ -2,11 +2,10 @@ import * as React from "react";
 import {Page} from '../../components/page';
 import {AboutNav} from './nav';
 import {model} from '../../../model/model';
+import {slice} from "../../slice";
 
-export class AboutDistinctivesPage extends React.Component<any, {}> {
-  render() {
-    const {distinctives} = this.props;
-
+export const AboutDistinctivesPage = {
+  render({data}) {
     return (
       <Page title="8 Distinctives" nav={<AboutNav/>}>
         <p>
@@ -15,8 +14,8 @@ export class AboutDistinctivesPage extends React.Component<any, {}> {
         </p>
 
         <ol style={{listStyleType: 'none', margin: 0, padding: 0, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
-          {distinctives.map((distinctive, i) => (
-          <li className="well" style={{width: '48%', marginBottom: '4%'}}>
+          {slice<any>(data.distinctives.inOrder, 0, 8).map((distinctive, i) => (
+          <li className="well" style={{width: '49%', marginBottom: '2%'}}>
             <h3 style={{marginTop: 0}}>{i+1}. {distinctive.title}</h3>
             <p>{distinctive.description}</p>
             <p>{distinctive.references}</p>
@@ -25,22 +24,18 @@ export class AboutDistinctivesPage extends React.Component<any, {}> {
         </ol>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/about/distinctives';
+  urlPattern: '/distinctives',
 
-  static redirects: {[url: string]: number} = {
+  redirects: {
     '/eight-distinctives': 301,
-  };
+  },
 
-  static render(): any {
-    return model().get(
-      ['distinctives', 'inOrder', {from: 0, to: 8}, ['title', 'description', 'references']],
+  data() {
+    return [
+      ['distinctives', 'inOrder', {from: 0, to: 7}, ['title', 'description', 'references']],
       ['distinctives', 'inOrder', 'length']
-    ).then((jsong: any) => {
-      return Array.prototype.slice.call(jsong.json.distinctives.inOrder);
-    }).then((distinctives) => {
-      return <AboutDistinctivesPage distinctives={distinctives} />;
-    });
-  }
-}
+    ];
+  },
+};

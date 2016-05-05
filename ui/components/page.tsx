@@ -7,7 +7,7 @@ export function Page({children = undefined, nav = undefined, title}) {
     <div>
       <Header/>
       <div style={{display: 'flex', flexDirection: 'row-reverse', backgroundColor: '#eee', padding: '2em'}}>
-        <main>
+        <main style={{flexGrow: 1}}>
           <h1 style={{marginTop: 0}}>{title}</h1>
           {children}
         </main>

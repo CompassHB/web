@@ -4,9 +4,20 @@ import {SermonPage} from './single';
 
 describe('SermonPage', function() {
   it('Shows the sermon title', function() {
-    const result = ReactDOMServer.renderToStaticMarkup(React.createElement(SermonPage, {
-      title: 'Foobar',
-      content: 'Foobar',
+    const result = ReactDOMServer.renderToStaticMarkup(SermonPage.render({
+      data: {
+        sermons: {
+          byAlias: {
+            'foo': {
+              title: 'Foobar',
+              content: 'Foobar',
+            },
+          },
+        },
+      },
+      params: {
+        slug: 'foo',
+      },
     }));
 
     expect(result.includes('Foobar')).toBe(true);

@@ -2,7 +2,7 @@ import * as React from "react";
 import {Page} from "../components/page";
 import {MinistriesNav} from "./ministries/nav";
 
-export class FellowshipPage extends React.Component<{}, {}> {
+export const FellowshipPage = {
   render() {
     return (
       <Page title="Home Fellowship Groups" nav={<MinistriesNav active="fellowship"/>}>
@@ -37,11 +37,7 @@ export class FellowshipPage extends React.Component<{}, {}> {
         </div>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/fellowship';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(React.createElement(FellowshipPage, {}));
-  }
-}
+  urlPattern: '/fellowship',
+};

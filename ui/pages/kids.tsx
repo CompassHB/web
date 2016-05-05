@@ -2,7 +2,7 @@ import * as React from "react";
 import {Page} from "../components/page";
 import {MinistriesNav} from "./ministries/nav";
 
-export class KidsPage extends React.Component<{}, {}> {
+export const KidsPage = {
   render() {
     return (
       <Page title="Kids Ministry" nav={<MinistriesNav active="kids"/>}>
@@ -88,11 +88,7 @@ export class KidsPage extends React.Component<{}, {}> {
         <style dangerouslySetInnerHTML={{__html: " .col-md-4 img { border: 6px solid #FFF; } " }} />
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/kids';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<KidsPage />);
-  }
-}
+  urlPattern: '/kids',
+};

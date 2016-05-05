@@ -2,9 +2,8 @@ import * as React from "react";
 import {Page} from '../../components/page';
 import {AboutNav} from './nav';
 
-export class AboutBeliefsPage extends React.Component<{}, {}> {
+export const AboutBeliefsPage = {
   render() {
-
     return (
       <Page title="What We Believe" nav={<AboutNav/>}>
         <div className="well">
@@ -34,15 +33,11 @@ export class AboutBeliefsPage extends React.Component<{}, {}> {
         </div>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/about/beliefs';
+  urlPattern: '/beliefs',
 
-  static redirects = {
+  redirects: {
     '/what-we-believe': 301,
-  };
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<AboutBeliefsPage/>);
-  }
-}
+  },
+};

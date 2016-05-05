@@ -72,7 +72,7 @@ export class Header extends React.Component<{}, { isLeftNavOpen: boolean }> {
             ),
             navbarcollapse({},
               nav({ pullRight: true },
-                navitem({ href: '/about/us' },
+                navitem({ href: 'about' },
                   'Who We Are'
                 ),
                 navdropdown({ title: 'Ministries', id: 'basic-nav-dropdown' },
@@ -88,7 +88,7 @@ export class Header extends React.Component<{}, { isLeftNavOpen: boolean }> {
                     'Scripture of the Day'
                   )
                 ),
-                navitem({ href: '/ice-cream-evangelism' },
+                navitem({ href: 'ice-cream-evangelism' },
                   'Ice Cream Evangelism'
                 )
               )

@@ -2,8 +2,8 @@ import * as React from "react";
 import {Header} from "../components/header";
 import {Footer} from "../components/footer";
 
-export class IndexPage extends React.Component<{}, {}> {
-  render() {
+export const IndexPage = {
+  render({data}) {
     return <div>
         <Header/>
         <div className="container-fluid">
@@ -253,14 +253,9 @@ export class IndexPage extends React.Component<{}, {}> {
           </div>
         </div>
       </div></div></div>
-        <Footer/>
-        </div>
-  }
+      <Footer/>
+    </div>
+  },
 
-  static urlPattern = '/';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<IndexPage />);
-  }
-
-}
+  urlPattern: '/',
+};

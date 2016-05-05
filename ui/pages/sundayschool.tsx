@@ -2,7 +2,7 @@ import * as React from "react";
 import {Page} from "../components/page";
 import {MinistriesNav} from "./ministries/nav";
 
-export class SundaySchoolPage extends React.Component<{}, {}> {
+export const SundaySchoolPage = {
   render() {
     return (
       <Page title="Sunday School" nav={<MinistriesNav active="sundayschool" />}>
@@ -73,11 +73,7 @@ export class SundaySchoolPage extends React.Component<{}, {}> {
         </div>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/sundayschool';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<SundaySchoolPage />);
-  }
-}
+  urlPattern: '/sundayschool',
+};

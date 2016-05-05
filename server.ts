@@ -1,6 +1,4 @@
-
 import * as React from "react";
-import * as ReactDOMServer from "react-dom/server";
 import * as express from "express";
 import {AboutBeliefsPage} from "./ui/pages/about/beliefs";
 import {AboutDistinctivesPage} from "./ui/pages/about/distinctives";
@@ -12,6 +10,7 @@ import {IceCreamEvangelismPage} from "./ui/pages/ice-cream-evangelism";
 import {GivingPage} from "./ui/pages/giving";
 import {KidsPage} from "./ui/pages/kids";
 import {MenPage} from "./ui/pages/men";
+import {PathSet} from "falcor-json-graph";
 import {ReadPage} from "./ui/pages/read";
 import {SeriesPage} from "./ui/pages/series";
 import {SermonPage} from "./ui/pages/sermons/single";
@@ -21,41 +20,19 @@ import {SundaySchoolPage} from "./ui/pages/sundayschool";
 import {VideosPage} from "./ui/pages/videos";
 import {WomenPage} from "./ui/pages/women";
 import {YouthPage} from "./ui/pages/youth";
-import {route} from './model/route';
+import {model} from './model/model';
+import {renderHtmlPage} from './ui/render_html_page';
 
 const app = express();
 
 // static js bundles
 app.use(express.static('_out/ui'));
 
-function renderFullHtmlPage(render: () => Promise<React.ReactElement<any>>): Promise<string> {
-  return render()
-    .then((reactElement) => ReactDOMServer.renderToStaticMarkup(reactElement))
-    .then((markup) => `
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <base href="/">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <script src="/ui/pages/index-client.bundle.js" async></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-            <link href='https://fonts.googleapis.com/css?family=Roboto|Fira+Sans:700' rel='stylesheet' type='text/css'>
-            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-          </head>
-          <body>
-            <div id="root">
-              ${markup}
-            </div>
-          </body>
-        </html>
-      `);
-}
-
 interface PageConfig {
+  render(props: {data: any, params: any}): React.ReactElement<any>;
   redirects?: { [url: string]: number };
   urlPattern: string;
-  render(params: any): Promise<React.ReactElement<any>>;
+  data?(params: any): Array<PathSet>,
 }
 
 var routes: Array<PageConfig> = [
@@ -80,23 +57,27 @@ var routes: Array<PageConfig> = [
   YouthPage,
 ];
 
-routes.forEach(pageConfig => {
-  app.get(pageConfig.urlPattern, function(req, res) {
-    return renderFullHtmlPage(() => pageConfig.render(req.params))
-      .then((content) => res.send(content))
-      .catch(({stack}) => res.send(`<pre>${stack}</pre>`));
+routes.forEach(config => {
+  app.get(config.urlPattern, function({params}, res) {
+    return model.get(...(config.data ? config.data(params): []))
+      .then((jsong = {json: {}}) => {
+        return renderHtmlPage(config.render({data: jsong.json, params}));
+      })
+      .then(
+        (content) => res.send(content),
+        (e) => res.send(`<pre>${e.stack}</pre>`)
+      );
   });
 
-  for (var url of Object.keys(pageConfig.redirects || {})) {
-    var status = pageConfig.redirects[url];
+  for (var url of Object.keys(config.redirects || {})) {
+    var status = config.redirects[url];
 
     app.get(url, function(req, res) {
-      res.redirect(status, pageConfig.urlPattern);
+      res.redirect(status, config.urlPattern);
     });
   }
 });
 
-app.use('/model.json', route);
 app.use(express.static('_out'));
 app.use('/node_modules/bootstrap/dist', express.static('node_modules/bootstrap/dist'));
 

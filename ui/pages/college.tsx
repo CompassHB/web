@@ -2,7 +2,7 @@ import * as React from "react";
 import {MinistriesNav} from "./ministries/nav";
 import {Page} from "../components/page";
 
-export class CollegePage extends React.Component<{}, {}> {
+export const CollegePage = {
   render() {
     return (
       <Page title="The Underground College Ministry" nav={<MinistriesNav active="college"/>}>
@@ -15,11 +15,7 @@ export class CollegePage extends React.Component<{}, {}> {
         </p>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/college';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<CollegePage />);
-  }
-}
+  urlPattern: '/college',
+};

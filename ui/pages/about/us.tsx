@@ -2,7 +2,7 @@ import * as React from "react";
 import {Page} from '../../components/page';
 import {AboutNav} from './nav';
 
-export class AboutUsPage extends React.Component<{}, {}> {
+export const AboutUsPage = {
   render() {
     return (
       <Page title="Welcome to Compass Bible Church Huntington Beach" nav={<AboutNav/>}>
@@ -113,11 +113,7 @@ export class AboutUsPage extends React.Component<{}, {}> {
         </div>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/about/us';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<AboutUsPage/>);
-  }
-}
+  urlPattern: '/about',
+};

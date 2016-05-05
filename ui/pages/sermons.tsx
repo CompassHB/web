@@ -1,8 +1,7 @@
 import * as React from "react";
 import {Page} from "../components/page";
 import {ContentNav} from "../components/contentNav";
-
-const {div, ul, li, link, h1, html, head, img, body, a, meta, script, span} = React.DOM;
+import {slice} from "../slice";
 
 export interface Sermon {
   alias: string;
@@ -13,14 +12,12 @@ export interface Sermon {
   title: string;
 }
 
-export class SermonsPage extends React.Component<{sermons: Array<Sermon>}, {}> {
-  render() {
-    const {sermons} = this.props;
-
+export const SermonsPage = {
+  render({data}) {
     return (
       <Page title="Sermons" nav={<ContentNav active="sermons" />}>
         <ol style={{display: 'block', listStyleType: 'none', margin: 0, padding: 0}}>
-        {sermons.map(sermon => (
+        {slice<Sermon>(data.sermons.recent, 0, 200).map(sermon => (
           <li key={sermon.alias} className="col-md-4" style={{marginTop: 20}}>
             <a href={`/sermons/${sermon.alias}`} style={{display: 'block'}}>
               <img src={sermon.coverImage} width="200" height="125" alt={sermon.title} />
@@ -57,45 +54,15 @@ export class SermonsPage extends React.Component<{sermons: Array<Sermon>}, {}> {
         </div>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/sermons';
+  urlPattern: '/sermons',
 
-  static render(): Promise<React.ReactElement<any>> {
-    // TODO(ewinslow): Fetch these from a database!
-    return Promise.resolve([
-      {
-        alias: 'psalm-of-the-day',
-        coverImage: 'https://i.vimeocdn.com/video/563621117_1280.jpg',
-        date: 'Sunday, April 3, 2016',
-        teacher: {name: 'Bobby Blakey'},
-        text: 'Psalm 1',
-        title: 'Psalm of the Day',
-      },
-      {
-        alias: 'the-new-you',
-        coverImage: 'https://i.vimeocdn.com/video/563309239_640.jpg',
-        date: 'Thursday, March 31, 2016',
-        teacher: {name: 'Bobby Blakey'},
-        text: 'Colossians 3:12-17',
-        title: 'The New You',
-      },
-      {
-        alias: 'die-to-live',
-        coverImage: 'https://i.vimeocdn.com/video/563121070_1280.jpg',
-        date: 'Wednesday, March 30, 2016',
-        teacher: {name: 'Bobby Blakey'},
-        text: 'Colossians 3:5-11',
-        title: 'Die to Live',
-      },
-      {
-        alias: 'rise-above-this-world',
-        coverImage: 'https://i.vimeocdn.com/video/562924917_1280.jpg',
-        date: 'Tuesday, March 29, 2016',
-        teacher: {name: 'Bobby Blakey'},
-        text: 'Colossians 3:1-4',
-        title: 'Rise Above This World',
-      },
-    ]).then(sermons => <SermonsPage sermons={sermons} />);
-  }
-}
+  data() {
+    return [
+      ['sermons', 'recent', {from: 0, to: 200}, ["alias", "coverImage", "date", "text", "title"]],
+      ['sermons', 'recent', {from: 0, to: 200}, "teacher", "name"],
+      ['sermons', 'recent', "length"],
+    ];
+  },
+};

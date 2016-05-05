@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Page} from "../components/page";
 
-export class IceCreamEvangelismPage extends React.Component<{}, {}> {
+export const IceCreamEvangelismPage = {
   render() {
     return (
       <Page title="Ice Cream Evangelism">
@@ -76,11 +76,7 @@ export class IceCreamEvangelismPage extends React.Component<{}, {}> {
         </div>
       </Page>
     );
-  }
+  },
 
-  static urlPattern = '/ice-cream-evangelism';
-
-  static render(): Promise<React.ReactElement<any>> {
-    return Promise.resolve(<IceCreamEvangelismPage/>);
-  }
+  urlPattern: '/ice-cream-evangelism',
 }
