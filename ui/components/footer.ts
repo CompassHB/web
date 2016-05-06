@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {RaisedButton} from 'material-ui';
 import {Grid, Row, Col} from 'react-bootstrap';
+import logo from './logo';
 
 const {a, div, h4, img, li, ul} = React.DOM;
 
@@ -28,7 +29,7 @@ export class Footer extends React.Component<{}, {}> {
 
         row({},
           col({ md: 2 },
-            img({ src: 'https://www.compasshb.com/CBC-HB-logo.png', alt: 'Compass Bible Church Huntington Beach, CompassHB', style: { height: 40 } })
+            logo()
           ),
           col({ md: 2 },
             h4({}, 'Ministries'),
