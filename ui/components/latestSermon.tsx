@@ -50,28 +50,22 @@ const styles = {
 };
 
 
-export default function latestSermon(sermon) {
-  // TODO(ewinslow): Parameterize this URL
-  return a({ href: '/sermons/' + sermon.slug, style: styles.link('https://i.vimeocdn.com/video/556184684_640.jpg') },
-    span({ style: styles.label }, `Latest sermon`),
+export function LatestSermon({sermon}) {
+  return <a href={'/sermons/' + sermon.alias} style={styles.link('https://i.vimeocdn.com/video/556184684_640.jpg')}>
+    <span style={styles.label}>Latest sermon</span>
 
-    div({ style: styles.aligner },
-      h1({ style: styles.title }, sermon.title),
+    <div style={styles.aligner}>
+      <h1 style={styles.title}>{sermon.title}</h1>
 
-      div({ style: { textAlign: 'center' } },
-        img({
-          src: material.icons.svg.playCircleOutline.white.src,
-          width: 72,
-          height: 72,
-          alt: 'Play',
-        })
-      )
-    ),
+      <div style={{textAlign: 'center'}}>
+        <img src={material.icons.svg.playCircleOutline.white.src} width={72} height={72} alt='Play' />
+      </div>
+    </div>
 
-    div({ style: styles.metadata },
-      div({}, 'Bill Blakey'),
-      div({}, 'Romans 5:6-8'),
-      div({}, 'February 14, 2016')
-    )
-  );
+    <div style={styles.metadata}>
+      <div>{sermon.teacher.name}</div>
+      <div>{sermon.text}</div>
+      <div>{sermon.date}</div>
+    </div>
+  </a>;
 }
