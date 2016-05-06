@@ -6,6 +6,8 @@ import {slice} from "../../slice";
 
 export const AboutDistinctivesPage = {
   render({data}) {
+    const distinctives = slice<any>(data.distinctives.inOrder, 0, 8);
+
     return (
       <Page title="8 Distinctives" nav={<AboutNav/>}>
         <p>
@@ -14,7 +16,7 @@ export const AboutDistinctivesPage = {
         </p>
 
         <ol style={{listStyleType: 'none', margin: 0, padding: 0, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
-          {slice<any>(data.distinctives.inOrder, 0, 8).map((distinctive, i) => (
+          {distinctives.map((distinctive, i) => (
           <li className="well" style={{width: '49%', marginBottom: '2%'}}>
             <h3 style={{marginTop: 0}}>{i+1}. {distinctive.title}</h3>
             <p>{distinctive.description}</p>
@@ -30,12 +32,21 @@ export const AboutDistinctivesPage = {
 
   redirects: {
     '/eight-distinctives': 301,
-  },
+  } as {[url: string]: number},
 
   data() {
-    return [
-      ['distinctives', 'inOrder', {from: 0, to: 7}, ['title', 'description', 'references']],
-      ['distinctives', 'inOrder', 'length']
-    ];
+    return {
+      distinctives: {
+        inOrder: {
+          length: true,
+          "0..7": {
+            $type: 'range',
+            title: true,
+            description: true,
+            references: true,
+          },
+        },
+      },
+    };
   },
 };

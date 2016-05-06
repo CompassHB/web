@@ -3,7 +3,25 @@ import {Header} from "../components/header";
 import {Footer} from "../components/footer";
 
 export const IndexPage = {
+  data() {
+    return {
+      sermons: {
+        recent: {
+          "0": {
+            title: true,
+            alias: true,
+            teacher: {
+              name: true,
+            },
+          },
+        },
+      },
+    };
+  },
+
   render({data}) {
+    const sermon = data.sermons.recent[0];
+
     return <div>
         <Header/>
         <div className="container-fluid">
@@ -13,13 +31,13 @@ export const IndexPage = {
                 <div className="col-sm-9">
                   <div className="Box--shadow--big" style={{width: '100%'}}>
                     <span className="Box--shadow--wrap">
-                       <a className="clickable latestsermon" href="https://www.compasshb.com/sermons/out-of-time" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/561543900_640.jpg)', backgroundPosition: 'center'}}>
+                       <a className="clickable latestsermon" href={`sermons/${sermon.alias}`} style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/561543900_640.jpg)', backgroundPosition: 'center'}}>
                        <p style={{position: 'absolute', textTransform: 'none', top: '-20px', left: 45, padding: '4px 10px', fontSize: '1.1em', backgroundColor: '#DD3F2E'}}>Latest Sermon</p>
                        <br /><br />
-                       <h1 className="tk-seravek-web">Out of Time</h1>
+                       <h1 className="tk-seravek-web">{sermon.title}</h1>
                        <p style={{padding: 20}} />
                        <p><i className="material-icons" style={{fontSize: '3em'}}>play_circle_outline</i></p>
-                        <div style={{position: 'absolute', bottom: 0, left: 0, textAlign: 'left', padding: 30, color: '#BBB'}}>Bobby Blakey <br />John 11:1-16<br />March 20, 2016</div>
+                        <div style={{position: 'absolute', bottom: 0, left: 0, textAlign: 'left', padding: 30, color: '#BBB'}}>{sermon.teacher.name} <br />{sermon.text}<br />{sermon.date}</div>
                      </a>
                   </span>
                 </div>

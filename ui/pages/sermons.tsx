@@ -17,7 +17,7 @@ export const SermonsPage = {
     return (
       <Page title="Sermons" nav={<ContentNav active="sermons" />}>
         <ol style={{display: 'block', listStyleType: 'none', margin: 0, padding: 0}}>
-        {slice<Sermon>(data.sermons.recent, 0, 200).map(sermon => (
+        {slice<Sermon>(data.sermons.recent, 0, 99).map(sermon => (
           <li key={sermon.alias} className="col-md-4" style={{marginTop: 20}}>
             <a href={`/sermons/${sermon.alias}`} style={{display: 'block'}}>
               <img src={sermon.coverImage} width="200" height="125" alt={sermon.title} />
@@ -59,10 +59,23 @@ export const SermonsPage = {
   urlPattern: '/sermons',
 
   data() {
-    return [
-      ['sermons', 'recent', {from: 0, to: 200}, ["alias", "coverImage", "date", "text", "title"]],
-      ['sermons', 'recent', {from: 0, to: 200}, "teacher", "name"],
-      ['sermons', 'recent', "length"],
-    ];
+    return {
+      sermons: {
+        recent: {
+          length: 1,
+          "0..99": {
+            $type: 'range',
+            alias: true,
+            coverImage: true,
+            date: true,
+            text: true,
+            title: true,
+            teacher: {
+              name: true,
+            },
+          },
+        },
+      },
+    };
   },
 };

@@ -20,6 +20,7 @@ import {SundaySchoolPage} from "./ui/pages/sundayschool";
 import {VideosPage} from "./ui/pages/videos";
 import {WomenPage} from "./ui/pages/women";
 import {YouthPage} from "./ui/pages/youth";
+import {getPathSets} from './ui/paths';
 import {model} from './model/model';
 import {renderHtmlPage} from './ui/render_html_page';
 
@@ -32,7 +33,7 @@ interface PageConfig {
   render(props: {data: any, params: any}): React.ReactElement<any>;
   redirects?: { [url: string]: number };
   urlPattern: string;
-  data?(params: any): Array<PathSet>,
+  data?(params: any): any,
 }
 
 var routes: Array<PageConfig> = [
@@ -59,7 +60,7 @@ var routes: Array<PageConfig> = [
 
 routes.forEach(config => {
   app.get(config.urlPattern, function({params}, res) {
-    return model.get(...(config.data ? config.data(params): []))
+    return model().get(...getPathSets(config.data ? config.data(params): {}))
       .then((jsong = {json: {}}) => {
         return renderHtmlPage(config.render({data: jsong.json, params}));
       })

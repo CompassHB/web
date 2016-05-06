@@ -5,10 +5,12 @@ import {slice} from "../slice";
 
 export const MenPage = {
   render({data}) {
+    const sermons = slice<any>(data.ministries.byAlias.men.sermons.recent, 0, 100);
+
     return (
       <Page title="Men" nav={<MinistriesNav active="men" />}>
         <ol style={{display: 'flex', flexWrap: 'wrap', listStyleType: 'none', justifyContent: 'space-between', margin: 0, padding: 0}}>
-          {slice<any>(data.ministries.byAlias.men.sermons.recent, 0, 200).map((sermon) => (
+          {sermons.map((sermon) => (
           <li style={{marginTop: 20, width: '33%'}}>
             <a href={`videos/${sermon.alias}`} style={{backgroundImage: `url(${sermon.backgroundImage})`, backgroundSize: 'cover', width: 200, height: 125, display: 'block'}} />
             <h4 className="tk-seravek-web">
@@ -28,10 +30,28 @@ export const MenPage = {
   urlPattern: '/men',
 
   data() {
-    return [
-      ['ministries', 'byAlias', 'men', 'sermons', 'recent', {from: 0, to: 199}, ['alias', 'backgroundImage', 'title', 'date']],
-      ['ministries', 'byAlias', 'men', 'sermons', 'recent', {from: 0, to: 199}, 'teacher', 'name'],
-      ['ministries', 'byAlias', 'men', 'sermons', 'recent', 'length'],
-    ];
+    return {
+      ministries: {
+        byAlias: {
+          men: {
+            sermons: {
+              recent: {
+                '0..99': {
+                  $type: 'range',
+                  alias: true,
+                  backgroundImage: true,
+                  title: true,
+                  date: true,
+                  teacher: {
+                    name: true,
+                  },
+                },
+                length: true,
+              },
+            },
+          },
+        },
+      },
+    };
   },
 };
