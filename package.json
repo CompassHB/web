@@ -1,10 +1,12 @@
 {
   "scripts": {
-    "test": "npm run build && jasmine-node _out/ui/ --junitreport",
-    "start": "npm run build && node _out/server.js",
     "build": "tsc && node _out/build.js",
+    "clean": "rm -rf _out/*",
+    "fix": "tsfmt -r",
     "postinstall": "typings install",
-    "fix": "tsfmt -r"
+    "start": "npm run build && node _out/server.js",
+    "test": "npm run build && jasmine-node _out/ui/ --junitreport",
+    "watch": "tsc -w"
   },
   "dependencies": {
     "express": "^4.13.4",
