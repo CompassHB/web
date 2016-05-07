@@ -1,4 +1,5 @@
 import * as Router from "falcor-router";
+import * as moment from "moment";
 import fetch from 'node-fetch';
 import {Observable} from "rxjs";
 import {PathValue, ref} from "falcor-json-graph";
@@ -19,13 +20,21 @@ function wpGetJson(resource: string) {
   });
 }
 
+function wpGetMedia(id: number) {
+  return wpGetJson(`/media/${id}`);
+}
+
+function wpGetSermons(categories: number, {offset = 0, limit = 100}): Observable<{slug: string}> {
+  return Observable.fromPromise(wpGetJson(`/sermons?categories=${categories}&offset=${offset}&per_page=${limit}`))
+      .concatMap((sermons: Array<{slug: string}>) => Observable.from(sermons));
+}
+
 function wpGetUser(id: number): Promise<{id: number, name: string, slug: string}> {
   return wpGetJson(`/users/${id}`);
 }
 
-function wpGetPosts(categories: number, {offset = 0, limit = 100}) {
-  return Observable.fromPromise(wpGetJson(`/posts?categories=${categories}&offset=${offset}&per_page=${limit}`));
-}
+
+const MAIN_SERVICE = 3; // "Main Service" is category 3 in the wordpress install
 
 export const router = new Router([
   {
@@ -54,24 +63,22 @@ export const router = new Router([
     route: 'sermons.recent[{ranges:ranges}]',
     get(pathSets: any) {
       const ranges = <Observable<{from: number, to: number}>>Observable.from(pathSets.ranges);
-
       return ranges.concatMap((range) => {
-        return wpGetPosts(3, { // Category 3 == main service
+        return wpGetSermons(MAIN_SERVICE, {
           offset: range.from,
           limit: range.to - range.from + 1,
-        }).concatMap((sermons) => {
-          return Observable.from(sermons).map(({slug}, i: number) => ({
-            path: ['sermons', 'recent', i],
-            value: ref(['sermons', 'byAlias', slug]),
-          }));
-        });
+        }).map(({slug}, i: number) => ({
+          // TODO(ewinslow): Cache the sermon bodies to avoid more round trips
+          path: ['sermons', 'recent', i],
+          value: ref(['sermons', 'byAlias', slug]),
+        }));
       }).toArray().toPromise();
     },
   },
   {
     route: 'sermons.recent.length',
     get(pathSets: any) {
-      return wpFetch('/posts?categories=3', {method: 'head'}).then((response) => {
+      return wpFetch(`/sermons?categories=${MAIN_SERVICE}`, {method: 'head'}).then((response) => {
         return response.headers.get('X-WP-Total');
       }).then((total) => ({
         path: ['sermons', 'recent', 'length'],
@@ -80,26 +87,38 @@ export const router = new Router([
     },
   },
   {
-    route: 'sermons.byAlias[{keys:aliases}]["title","content","alias","teacher"]',
+    route: 'sermons.byAlias[{keys:aliases}]["title","content","alias","teacher","text","date","coverImage"]',
     get(pathSets: any) {
       const props = Observable.from(pathSets[3]);
       const aliases = Observable.from(pathSets.aliases);
 
       return aliases.concatMap((alias: string) => {
-        return Observable.fromPromise(wpGetJson(`/posts?slug=${alias}`))
-          .concatMap(([sermon]: any) => {
-            return props.map((prop: string) => {
+        return Observable.fromPromise(wpGetJson(`/sermons?slug=${alias}`))
+          .concatMap(([sermon]: Array<any>) => {
+            return props.concatMap((prop: string) => {
               const path = ['sermons', 'byAlias', alias, prop];
 
               switch(prop) {
-                case 'title':
-                  return {path, value: sermon.title.rendered};
-                case 'content':
-                  return {path, value: sermon.content.rendered};
                 case 'alias':
-                  return {path, value: sermon.slug};
+                  return Observable.of({path, value: sermon.slug});
+                case 'content':
+                  return Observable.of({path, value: sermon.content.rendered});
+                case 'coverImage':
+                  if (!sermon.featured_media) {
+                    return Observable.of();
+                  }
+
+                  return Observable.fromPromise(wpGetMedia(sermon.featured_media)
+                    .then((media) => ({path, value: media.media_details.sizes.medium.source_url}))
+                    .catch((e) => ({path, value: {$type: 'error', value: e.message}})));
+                case 'date':
+                  return Observable.of({path, value: moment(sermon.date).format('dddd, MMMM D, YYYY')});
                 case 'teacher':
-                  return {path, value: ref(['people', 'byId', sermon.author])};
+                  return Observable.of({path, value: sermon.acf.preacher});
+                case 'text':
+                  return Observable.of({path, value: sermon.acf.text});
+                case 'title':
+                  return Observable.of({path, value: sermon.title.rendered});
               }
             });
           });

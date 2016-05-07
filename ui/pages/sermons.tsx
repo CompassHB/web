@@ -25,17 +25,14 @@ export const SermonsPage = {
             <h4 className="tk-seravek-web">
               <a href={`/sermons/${sermon.alias}`}>{sermon.title}</a>
             </h4>
-            <p>
-              {sermon.text}<br />
-              {sermon.date}<br />
-              {sermon.teacher.name}
-            </p>
+            <div>{sermon.text}</div>
+            <div>{sermon.date}</div>
+            <div>{sermon.teacher}</div>
           </li>
         ))}
         </ol>
-        <div style={{clear:'both'}}></div>
-
-        <div className="panel panel-default">
+        <div style={{clear: 'both'}}></div>
+        <div className="panel panel-default" style={{marginTop: '2em'}}>
           <div className="panel-heading">
             <h3 className="panel-title tk-seravek-web">Links</h3>
           </div>
@@ -70,9 +67,7 @@ export const SermonsPage = {
             date: true,
             text: true,
             title: true,
-            teacher: {
-              name: true,
-            },
+            teacher: true,
           },
         },
       },

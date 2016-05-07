@@ -1,20 +1,14 @@
 import * as React from "react";
 import {Header} from "../components/header";
 import {Footer} from "../components/footer";
-import {LatestSermon} from "../components/latestSermon";
+import {LatestSermon, latestSermonData} from "../components/latestSermon";
 
 export const IndexPage = {
   data() {
     return {
       sermons: {
         recent: {
-          "0": {
-            title: true,
-            alias: true,
-            teacher: {
-              name: true,
-            },
-          },
+          "0": latestSermonData.sermon,
         },
       },
     };

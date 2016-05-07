@@ -63,9 +63,19 @@ export function LatestSermon({sermon}) {
     </div>
 
     <div style={styles.metadata}>
-      <div>{sermon.teacher.name}</div>
+      <div>{sermon.teacher}</div>
       <div>{sermon.text}</div>
       <div>{sermon.date}</div>
     </div>
   </a>;
 }
+
+export const latestSermonData = {
+  sermon: {
+    alias: true,
+    teacher: true,
+    text: true,
+    title: true,
+    date: true,
+  },
+};
