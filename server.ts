@@ -1,13 +1,11 @@
 import * as React from "react";
 import * as express from "express";
-import {AboutBeliefsPage} from "./ui/pages/about/beliefs";
-import {AboutDistinctivesPage} from "./ui/pages/about/distinctives";
-import {AboutUsPage} from "./ui/pages/about/us";
 import {CollegePage} from "./ui/pages/college";
+import {DistinctivesPage} from "./ui/pages/eight-distinctives";
 import {FellowshipPage} from "./ui/pages/fellowship";
+import {GivingPage} from "./ui/pages/giving";
 import {IndexPage} from "./ui/pages/index";
 import {IceCreamEvangelismPage} from "./ui/pages/ice-cream-evangelism";
-import {GivingPage} from "./ui/pages/giving";
 import {KidsPage} from "./ui/pages/kids";
 import {MenPage} from "./ui/pages/men";
 import {PathSet} from "falcor-json-graph";
@@ -18,6 +16,8 @@ import {SermonsPage} from "./ui/pages/sermons";
 import {SongsPage} from "./ui/pages/songs";
 import {SundaySchoolPage} from "./ui/pages/sundayschool";
 import {VideosPage} from "./ui/pages/videos";
+import {WhatWeBelievePage} from "./ui/pages/what-we-believe";
+import {WhoWeArePage} from "./ui/pages/who-we-are";
 import {WomenPage} from "./ui/pages/women";
 import {YouthPage} from "./ui/pages/youth";
 import {getPathSets} from './ui/paths';
@@ -37,10 +37,8 @@ interface PageConfig {
 }
 
 var routes: Array<PageConfig> = [
-  AboutBeliefsPage,
-  AboutDistinctivesPage,
-  AboutUsPage,
   CollegePage,
+  DistinctivesPage,
   FellowshipPage,
   GivingPage,
   IndexPage,
@@ -54,6 +52,8 @@ var routes: Array<PageConfig> = [
   SongsPage,
   SundaySchoolPage,
   VideosPage,
+  WhatWeBelievePage,
+  WhoWeArePage,
   WomenPage,
   YouthPage,
 ];

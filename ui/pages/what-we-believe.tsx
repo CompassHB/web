@@ -1,8 +1,8 @@
 import * as React from "react";
-import * as gallery from '../../components/gallery';
-import {AboutNav} from './nav';
-import {Page} from '../../components/page';
-import {slice} from '../../slice';
+import * as gallery from '../components/gallery';
+import {AboutNav} from '../components/aboutNav';
+import {Page} from '../components/page';
+import {slice} from '../slice';
 
 const styles = {
   heading: {
@@ -10,11 +10,11 @@ const styles = {
   },
 };
 
-export const AboutBeliefsPage = {
+export const WhatWeBelievePage = {
   render({data}) {
     const beliefs = slice(data.beliefs.inOrder, 0, 8);
     return (
-      <Page title="What We Believe" nav={<AboutNav/>}>
+      <Page title="What We Believe" nav={<AboutNav active="what-we-believe" />}>
         <ul style={gallery.container}>
           {beliefs.map((belief: any) => (
           <li className="well" style={gallery.item}>
@@ -27,7 +27,7 @@ export const AboutBeliefsPage = {
     );
   },
 
-  urlPattern: '/beliefs',
+  urlPattern: '/what-we-believe',
 
   redirects: {
     '/what-we-believe': 301,

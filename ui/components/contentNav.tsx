@@ -10,5 +10,5 @@ export function ContentNav({active}: {active: string}) {
     {href: 'giving', label: 'Give'},
   ];
 
-  return <Nav links={links}/>;
+  return <Nav {...{active, links}} />;
 }

@@ -1,16 +1,16 @@
 import * as React from "react";
-import * as gallery from '../../components/gallery';
-import {Page} from '../../components/page';
-import {AboutNav} from './nav';
-import {model} from '../../../model/model';
-import {slice} from "../../slice";
+import * as gallery from '../components/gallery';
+import {Page} from '../components/page';
+import {AboutNav} from '../components/aboutNav';
+import {model} from '../../model/model';
+import {slice} from "../slice";
 
-export const AboutDistinctivesPage = {
+export const DistinctivesPage = {
   render({data}) {
     const distinctives = slice<any>(data.distinctives.inOrder, 0, 8);
 
     return (
-      <Page title="8 Distinctives" nav={<AboutNav/>}>
+      <Page title="8 Distinctives" nav={<AboutNav active="eight-distinctives" />}>
         <p>
           At Compass Bible Church we are called to make disciples of Christ (Matthew 28:18-20).
           As we do, we will always work to express and maintain these eight ministry values.
@@ -29,11 +29,7 @@ export const AboutDistinctivesPage = {
     );
   },
 
-  urlPattern: '/distinctives',
-
-  redirects: {
-    '/eight-distinctives': 301,
-  } as {[url: string]: number},
+  urlPattern: '/eight-distinctives',
 
   data() {
     return {

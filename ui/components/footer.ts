@@ -25,7 +25,7 @@ export class Footer extends React.Component<{}, {}> {
   render() {
     return React.DOM.footer({},
 
-      grid({ style: { paddingTop: 40, borderTop: '1px solid #EEE', lineHeight: '2em' } },
+      grid({ fluid: true, style: { paddingTop: 40, borderTop: '1px solid #EEE', lineHeight: '2em' } },
 
         row({},
           col({ md: 2 },

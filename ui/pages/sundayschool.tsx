@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Page} from "../components/page";
-import {MinistriesNav} from "./ministries/nav";
+import {MinistriesNav} from "../components/ministriesNav";
 
 export const SundaySchoolPage = {
   render() {

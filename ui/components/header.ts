@@ -5,7 +5,7 @@ import {Grid, Row, Col, MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react
 // import * as injectTapEventPlugin from 'react-tap-event-plugin';
 // injectTapEventPlugin();
 
-const {a, img} = React.DOM;
+const {a, div, img} = React.DOM;
 
 //TODO: long list of functions
 function grid(props, ...children) {
@@ -60,19 +60,19 @@ export class Header extends React.Component<{}, { isLeftNavOpen: boolean }> {
   render() {
     return React.DOM.header({},
 
-      grid({},
+      grid({fluid: true},
 
         row({ style: { borderTop: '5px solid #497f9e' } },
-          navbar({},
+          navbar({staticTop: true},
             navbarheader({},
               navbartoggle({}),
-              navbarbrand({},
+              navbarbrand({style: {height: 'auto'}},
                 logo()
               )
             ),
             navbarcollapse({},
               nav({ pullRight: true },
-                navitem({ href: 'about' },
+                navitem({ href: 'who-we-are' },
                   'Who We Are'
                 ),
                 navdropdown({ title: 'Ministries', id: 'basic-nav-dropdown' },

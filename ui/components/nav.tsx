@@ -16,6 +16,10 @@ const styles = {
   item: {
     borderBottom: '1px solid #ddd',
   },
+  active: {
+    borderBottom: '1px solid #ddd',
+    fontWeight: 'bold',
+  },
   link: {
     color: '#3a3a3a',
     display: 'flex',
@@ -25,12 +29,17 @@ const styles = {
   },
 };
 
-export function Nav({links}: {links: Array<{href: string, label: string}>}) {
+interface NavProps {
+  active: string;
+  links: Array<{href: string, label: string}>;
+}
+
+export function Nav({links, active}: NavProps) {
   return (
     <nav style={styles.nav}>
       <ul style={styles.list}>
         {links.map((link) => (
-        <li style={styles.item} key={link.href}>
+        <li style={active === link.href ? styles.active : styles.item} key={link.href}>
           <a href={link.href} style={styles.link}>
             {link.label} <i className="material-icons">keyboard_arrow_right</i>
           </a>

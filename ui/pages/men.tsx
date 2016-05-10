@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as gallery from "../components/gallery";
 import {Page} from "../components/page";
-import {MinistriesNav} from "./ministries/nav";
+import {MinistriesNav} from "../components/ministriesNav";
 import {slice} from "../slice";
 
 export const MenPage = {

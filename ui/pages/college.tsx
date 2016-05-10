@@ -1,5 +1,5 @@
 import * as React from "react";
-import {MinistriesNav} from "./ministries/nav";
+import {MinistriesNav} from "../components/ministriesNav";
 import {Page} from "../components/page";
 
 export const CollegePage = {

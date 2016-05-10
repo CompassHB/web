@@ -1,8 +1,8 @@
 import * as React from "react";
-import {Nav} from '../../components/nav';
+import {Nav} from './nav';
 
-export function MinistriesNav({active}: {active?: string}) {
-  return <Nav links={[
+export function MinistriesNav({active}: {active: string}) {
+  const links = [
     {href: 'kids', label: "Kids Ministry"},
     {href: 'youth', label: "Youth Ministry"},
     {href: 'college', label: "College Ministry"},
@@ -10,5 +10,8 @@ export function MinistriesNav({active}: {active?: string}) {
     {href: 'fellowship', label: "Fellowship Groups"},
     {href: 'men', label: "Men's Ministry"},
     {href: 'women', label: "Women's Ministry"},
-  ]} />;
+  ];
+
+
+  return <Nav {...{active, links}} />;
 }

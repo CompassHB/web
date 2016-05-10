@@ -1,11 +1,11 @@
 import * as React from "react";
-import {Page} from '../../components/page';
-import {AboutNav} from './nav';
+import {Page} from '../components/page';
+import {AboutNav} from '../components/aboutNav';
 
-export const AboutUsPage = {
+export const WhoWeArePage = {
   render() {
     return (
-      <Page title="Welcome to Compass Bible Church Huntington Beach" nav={<AboutNav/>}>
+      <Page title="Welcome to Compass Bible Church Huntington Beach" nav={<AboutNav active="who-we-are" />}>
         <p>
           On August 2nd, 2014 we were commissioned by <a title="Compass Bible Church Aliso Viejo" href="http://www.compasschurch.org" target="_blank">Compass Bible Church in Aliso Viejo</a>.
           Pastor Bobby, his wife Christa and their three children (Tyler, Emma and Jack) were sent out to plant another Compass here in Huntington Beach.
@@ -115,5 +115,5 @@ export const AboutUsPage = {
     );
   },
 
-  urlPattern: '/about',
+  urlPattern: '/who-we-are',
 };
