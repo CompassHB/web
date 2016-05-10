@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as gallery from "../components/gallery";
 import {Page} from "../components/page";
 import {MinistriesNav} from "./ministries/nav";
 import {slice} from "../slice";
@@ -9,9 +10,9 @@ export const MenPage = {
 
     return (
       <Page title="Men" nav={<MinistriesNav active="men" />}>
-        <ol style={{display: 'flex', flexWrap: 'wrap', listStyleType: 'none', justifyContent: 'space-between', margin: 0, padding: 0}}>
+        <ol style={gallery.container}>
           {sermons.map((sermon) => (
-          <li style={{marginTop: 20, width: '33%'}}>
+          <li style={gallery.item}>
             <a href={`videos/${sermon.alias}`} style={{backgroundImage: `url(${sermon.backgroundImage})`, backgroundSize: 'cover', width: 200, height: 125, display: 'block'}} />
             <h4 className="tk-seravek-web">
               <a href={`videos/${sermon.alias}`}>{sermon.title}</a>

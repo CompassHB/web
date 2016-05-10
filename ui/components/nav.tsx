@@ -7,7 +7,6 @@ const styles = {
     borderBottomWidth: '2px',
     borderTop: 'none',
     borderRadius: '3px',
-    minWidth: 200,
   },
   list: {
     listStyleType: 'none',

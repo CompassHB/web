@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as gallery from "../components/gallery";
 import {Page} from "../components/page";
 import {ContentNav} from "../components/contentNav";
 import {slice} from "../slice";
@@ -7,9 +8,9 @@ export const SeriesPage = {
   render({data}) {
     return (
       <Page title="Sermon Series" nav={<ContentNav active="series" />}>
-        <ol style={{margin: 0, padding: 0, listStyleType: 'none', flexWrap: 'wrap', display: 'flex'}}>
+        <ol style={gallery.container}>
           {slice<any>(data.series.recent, 0, 200).map(series => (
-            <li key={series.alias} style={{width: "33.33%"}}>
+            <li key={series.alias} style={gallery.item}>
               <a href={`/series/${series.alias}`}>
                 <img src={series.coverImage} width="200" height="125" alt={series.title} />
               </a>

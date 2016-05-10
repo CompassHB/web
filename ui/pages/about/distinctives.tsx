@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as gallery from '../../components/gallery';
 import {Page} from '../../components/page';
 import {AboutNav} from './nav';
 import {model} from '../../../model/model';
@@ -15,9 +16,9 @@ export const AboutDistinctivesPage = {
           As we do, we will always work to express and maintain these eight ministry values.
         </p>
 
-        <ol style={{listStyleType: 'none', margin: 0, padding: 0, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between'}}>
+        <ol style={gallery.container}>
           {distinctives.map((distinctive, i) => (
-          <li className="well" style={{width: '49%', marginBottom: '2%'}}>
+          <li className="well" style={gallery.item}>
             <h3 style={{marginTop: 0}}>{i+1}. {distinctive.title}</h3>
             <p>{distinctive.description}</p>
             <p>{distinctive.references}</p>

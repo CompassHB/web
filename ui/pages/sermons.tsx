@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as gallery from "../components/gallery";
 import {Page} from "../components/page";
 import {ContentNav} from "../components/contentNav";
 import {slice} from "../slice";
@@ -16,9 +17,9 @@ export const SermonsPage = {
   render({data}) {
     return (
       <Page title="Sermons" nav={<ContentNav active="sermons" />}>
-        <ol style={{display: 'block', listStyleType: 'none', margin: 0, padding: 0}}>
+        <ol style={gallery.container}>
         {slice<Sermon>(data.sermons.recent, 0, 99).map(sermon => (
-          <li key={sermon.alias} className="col-md-4" style={{marginTop: 20}}>
+          <li key={sermon.alias} style={gallery.item}>
             <a href={`/sermons/${sermon.alias}`} style={{display: 'block'}}>
               <img src={sermon.coverImage} width="200" height="125" alt={sermon.title} />
             </a>
