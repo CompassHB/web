@@ -1,4 +1,5 @@
 {
+  "name": "web",
   "scripts": {
     "build": "tsc && node _out/build.js",
     "clean": "rm -rf _out/*",
@@ -6,7 +7,8 @@
     "postinstall": "typings install",
     "start": "npm run build && node _out/server.js",
     "test": "npm run build && jasmine-node _out/ui/ --junitreport",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "posttest": "node_modules/.bin/nsp check"
   },
   "dependencies": {
     "express": "^4.13.4",
@@ -27,6 +29,7 @@
     "browserify": "^13.0.0",
     "jasmine-core": "^2.4.1",
     "jasmine-node": "^1.14.5",
+    "nsp": "^2.6.1",
     "typescript": "^1.8.10",
     "typescript-formatter": "^2.0.0",
     "typings": "^0.8.1"
