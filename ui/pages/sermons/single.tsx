@@ -4,7 +4,7 @@ import {Page} from "../../components/page";
 
 export const SermonPage = {
   render({data, params}) {
-    const sermon = data.sermons.byAlias[params.slug];
+    const sermon = data.sermons.bySlug[params.slug];
 
     // TODO(ewinslow): Use an HTML sanitizer or something}
     return <Page title={sermon.title} nav={<ContentNav active="sermons" />}>
@@ -17,7 +17,7 @@ export const SermonPage = {
   data({slug}) {
     return {
       sermons: {
-        byAlias: {
+        bySlug: {
           [slug]: {
             title: true,
             content: true,

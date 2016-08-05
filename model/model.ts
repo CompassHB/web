@@ -7,17 +7,17 @@ export function model() {
     cache: {
       distinctives: {
         inOrder: {
-          0: ref("distinctives.byAlias.bible"),
-          1: ref("distinctives.byAlias.preaching"),
-          2: ref("distinctives.byAlias.god"),
-          3: ref("distinctives.byAlias.gospel"),
-          4: ref("distinctives.byAlias.prayer"),
-          5: ref("distinctives.byAlias.participants"),
-          6: ref("distinctives.byAlias.leaders"),
-          7: ref("distinctives.byAlias.churches"),
+          0: ref("distinctives.bySlug.bible"),
+          1: ref("distinctives.bySlug.preaching"),
+          2: ref("distinctives.bySlug.god"),
+          3: ref("distinctives.bySlug.gospel"),
+          4: ref("distinctives.bySlug.prayer"),
+          5: ref("distinctives.bySlug.participants"),
+          6: ref("distinctives.bySlug.leaders"),
+          7: ref("distinctives.bySlug.churches"),
           length: 8,
         },
-        byAlias: {
+        bySlug: {
           bible: {
             title: "The Bible is central",
             description: `While the Bible is not an end in itself, it is certainly the indispensable "compass"
@@ -81,17 +81,17 @@ export function model() {
       },
       beliefs: {
         inOrder: {
-          0: ref("beliefs.byAlias.bible"),
-          1: ref("beliefs.byAlias.father"),
-          2: ref("beliefs.byAlias.son"),
-          3: ref("beliefs.byAlias.spirit"),
-          4: ref("beliefs.byAlias.people"),
-          5: ref("beliefs.byAlias.salvation"),
-          6: ref("beliefs.byAlias.church"),
-          7: ref("beliefs.byAlias.last"),
+          0: ref("beliefs.bySlug.bible"),
+          1: ref("beliefs.bySlug.father"),
+          2: ref("beliefs.bySlug.son"),
+          3: ref("beliefs.bySlug.spirit"),
+          4: ref("beliefs.bySlug.people"),
+          5: ref("beliefs.bySlug.salvation"),
+          6: ref("beliefs.bySlug.church"),
+          7: ref("beliefs.bySlug.last"),
           length: 8,
         },
-        byAlias: {
+        bySlug: {
           bible: {
             title: "The Bible",
             content: `The sixty-six books of the Bible were given by the inspiration of God's Spirit and are not the product of human creativity or ingenuity (2 Pt 1:20-21).
@@ -168,7 +168,7 @@ export function model() {
         },
       },
       ministries: {
-        byAlias: {
+        bySlug: {
           men: {
             sermons: {
               recent: {
@@ -177,28 +177,28 @@ export function model() {
                   backgroundImage: 'https://i.vimeocdn.com/video/554589747_640.jpg',
                   title: 'Men’s Retreat 2016 - Session 4',
                   date: 'Sunday, January 31, 2016',
-                  teacher: ref('people.byAlias.bobby'),
+                  teacher: ref('people.bySlug.bobby'),
                 },
                 1: {
                   alias: 'mens-retreat-2016-session-3',
                   backgroundImage: 'https://i.vimeocdn.com/video/554582150_640.jpg',
                   title: 'Men’s Retreat 2016 - Session 3',
                   date: 'Saturday, January 30, 2016',
-                  teacher: ref('people.byAlias.bobby'),
+                  teacher: ref('people.bySlug.bobby'),
                 },
                 2: {
                   alias: 'mens-retreat-2016-session-2',
                   backgroundImage: 'https://i.vimeocdn.com/video/554425400_1280.jpg',
                   title: 'Men’s Retreat 2016 - Session 2',
                   date: 'Saturday, January 30, 2016',
-                  teacher: ref('people.byAlias.bobby'),
+                  teacher: ref('people.bySlug.bobby'),
                 },
                 3: {
                   alias: 'mens-retreat-2016-session-1',
                   backgroundImage: 'https://i.vimeocdn.com/video/554418903_1280.jpg',
                   title: 'Men’s Retreat 2016 - Session 1',
                   date: 'Friday, January 29, 2016',
-                  teacher: ref('people.byAlias.bobby'),
+                  teacher: ref('people.bySlug.bobby'),
                 },
                 length: 4,
               },
@@ -207,7 +207,7 @@ export function model() {
         },
       },
       people: {
-        byAlias: {
+        bySlug: {
           bobby: {
             name: 'Bobby Blakey',
           },

@@ -6,7 +6,7 @@ This will be the new website for https://compasshb.com!
 
 * Install: `npm install`
 * Run tests: `npm test`
-* Local server: `npm start`
+* Run site locally: `npm start`
 
 ## Handy commands
 

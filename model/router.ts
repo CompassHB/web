@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {PathValue, ref} from "falcor-json-graph";
 
 function wpFetch(resource: string, options: {method?: 'head'} = undefined) {
-  return fetch('http://107.170.41.18/wp-json/wp/v2' + resource);
+  return fetch('https://api.compasshb.com/wp-json/wp/v2' + resource);
 }
 
 function wpGetJson(resource: string) {
@@ -24,8 +24,8 @@ function wpGetMedia(id: number) {
   return wpGetJson(`/media/${id}`);
 }
 
-function wpGetSermons(categories: number, {offset = 0, limit = 100}): Observable<{slug: string}> {
-  return Observable.fromPromise(wpGetJson(`/sermons?categories=${categories}&offset=${offset}&per_page=${limit}`))
+function wpGetSermons({offset = 0, limit = 100}): Observable<{slug: string}> {
+  return Observable.fromPromise(wpGetJson(`/posts?categories=1&offset=${offset}&per_page=${limit}`))
       .concatMap((sermons: Array<{slug: string}>) => Observable.from(sermons));
 }
 
@@ -34,11 +34,9 @@ function wpGetUser(id: number): Promise<{id: number, name: string, slug: string}
 }
 
 
-const MAIN_SERVICE = 3; // "Main Service" is category 3 in the wordpress install
-
 export const router = new Router([
   {
-    route: 'people.byId[{integers:ids}]["name","alias"]',
+    route: 'people.byId[{integers:ids}]["name","slug"]',
     get(pathSets: any) {
       const ids = <Observable<number>>Observable.from(pathSets.ids);
       const props = <Observable<string>>Observable.from(pathSets[3]);
@@ -51,7 +49,7 @@ export const router = new Router([
             switch (prop) {
               case 'name':
                 return {path, value: person.name};
-              case 'alias':
+              case 'slug':
                 return {path, value: person.slug};
             }
           });
@@ -63,22 +61,28 @@ export const router = new Router([
     route: 'sermons.recent[{ranges:ranges}]',
     get(pathSets: any) {
       const ranges = <Observable<{from: number, to: number}>>Observable.from(pathSets.ranges);
-      return ranges.concatMap((range) => {
-        return wpGetSermons(MAIN_SERVICE, {
+      const obs = ranges.concatMap((range) => {
+        return wpGetSermons({
           offset: range.from,
           limit: range.to - range.from + 1,
-        }).map(({slug}, i: number) => ({
-          // TODO(ewinslow): Cache the sermon bodies to avoid more round trips
-          path: ['sermons', 'recent', i],
-          value: ref(['sermons', 'byAlias', slug]),
-        }));
-      }).toArray().toPromise();
+        }).map(({slug}, i: number) => {
+          return {
+            // TODO(ewinslow): Cache the sermon bodies to avoid more round trips
+            path: ['sermons', 'recent', i],
+            value: ref(['sermons', 'bySlug', slug]),
+          };
+        });
+      });
+
+      const promise = obs.toArray().toPromise();
+
+      return promise;
     },
   },
   {
     route: 'sermons.recent.length',
     get(pathSets: any) {
-      return wpFetch(`/sermons?categories=${MAIN_SERVICE}`, {method: 'head'}).then((response) => {
+      return wpFetch(`/posts?categories=1`, {method: 'head'}).then((response) => {
         return response.headers.get('X-WP-Total');
       }).then((total) => ({
         path: ['sermons', 'recent', 'length'],
@@ -87,38 +91,35 @@ export const router = new Router([
     },
   },
   {
-    route: 'sermons.byAlias[{keys:aliases}]["title","content","alias","teacher","text","date","coverImage"]',
+    route: 'sermons.bySlug[{keys:slugs}]["title","content","slug","teacher","text","date","coverImage"]',
     get(pathSets: any) {
       const props = Observable.from(pathSets[3]);
-      const aliases = Observable.from(pathSets.aliases);
+      const slugs = Observable.from(pathSets.slugs);
 
-      return aliases.concatMap((alias: string) => {
-        return Observable.fromPromise(wpGetJson(`/sermons?slug=${alias}`))
+      return slugs.concatMap((slug: string) => {
+        return Observable.fromPromise(wpGetJson(`/posts?_embed&slug=${slug}`))
           .concatMap(([sermon]: Array<any>) => {
             return props.concatMap((prop: string) => {
-              const path = ['sermons', 'byAlias', alias, prop];
-
-              switch(prop) {
-                case 'alias':
-                  return Observable.of({path, value: sermon.slug});
-                case 'content':
-                  return Observable.of({path, value: sermon.content.rendered});
-                case 'coverImage':
-                  if (!sermon.featured_media) {
-                    return Observable.of();
-                  }
-
-                  return Observable.fromPromise(wpGetMedia(sermon.featured_media)
-                    .then((media) => ({path, value: media.media_details.sizes.medium.source_url}))
-                    .catch((e) => ({path, value: {$type: 'error', value: e.message}})));
-                case 'date':
-                  return Observable.of({path, value: moment(sermon.date).format('dddd, MMMM D, YYYY')});
-                case 'teacher':
-                  return Observable.of({path, value: sermon.acf.preacher});
-                case 'text':
-                  return Observable.of({path, value: sermon.acf.text});
-                case 'title':
-                  return Observable.of({path, value: sermon.title.rendered});
+              const path = ['sermons', 'bySlug', slug, prop];
+              try {
+                switch(prop) {
+                  case 'slug':
+                    return Observable.of({path, value: sermon.slug});
+                  case 'content':
+                    return Observable.of({path, value: sermon.content.rendered});
+                  case 'coverImage':
+                    return Observable.of({path, value: sermon._embedded['wp:featuredmedia'][0].source_url});
+                  case 'date':
+                    return Observable.of({path, value: moment(sermon.date).format('dddd, MMMM D, YYYY')});
+                  case 'teacher':
+                    return Observable.of({path, value: sermon._embedded.author[0].name });
+                  case 'text':
+                    return Observable.of({path, value: sermon.acf.text});
+                  case 'title':
+                    return Observable.of({path, value: sermon.title.rendered});
+                }
+              } catch (e) {
+                return Observable.of({path, value: e.message});
               }
             });
           });

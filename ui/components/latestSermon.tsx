@@ -51,7 +51,7 @@ const styles = {
 
 
 export function LatestSermon({sermon}) {
-  return <a href={'/sermons/' + sermon.alias} style={styles.link('https://i.vimeocdn.com/video/556184684_640.jpg')}>
+  return <a href={'/sermons/' + sermon.slug} style={styles.link(sermon.coverImage)}>
     <span style={styles.label}>Latest sermon</span>
 
     <div style={styles.aligner}>
@@ -72,7 +72,8 @@ export function LatestSermon({sermon}) {
 
 export const latestSermonData = {
   sermon: {
-    alias: true,
+    coverImage: true,
+    slug: true,
     teacher: true,
     text: true,
     title: true,
