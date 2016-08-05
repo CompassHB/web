@@ -30,6 +30,7 @@ const app = express();
 app.use(express.static('_out/ui'));
 
 interface PageConfig {
+  title?(data: any): string;
   render(props: {data: any, params: any}): React.ReactElement<any>;
   redirects?: { [url: string]: number };
   urlPattern: string;
@@ -64,8 +65,8 @@ routes.forEach(config => {
       .then(() => {
         return model().get(...getPathSets(config.data ? config.data(params): {})) as any;
       })
-      .then((jsong = {json: {}}) => {
-        return renderHtmlPage(config.render({data: jsong.json, params}));
+      .then(({json} = {json: {}}) => {
+        return renderHtmlPage(config.title ? config.title(json) : 'CompassHB', config.render({data: json, params}));
       })
       .then((content) => {
         res.send(content);

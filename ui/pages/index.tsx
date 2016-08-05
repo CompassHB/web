@@ -4,6 +4,8 @@ import {Footer} from "../components/footer";
 import {LatestSermon, latestSermonData} from "../components/latestSermon";
 
 export const IndexPage = {
+  title: () => 'CompassHB',
+
   data() {
     return {
       sermons: {

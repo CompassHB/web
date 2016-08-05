@@ -1,10 +1,11 @@
 import * as ReactDOMServer from "react-dom/server";
 
-export function renderHtmlPage(reactElement) {
+export function renderHtmlPage(title: string, reactElement) {
   return `
     <!DOCTYPE html>
     <html>
       <head>
+        <title>${title}</title>
         <base href="/">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="/ui/pages/index-client.bundle.js" async></script>
