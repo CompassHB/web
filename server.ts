@@ -88,6 +88,6 @@ routes.forEach(config => {
 app.use(express.static('_out'));
 app.use('/node_modules/bootstrap/dist', express.static('node_modules/bootstrap/dist'));
 
-const server = app.listen(process.env.PORT || 1743, function() {
+const server = app.listen(process.env.PORT || 8080, function() {
   console.log(`CompassHB ready for requests on port ${server.address().port}!`);
 });

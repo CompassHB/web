@@ -5,7 +5,7 @@ import {ContentNav} from "../components/contentNav";
 import {slice} from "../slice";
 
 export interface Sermon {
-  alias: string;
+  slug: string;
   coverImage: string;
   date: string;
   teacher: {name: string};
@@ -18,13 +18,13 @@ export const SermonsPage = {
     return (
       <Page title="Sermons" nav={<ContentNav active="sermons" />}>
         <ol style={gallery.container}>
-        {slice<Sermon>(data.sermons.recent, 0, 99).map(sermon => (
-          <li key={sermon.alias} style={gallery.item}>
-            <a href={`/sermons/${sermon.alias}`} style={{display: 'block'}}>
+        {slice<Sermon>(data.sermons.recent, 0, 100).map(sermon => (
+          <li key={sermon.slug} style={gallery.item}>
+            <a href={`/sermons/${sermon.slug}`} style={{display: 'block'}}>
               <img src={sermon.coverImage} width="200" height="125" alt={sermon.title} />
             </a>
             <h4 className="tk-seravek-web">
-              <a href={`/sermons/${sermon.alias}`}>{sermon.title}</a>
+              <a href={`/sermons/${sermon.slug}`}>{sermon.title}</a>
             </h4>
             <div>{sermon.text}</div>
             <div>{sermon.date}</div>
@@ -61,9 +61,9 @@ export const SermonsPage = {
       sermons: {
         recent: {
           length: 1,
-          "0..99": {
+          "0..100": {
             $type: 'range',
-            alias: true,
+            slug: true,
             coverImage: true,
             date: true,
             text: true,

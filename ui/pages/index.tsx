@@ -2,6 +2,16 @@ import * as React from "react";
 import {Header} from "../components/header";
 import {Footer} from "../components/footer";
 import {LatestSermon, latestSermonData} from "../components/latestSermon";
+import {slice} from "../slice";
+
+export interface Sermon {
+  slug: string;
+  coverImage: string;
+  date: string;
+  teacher: {name: string};
+  text: string;
+  title: string;
+}
 
 export const IndexPage = {
   title: () => 'CompassHB',
@@ -10,17 +20,31 @@ export const IndexPage = {
     return {
       sermons: {
         recent: {
-          "0": latestSermonData.sermon,
+          length: 1,
+          "0..4": {
+            $type: 'range',
+            slug: true,
+            coverImage: true,
+            date: true,
+            text: true,
+            title: true,
+            teacher: true,
+          },
         },
       },
     };
   },
+
 
   render({data}) {
     const sermon = data.sermons.recent[0];
 
     return <div>
         <Header/>
+        <style dangerouslySetInnerHTML={{__html: "\n        .boxer {\n          display: block;\n          text-transform: uppercase;\n          color: #fff;\n          padding: 10px;\n          width: 100%;\n          min-height: 129px;\n          background-size: cover;\n          background-position: center;\n        }\n        " }} />
+            );
+          }
+        }
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-12">
@@ -107,50 +131,21 @@ export const IndexPage = {
       <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
         <div className="col-xs-10 col-xs-offset-1">
           <h2 className="tk-seravek-web"><a href="https://www.compasshb.com/sermons">Sermons</a></h2>
-          <div className="col-sm-6 col-md-3">
-            <div className="Box--shadow" style={{width: '100%'}}>
-                    <span className="Box--shadow--wrap">
-                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/sermons/out-of-time" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/561543900_640.jpg)'}}>
-                        <h4 className="tk-seravek-web">Out of Time</h4>
-                        <p> March 20<br />John 11:1-16</p>
-                        <br /><br />
-                      </a>
-                    </span>
-            </div>
-          </div>
-          <div className="col-sm-6 col-md-3">
-            <div className="Box--shadow" style={{width: '100%'}}>
-                    <span className="Box--shadow--wrap">
-                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/sermons/held" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560464621_1280.jpg)'}}>
-                        <h4 className="tk-seravek-web">Held </h4>
-                        <p> March 13<br />John 10:22-41</p>
-                        <br /><br />
-                      </a>
-                    </span>
-            </div>
-          </div>
-          <div className="col-sm-6 col-md-3">
-            <div className="Box--shadow" style={{width: '100%'}}>
-                    <span className="Box--shadow--wrap">
-                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/sermons/the-good-shepherd" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/559326852_640.jpg)'}}>
-                        <h4 className="tk-seravek-web">The Good Shepherd</h4>
-                        <p> March 6<br />John 10:1-21</p>
-                        <br /><br />
-                      </a>
-                    </span>
-            </div>
-          </div>
-          <div className="col-sm-6 col-md-3">
-            <div className="Box--shadow" style={{width: '100%'}}>
-                    <span className="Box--shadow--wrap">
-                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/sermons/the-twisted-thinking-of-this-world" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/561306746_1280.jpg)'}}>
-                        <h4 className="tk-seravek-web">The Twisted Thinking of This World </h4>
-                        <p> February 28<br />John 9:8-41</p>
-                        <br /><br />
-                      </a>
-                    </span>
-            </div>
-          </div>
+            {slice<Sermon>(data.sermons.recent, 0, 4).map(sermon => (
+              <div className="col-sm-6 col-md-3">
+                <div className="Box--shadow" style={{width: '100%'}}>
+                  <span className="Box--shadow--wrap">
+                    <a className="clickable featuredblog boxer" 
+                      href={`/sermons/${sermon.slug}`} 
+                      style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + sermon.coverImage + ')'}}>
+                      <h4 className="tk-seravek-web">{sermon.title}</h4>
+                      <p>{sermon.date}<br />{sermon.text}</p>
+                      <br /><br />
+                    </a>
+                  </span>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
       <div className="row" style={{background: 'none', backgroundColor: '#dddddd', paddingBottom: 20}}>

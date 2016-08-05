@@ -2,7 +2,6 @@ import * as React from "react";
 import * as gallery from '../components/gallery';
 import {Page} from '../components/page';
 import {AboutNav} from '../components/aboutNav';
-import {model} from '../../model/model';
 import {slice} from "../slice";
 
 export const DistinctivesPage = {
