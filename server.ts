@@ -60,14 +60,19 @@ var routes: Array<PageConfig> = [
 
 routes.forEach(config => {
   app.get(config.urlPattern, function({params}, res) {
-    return model().get(...getPathSets(config.data ? config.data(params): {}))
+    return Promise.resolve()
+      .then(() => {
+        return model().get(...getPathSets(config.data ? config.data(params): {})) as any;
+      })
       .then((jsong = {json: {}}) => {
         return renderHtmlPage(config.render({data: jsong.json, params}));
       })
-      .then(
-        (content) => res.send(content),
-        (e) => res.send(`<pre>${e.stack}</pre>`)
-      );
+      .then((content) => {
+        res.send(content);
+      })
+      .catch((e) => {
+        res.send(`<pre>${e.stack}</pre>`);
+      });
   });
 
   for (var url of Object.keys(config.redirects || {})) {
