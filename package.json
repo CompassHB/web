@@ -8,33 +8,34 @@
     "start": "npm run build && node _out/server.js",
     "test": "npm run build && jasmine-node _out/ui/ --junitreport",
     "watch": "tsc -w",
-    "posttest": "node_modules/.bin/nsp check"
+    "posttest": "nsp check"
   },
   "dependencies": {
-    "express": "^4.13.4",
+    "express": "^4.14.0",
     "falcor": "^0.1.17",
     "falcor-express": "^0.1.2",
     "falcor-json-graph": "^1.1.7",
     "falcor-router": "^0.4.0",
-    "material-ui": "^0.14.4",
-    "moment": "^2.13.0",
-    "node-fetch": "^1.5.1",
-    "react": "0.14.7",
-    "react-bootstrap": "^0.28.3",
-    "react-dom": "0.14.7",
-    "react-tap-event-plugin": "0.2.2",
-    "rxjs": "^5.0.0-beta.7"
+    "moment": "^2.14.1",
+    "node-fetch": "^1.6.0",
+    "react": "15.3.0",
+    "react-bootstrap": "^0.30.2",
+    "react-dom": "^15.3.0",
+    "react-tap-event-plugin": "1.0.0",
+    "rxjs": "^5.0.0-beta.10"
   },
   "devDependencies": {
-    "browserify": "^13.0.0",
+    "browserify": "^13.1.0",
     "jasmine-core": "^2.4.1",
     "jasmine-node": "^1.14.5",
     "nsp": "^2.6.1",
     "typescript": "^1.8.10",
-    "typescript-formatter": "^2.0.0",
-    "typings": "^0.8.1"
+    "typescript-formatter": "^2.3.0",
+    "typings": "^1.3.2"
   },
   "engines": {
     "node": "^6.2"
-  }
+  },
+  "license": "UNLICENSED",
+  "repository": "https://github.com/compasshb/web/#readme"
 }

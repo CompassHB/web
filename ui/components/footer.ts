@@ -1,12 +1,11 @@
 import * as React from 'react';
-import {RaisedButton} from 'material-ui';
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, Button} from 'react-bootstrap';
 import logo from './logo';
 
 const {a, div, h4, img, li, ul} = React.DOM;
 
 function raisedButton(props, ...children) {
-  return React.createElement(RaisedButton, props, ...children);
+  return React.createElement(Button, props, ...children);
 }
 
 function grid(props, ...children) {

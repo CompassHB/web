@@ -7,7 +7,7 @@ describe('SermonPage', function() {
     const result = ReactDOMServer.renderToStaticMarkup(SermonPage.render({
       data: {
         sermons: {
-          byAlias: {
+          bySlug: {
             'foo': {
               title: 'Foobar',
               content: 'Foobar',

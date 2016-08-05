@@ -1,21 +1,19 @@
 {
-  "ambientDependencies": {
+  "globalDependencies": {
     "browserify": "github:DefinitelyTyped/DefinitelyTyped/browserify/browserify.d.ts#161d514d1259011b6c194ef4c4b456d64f25a1f1",
     "es6-promise": "github:DefinitelyTyped/DefinitelyTyped/es6-promise/es6-promise.d.ts#830e8ebd9ef137d039d5c7ede24a421f08595f83",
     "express": "github:DefinitelyTyped/DefinitelyTyped/express/express.d.ts#dd638012d63e069f2c99d06ef4dcc9616a943ee4",
     "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#dd638012d63e069f2c99d06ef4dcc9616a943ee4",
-    "material-ui": "github:DefinitelyTyped/DefinitelyTyped/material-ui/material-ui.d.ts#44d672fd37ffe1ffabf9cec3bbadfbecedf39006",
     "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#cb5206a8ac1c9a3ddfd126f5ecea6729b2361452",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#aee0039a2d6686ec78352125010ebb38a7a7d743",
-    "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#ecaf8c1c3f858e4b73f508c2a7dc831561d2097f",
-    "react-bootstrap": "github:DefinitelyTyped/DefinitelyTyped/react-bootstrap/react-bootstrap.d.ts#56295f5058cac7ae458540423c50ac2dcf9fc711",
-    "react-dom": "registry:dt/react-dom#0.14.0+20160316155526",
-    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#0fa4e9e61385646ea6a4cba2aef357353d2ce77f",
-    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160412133644"
+"react-bootstrap": "github:DefinitelyTyped/DefinitelyTyped/react-bootstrap/react-bootstrap.d.ts#56295f5058cac7ae458540423c50ac2dcf9fc711",    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#0fa4e9e61385646ea6a4cba2aef357353d2ce77f",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20160728142841"
   },
   "dependencies": {
-    "falcor": "registry:npm/falcor#0.1.0+20160427193439",
-    "falcor-json-graph": "registry:npm/falcor-json-graph#1.1.0+20160427033401",
-    "falcor-router": "registry:npm/falcor-router#0.4.0+20160427212252"
+    "falcor": "registry:npm/falcor#0.1.0+20160723033700",
+    "falcor-json-graph": "registry:npm/falcor-json-graph#1.1.0+20160723033700",
+    "falcor-router": "registry:npm/falcor-router#0.4.0+20160723033700",
+    "react": "registry:npm/react#15.0.1+20160601175240",
+    "react-dom": "registry:npm/react-dom#15.0.1+20160705210405"
   }
 }
