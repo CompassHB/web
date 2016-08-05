@@ -60,13 +60,13 @@ export class Header extends React.Component<{}, { isLeftNavOpen: boolean }> {
   render() {
     return React.DOM.header({},
 
-      grid({fluid: true},
+      grid({ fluid: true },
 
         row({ style: { borderTop: '5px solid #497f9e' } },
-          navbar({staticTop: true},
+          navbar({ staticTop: true },
             navbarheader({},
               navbartoggle({}),
-              navbarbrand({style: {height: 'auto'}},
+              navbarbrand({ style: { height: 'auto' } },
                 logo()
               )
             ),

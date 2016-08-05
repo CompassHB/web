@@ -31,7 +31,7 @@ app.use(express.static('_out/ui'));
 
 interface PageConfig {
   title?(data: any): string;
-  render(props: {data: any, params: any}): React.ReactElement<any>;
+  render(props: { data: any, params: any }): React.ReactElement<any>;
   redirects?: { [url: string]: number };
   urlPattern: string;
   data?(params: any): any,
@@ -63,10 +63,10 @@ routes.forEach(config => {
   app.get(config.urlPattern, function({params}, res) {
     return Promise.resolve()
       .then(() => {
-        return model().get(...getPathSets(config.data ? config.data(params): {})) as any;
+        return model().get(...getPathSets(config.data ? config.data(params) : {})) as any;
       })
-      .then(({json} = {json: {}}) => {
-        return renderHtmlPage(config.title ? config.title(json) : 'CompassHB', config.render({data: json, params}));
+      .then(({json} = { json: {} }) => {
+        return renderHtmlPage(config.title ? config.title(json) : 'CompassHB', config.render({ data: json, params }));
       })
       .then((content) => {
         res.send(content);

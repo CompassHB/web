@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import {Observable} from "rxjs";
 import {PathValue, ref} from "falcor-json-graph";
 
-function wpFetch(resource: string, options: {method?: 'head'} = undefined) {
+function wpFetch(resource: string, options: { method?: 'head' } = undefined) {
   return fetch('https://api.compasshb.com/wp-json/wp/v2' + resource);
 }
 
@@ -24,12 +24,12 @@ function wpGetMedia(id: number) {
   return wpGetJson(`/media/${id}`);
 }
 
-function wpGetSermons({offset = 0, limit = 100}): Observable<{slug: string}> {
+function wpGetSermons({offset = 0, limit = 100}): Observable<{ slug: string }> {
   return Observable.fromPromise(wpGetJson(`/posts?categories=1&offset=${offset}&per_page=${limit}`))
-      .concatMap((sermons: Array<{slug: string}>) => Observable.from(sermons));
+    .concatMap((sermons: Array<{ slug: string }>) => Observable.from(sermons));
 }
 
-function wpGetUser(id: number): Promise<{id: number, name: string, slug: string}> {
+function wpGetUser(id: number): Promise<{ id: number, name: string, slug: string }> {
   return wpGetJson(`/users/${id}`);
 }
 
@@ -48,9 +48,9 @@ export const router = new Router([
 
             switch (prop) {
               case 'name':
-                return {path, value: person.name};
+                return { path, value: person.name };
               case 'slug':
-                return {path, value: person.slug};
+                return { path, value: person.slug };
             }
           });
         });
@@ -60,7 +60,7 @@ export const router = new Router([
   {
     route: 'sermons.recent[{ranges:ranges}]',
     get(pathSets: any) {
-      const ranges = <Observable<{from: number, to: number}>>Observable.from(pathSets.ranges);
+      const ranges = <Observable<{ from: number, to: number }>>Observable.from(pathSets.ranges);
       const obs = ranges.concatMap((range) => {
         return wpGetSermons({
           offset: range.from,
@@ -82,7 +82,7 @@ export const router = new Router([
   {
     route: 'sermons.recent.length',
     get(pathSets: any) {
-      return wpFetch(`/posts?categories=1`, {method: 'head'}).then((response) => {
+      return wpFetch(`/posts?categories=1`, { method: 'head' }).then((response) => {
         return response.headers.get('X-WP-Total');
       }).then((total) => ({
         path: ['sermons', 'recent', 'length'],
@@ -102,24 +102,24 @@ export const router = new Router([
             return props.concatMap((prop: string) => {
               const path = ['sermons', 'bySlug', slug, prop];
               try {
-                switch(prop) {
+                switch (prop) {
                   case 'slug':
-                    return Observable.of({path, value: sermon.slug});
+                    return Observable.of({ path, value: sermon.slug });
                   case 'content':
-                    return Observable.of({path, value: sermon.content.rendered});
+                    return Observable.of({ path, value: sermon.content.rendered });
                   case 'coverImage':
-                    return Observable.of({path, value: sermon._embedded['wp:featuredmedia'][0].source_url});
+                    return Observable.of({ path, value: sermon._embedded['wp:featuredmedia'][0].source_url });
                   case 'date':
-                    return Observable.of({path, value: moment(sermon.date).format('dddd, MMMM D, YYYY')});
+                    return Observable.of({ path, value: moment(sermon.date).format('dddd, MMMM D, YYYY') });
                   case 'teacher':
-                    return Observable.of({path, value: sermon._embedded.author[0].name });
+                    return Observable.of({ path, value: sermon._embedded.author[0].name });
                   case 'text':
-                    return Observable.of({path, value: sermon.acf.text});
+                    return Observable.of({ path, value: sermon.acf.text });
                   case 'title':
-                    return Observable.of({path, value: sermon.title.rendered});
+                    return Observable.of({ path, value: sermon.title.rendered });
                 }
               } catch (e) {
-                return Observable.of({path, value: e.message});
+                return Observable.of({ path, value: e.message });
               }
             });
           });

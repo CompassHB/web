@@ -6,19 +6,19 @@ describe('IndexPage', function() {
   it("shows the latest sermon's title", function() {
     const result = ReactDOMServer.renderToStaticMarkup(
       IndexPage.render({
-      data: {
-        sermons: {
-          recent: {
-            0: {
-              id: '1345',
-              slug: 'foo-sermon',
-              title: 'Foo sermon',
+        data: {
+          sermons: {
+            recent: {
+              0: {
+                id: '1345',
+                slug: 'foo-sermon',
+                title: 'Foo sermon',
+              },
+              length: 1,
             },
-            length: 1,
           },
         },
-      },
-    }));
+      }));
 
     expect(result.includes('Foo sermon')).toBe(true);
   });

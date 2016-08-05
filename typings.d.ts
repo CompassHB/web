@@ -8,8 +8,8 @@ interface String {
 }
 
 declare module 'node-fetch' {
-    function fetch(url: string|Request, init?: RequestInit): Promise<Response>;
-    export default fetch;
+  function fetch(url: string | Request, init?: RequestInit): Promise<Response>;
+  export default fetch;
 }
 
 declare module "node-sass" {
@@ -39,6 +39,6 @@ declare module "react-tap-event-plugin" {
 
 // @TODO: Temporary fix. Not sure why this is missing from react-dom typings...
 declare module "react-dom/server" {
-    function renderToString(any): string;
-    function renderToStaticMarkup(any): string;
+  function renderToString(any): string;
+  function renderToStaticMarkup(any): string;
 }

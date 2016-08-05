@@ -7,9 +7,9 @@
  *    const data = {1: 'foo', "length": 10};
  *    slice(data, 1, 1); // ['foo']
  */
-export function slice<T>(arrayLike: {[index:number]: T, length: number}, offset:number, limit:number): Array<T> {
+export function slice<T>(arrayLike: { [index: number]: T, length: number }, offset: number, limit: number): Array<T> {
   if (typeof arrayLike.length === 'undefined') {
-      throw new Error("Object is missing 'length' property. Did you forget to request it?");
+    throw new Error("Object is missing 'length' property. Did you forget to request it?");
   }
 
   let results = [];
