@@ -5,10 +5,9 @@ import {DistinctivesPage} from "./ui/pages/eight-distinctives";
 import {FellowshipPage} from "./ui/pages/fellowship";
 import {GivingPage} from "./ui/pages/giving";
 import {IndexPage} from "./ui/pages/index";
-import {IceCreamEvangelismPage} from "./ui/pages/ice-cream-evangelism";
+import {PagesPage} from "./ui/pages/single";
 import {KidsPage} from "./ui/pages/kids";
 import {MenPage} from "./ui/pages/men";
-import {PathSet} from "falcor-json-graph";
 import {ReadPage} from "./ui/pages/read";
 import {SeriesPage} from "./ui/pages/series";
 import {SermonPage} from "./ui/pages/sermons/single";
@@ -43,7 +42,7 @@ var routes: Array<PageConfig> = [
   FellowshipPage,
   GivingPage,
   IndexPage,
-  IceCreamEvangelismPage,
+  PagesPage,
   KidsPage,
   MenPage,
   ReadPage,
@@ -89,5 +88,5 @@ app.use(express.static('_out'));
 app.use('/node_modules/bootstrap/dist', express.static('node_modules/bootstrap/dist'));
 
 const server = app.listen(process.env.PORT || 8080, function() {
-  console.log(`CompassHB ready for requests on port ${server.address().port}!`);
+  console.log(`CompassHB ready for requests on ${server.address().address} port ${server.address().port}!`);
 });

@@ -126,4 +126,32 @@ export const router = new Router([
       }).toArray().toPromise();
     },
   },
+  {
+    route: 'pages.bySlug[{keys:slugs}]["title","content","slug"]',
+    get(pathSets: any) {
+      const props = Observable.from(pathSets[3]);
+      const slugs = Observable.from(pathSets.slugs);
+
+      return slugs.concatMap((slug: string) => {
+        return Observable.fromPromise(wpGetJson(`/pages?_embed&slug=${slug}`))
+            .concatMap(([page]: Array<any>) => {
+              return props.concatMap((prop: string) => {
+                const path = ['pages', 'bySlug', slug, prop];
+                try {
+                  switch (prop) {
+                    case 'slug':
+                      return Observable.of({ path, value: page.slug });
+                    case 'content':
+                      return Observable.of({ path, value: page.content.rendered });
+                    case 'title':
+                      return Observable.of({ path, value: page.title.rendered });
+                  }
+                } catch (e) {
+                  return Observable.of({ path, value: e.message });
+                }
+              });
+            });
+      }).toArray().toPromise();
+    },
+  },
 ]);
