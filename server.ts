@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as express from "express";
+import * as FalcorExpress from 'falcor-express';
 import {CollegePage} from "./ui/pages/college";
 import {DistinctivesPage} from "./ui/pages/eight-distinctives";
 import {FellowshipPage} from "./ui/pages/fellowship";
@@ -24,10 +25,13 @@ import {model} from './model/model';
 import {renderHtmlPage} from './ui/render_html_page';
 
 const app = express();
+const falcorModel = model();
 
 // static js bundles
 app.use(express.static('_out/ui'));
-
+app.use('/model.json', FalcorExpress.dataSourceRoute(function(req, res) {
+    return falcorModel.asDataSource();
+}));
 interface PageConfig {
   title?(data: any): string;
   render(props: { data: any, params: any }): React.ReactElement<any>;
@@ -62,7 +66,7 @@ routes.forEach(config => {
   app.get(config.urlPattern, function({params}, res) {
     return Promise.resolve()
       .then(() => {
-        return model().get(...getPathSets(config.data ? config.data(params) : {})) as any;
+        return falcorModel.get(...getPathSets(config.data ? config.data(params) : {})) as any;
       })
       .then(({json} = { json: {} }) => {
         return renderHtmlPage(config.title ? config.title(json) : 'CompassHB', config.render({ data: json, params }));
