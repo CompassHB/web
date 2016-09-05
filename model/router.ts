@@ -134,23 +134,23 @@ export const router = new Router([
 
       return slugs.concatMap((slug: string) => {
         return Observable.fromPromise(wpGetJson(`/pages?_embed&slug=${slug}`))
-            .concatMap(([page]: Array<any>) => {
-              return props.concatMap((prop: string) => {
-                const path = ['pages', 'bySlug', slug, prop];
-                try {
-                  switch (prop) {
-                    case 'slug':
-                      return Observable.of({ path, value: page.slug });
-                    case 'content':
-                      return Observable.of({ path, value: page.content.rendered });
-                    case 'title':
-                      return Observable.of({ path, value: page.title.rendered });
-                  }
-                } catch (e) {
-                  return Observable.of({ path, value: e.message });
+          .concatMap(([page]: Array<any>) => {
+            return props.concatMap((prop: string) => {
+              const path = ['pages', 'bySlug', slug, prop];
+              try {
+                switch (prop) {
+                  case 'slug':
+                    return Observable.of({ path, value: page.slug });
+                  case 'content':
+                    return Observable.of({ path, value: page.content.rendered });
+                  case 'title':
+                    return Observable.of({ path, value: page.title.rendered });
                 }
-              });
+              } catch (e) {
+                return Observable.of({ path, value: e.message });
+              }
             });
+          });
       }).toArray().toPromise();
     },
   },

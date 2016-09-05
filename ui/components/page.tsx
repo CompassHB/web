@@ -18,7 +18,9 @@ const styles = {
   },
 }
 
-export function Page({children = undefined, nav = undefined, title}) {
+export interface PageProps {children?: React.ReactElement<any>[]; nav?: React.ReactElement<any>; title: string;}
+
+export function Page({children = undefined, nav = undefined, title}: PageProps) {
   return (
     <div>
       <Header/>
