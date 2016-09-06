@@ -59,7 +59,7 @@ export const IndexPage = {
           <div className="col-sm-3">
             <div className="Box--shadow" style={{width: '100%'}}>
               <span className="Box--shadow--wrap">
-                <a className="clickable boxer" href="https://www.compasshb.com/read" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://compasshb.smugmug.com/photos/i-w6dnZK2/0/S/i-w6dnZK2-S.jpg)'}}>
+                <a className="clickable boxer" href="/read" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://compasshb.smugmug.com/photos/i-w6dnZK2/0/S/i-w6dnZK2-S.jpg)'}}>
                   <h4 className="tk-seravek-web">1 Peter 5</h4>
                   <p>Scripture of the Day</p>
                 </a>
