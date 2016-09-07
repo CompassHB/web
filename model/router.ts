@@ -58,6 +58,61 @@ export const router = new Router([
     },
   },
   {
+    route: 'events.featured[{ranges:ranges}]',
+    get(pathSets: any) {
+      // https://api.compasshb.com/wp-json/wp/v2/tribe_events?_embed&filter[tribe_events_cat]=Show on Homepage
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'events.featured.length',
+    get(pathSets: any) {
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'events.upcoming[{ranges:ranges}]',
+    get(pathSets: any) {
+      // https://api.compasshb.com/wp-json/wp/v2/tribe_events?_embed
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'events.upcoming.length',
+    get(pathSets: any) {
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'events.bySlug[{keys:slugs}]["startTime","endTime","title","description","coverImage","slug"]',
+    get(pathSets: any) {
+      // https://api.compasshb.com/wp-json/wp/v2/tribe_events?_embed&slug={slug}
+      return Promise.resolve([]);
+    }
+  },
+  {
+    route: 'series.recent[{ranges:ranges}]',
+    get(pathSets: any) {
+      // Series are "tags" in WP: https://api.compasshb.com/wp-json/wp/v2/tags?embed
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'series.recent.length',
+    get() {
+      return Promise.resolve([
+        { path: ['series', 'recent', 'length'], value: 0 },
+      ]);
+    },
+  },
+  {
+    route: 'series.bySlug[{keys:slugs}]["title","description","coverImage","slug"]',
+    get(pathSets: any) {
+      // Series are "tags" in WP: https://api.compasshb.com/wp-json/wp/v2/tags?embed&slug={slug}
+      return Promise.resolve([]);
+    },
+  },
+  {
     route: 'sermons.recent[{ranges:ranges}]',
     get(pathSets: any) {
       const ranges = <Observable<{ from: number, to: number }>>Observable.from(pathSets.ranges);
