@@ -1,7 +1,7 @@
 import * as React from 'react';
 import logo from "./logo";
 
-import {Grid, Row, Col, MenuItem, Nav, Navbar, NavDropdown, NavItem} from 'react-bootstrap';
+import { Grid, Row, Col, MenuItem, Nav, Navbar, NavDropdown, NavItem } from 'react-bootstrap';
 // import * as injectTapEventPlugin from 'react-tap-event-plugin';
 // injectTapEventPlugin();
 

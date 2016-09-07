@@ -1,8 +1,8 @@
 import * as Router from "falcor-router";
 import * as moment from "moment";
 import fetch from 'node-fetch';
-import {Observable} from "rxjs";
-import {PathValue, ref} from "falcor-json-graph";
+import { Observable } from "rxjs";
+import { PathValue, ref } from "falcor-json-graph";
 
 function wpFetch(resource: string, options: { method?: 'head' } = undefined) {
   return fetch('https://api.compasshb.com/wp-json/wp/v2' + resource);

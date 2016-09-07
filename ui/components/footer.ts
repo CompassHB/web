@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid, Row, Col, Button} from 'react-bootstrap';
+import { Grid, Row, Col, Button } from 'react-bootstrap';
 import logo from './logo';
 
 const {a, div, h4, img, li, ul} = React.DOM;

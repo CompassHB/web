@@ -1,6 +1,6 @@
-import {Model} from "falcor";
-import {ref} from "falcor-json-graph";
-import {router} from './router';
+import { Model } from "falcor";
+import { ref } from "falcor-json-graph";
+import { router } from './router';
 
 export function model() {
   return new Model({

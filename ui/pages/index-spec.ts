@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOMServer from 'react-dom/server';
-import {IndexPage} from './index';
+import { IndexPage } from './index';
 
 describe('IndexPage', function() {
   it("shows the latest sermon's title", function() {
