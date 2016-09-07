@@ -3,7 +3,7 @@ import {ContentNav} from "../components/contentNav";
 import {Page} from "../components/page";
 
 export const PagesPage = {
-  render({data, params}) {
+  render({data, params}: any) {
     // TODO(): redirect 404 if results are undefined
     const page = data.pages.bySlug[params.slug];
 
@@ -15,7 +15,7 @@ export const PagesPage = {
 
   urlPattern: '/:slug',
 
-  data({slug}) {
+  data({slug}: {slug: string}) {
     return {
       pages: {
         bySlug: {

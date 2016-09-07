@@ -4,19 +4,19 @@ import logo from './logo';
 
 const {a, div, h4, img, li, ul} = React.DOM;
 
-function raisedButton(props, ...children) {
+function raisedButton(props: any, ...children: Array<any>) {
   return React.createElement(Button, props, ...children);
 }
 
-function grid(props, ...children) {
+function grid(props: any, ...children: Array<any>) {
   return React.createElement(Grid, props, ...children);
 }
 
-function row(props, ...children) {
+function row(props: any, ...children: Array<any>) {
   return React.createElement(Row, props, ...children);
 }
 
-function col(props, ...children) {
+function col(props: any, ...children: Array<any>) {
   return React.createElement(Col, props, ...children);
 }
 

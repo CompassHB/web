@@ -5,7 +5,7 @@ import {AboutNav} from '../components/aboutNav';
 import {slice} from "../slice";
 
 export const DistinctivesPage = {
-  render({data}) {
+  render({data}: any) {
     const distinctives = slice<any>(data.distinctives.inOrder, 0, 8);
 
     return (

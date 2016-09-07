@@ -122,7 +122,7 @@ export const router = new Router([
         return wpGetSermons({
           offset: range.from,
           limit: range.to - range.from + 1,
-        }).map(({slug}, i: number) => {
+        }).map(({slug}: { slug: string }, i: number) => {
           return {
             // TODO(ewinslow): Cache the sermon bodies to avoid more round trips
             path: ['sermons', 'recent', i],

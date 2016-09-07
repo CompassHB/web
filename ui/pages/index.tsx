@@ -36,7 +36,7 @@ export const IndexPage = {
   },
 
 
-  render({data}) {
+  render({data}: any) {
     const sermon = data.sermons.recent[0];
 
     return <div>
@@ -132,8 +132,8 @@ export const IndexPage = {
               <div className="col-sm-6 col-md-3">
                 <div className="Box--shadow" style={{width: '100%'}}>
                   <span className="Box--shadow--wrap">
-                    <a className="clickable featuredblog boxer" 
-                      href={`/sermons/${sermon.slug}`} 
+                    <a className="clickable featuredblog boxer"
+                      href={`/sermons/${sermon.slug}`}
                       style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + sermon.coverImage + ')'}}>
                       <h4 className="tk-seravek-web">{sermon.title}</h4>
                       <p>{sermon.date}<br />{sermon.text}</p>

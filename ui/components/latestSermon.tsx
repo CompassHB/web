@@ -50,7 +50,7 @@ const styles = {
 };
 
 
-export function LatestSermon({sermon}) {
+export function LatestSermon({sermon}: any) {
   return <a href={'/sermons/' + sermon.slug} style={styles.link(sermon.coverImage)}>
     <span style={styles.label}>Latest sermon</span>
 

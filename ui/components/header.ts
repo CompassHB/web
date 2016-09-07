@@ -8,51 +8,51 @@ import { Grid, Row, Col, MenuItem, Nav, Navbar, NavDropdown, NavItem } from 'rea
 const {a, div, img} = React.DOM;
 
 //TODO: long list of functions
-function grid(props, ...children) {
+function grid(props: any, ...children: Array<any>) {
   return React.createElement(Grid, props, ...children);
 }
 
-function row(props, ...children) {
+function row(props: any, ...children: Array<any>) {
   return React.createElement(Row, props, ...children);
 }
 
-function col(props, ...children) {
+function col(props: any, ...children: Array<any>) {
   return React.createElement(Col, props, ...children);
 }
 
-function menuitem(props, ...children) {
+function menuitem(props: any, ...children: Array<any>) {
   return React.createElement(MenuItem, props, ...children);
 }
 
-function nav(props, ...children) {
+function nav(props: any, ...children: Array<any>) {
   return React.createElement(Nav, props, ...children);
 }
 
-function navbar(props, ...children) {
+function navbar(props: any, ...children: Array<any>) {
   return React.createElement(Navbar, props, ...children);
 }
 
-function navbarbrand(props, ...children) {
+function navbarbrand(props: any, ...children: Array<any>) {
   return React.createElement(Navbar.Brand, props, ...children);
 }
 
-function navbarcollapse(props, ...children) {
+function navbarcollapse(props: any, ...children: Array<any>) {
   return React.createElement(Navbar.Collapse, props, ...children);
 }
 
-function navbarheader(props, ...children) {
+function navbarheader(props: any, ...children: Array<any>) {
   return React.createElement(Navbar.Header, props, ...children);
 }
 
-function navbartoggle(props, ...children) {
+function navbartoggle(props: any, ...children: Array<any>) {
   return React.createElement(Navbar.Toggle, props, ...children);
 }
 
-function navitem(props, ...children) {
+function navitem(props: any, ...children: Array<any>) {
   return React.createElement(NavItem, props, ...children);
 }
 
-function navdropdown(props, ...children) {
+function navdropdown(props: any, ...children: Array<any>) {
   return React.createElement(NavDropdown, props, ...children);
 }
 

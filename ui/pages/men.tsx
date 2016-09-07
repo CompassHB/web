@@ -5,7 +5,7 @@ import {MinistriesNav} from "../components/ministriesNav";
 import {slice} from "../slice";
 
 export const MenPage = {
-  render({data}) {
+  render({data}: any) {
     const sermons = slice<any>(data.ministries.byAlias.men.sermons.recent, 0, 100);
 
     return (
