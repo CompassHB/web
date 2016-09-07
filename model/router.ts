@@ -1,11 +1,11 @@
 import * as Router from "falcor-router";
 import * as moment from "moment";
 import fetch from 'node-fetch';
-import {Observable} from "rxjs";
-import {PathValue, ref} from "falcor-json-graph";
+import { Observable } from "rxjs";
+import { PathValue, ref } from "falcor-json-graph";
 
-function wpFetch(resource: string, options: { method?: 'head' } = undefined) {
-  return fetch('https://api.compasshb.com/wp-json/wp/v2' + resource);
+function wpFetch(resource: string, options: { method?: 'head' } = {}) {
+  return fetch('https://api.compasshb.com/wp-json/wp/v2' + resource, options);
 }
 
 function wpGetJson(resource: string) {
@@ -51,10 +51,67 @@ export const router = new Router([
                 return { path, value: person.name };
               case 'slug':
                 return { path, value: person.slug };
+              default:
+                throw new Error('Unrecognized property: ' + prop);
             }
           });
         });
       }).toArray().toPromise();
+    },
+  },
+  {
+    route: 'events.featured[{ranges:ranges}]',
+    get(pathSets: any) {
+      // https://api.compasshb.com/wp-json/wp/v2/tribe_events?_embed&filter[tribe_events_cat]=Show on Homepage
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'events.featured.length',
+    get(pathSets: any) {
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'events.upcoming[{ranges:ranges}]',
+    get(pathSets: any) {
+      // https://api.compasshb.com/wp-json/wp/v2/tribe_events?_embed
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'events.upcoming.length',
+    get(pathSets: any) {
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'events.bySlug[{keys:slugs}]["startTime","endTime","title","description","coverImage","slug"]',
+    get(pathSets: any) {
+      // https://api.compasshb.com/wp-json/wp/v2/tribe_events?_embed&slug={slug}
+      return Promise.resolve([]);
+    }
+  },
+  {
+    route: 'series.recent[{ranges:ranges}]',
+    get(pathSets: any) {
+      // Series are "tags" in WP: https://api.compasshb.com/wp-json/wp/v2/tags?embed
+      return Promise.resolve([]);
+    },
+  },
+  {
+    route: 'series.recent.length',
+    get() {
+      return Promise.resolve([
+        { path: ['series', 'recent', 'length'], value: 0 },
+      ]);
+    },
+  },
+  {
+    route: 'series.bySlug[{keys:slugs}]["title","description","coverImage","slug"]',
+    get(pathSets: any) {
+      // Series are "tags" in WP: https://api.compasshb.com/wp-json/wp/v2/tags?embed&slug={slug}
+      return Promise.resolve([]);
     },
   },
   {
@@ -65,7 +122,7 @@ export const router = new Router([
         return wpGetSermons({
           offset: range.from,
           limit: range.to - range.from + 1,
-        }).map(({slug}, i: number) => {
+        }).map(({slug}: { slug: string }, i: number) => {
           return {
             // TODO(ewinslow): Cache the sermon bodies to avoid more round trips
             path: ['sermons', 'recent', i],
@@ -84,10 +141,10 @@ export const router = new Router([
     get(pathSets: any) {
       return wpFetch(`/posts?categories=1`, { method: 'head' }).then((response) => {
         return response.headers.get('X-WP-Total');
-      }).then((total) => ({
+      }).then((total) => ([{
         path: ['sermons', 'recent', 'length'],
         value: total,
-      }));
+      }]));
     },
   },
   {
@@ -117,6 +174,8 @@ export const router = new Router([
                     return Observable.of({ path, value: sermon.acf.text });
                   case 'title':
                     return Observable.of({ path, value: sermon.title.rendered });
+                  default:
+                    throw new Error('Unrecognized property: ' + prop);
                 }
               } catch (e) {
                 return Observable.of({ path, value: e.message });
@@ -145,6 +204,8 @@ export const router = new Router([
                     return Observable.of({ path, value: page.content.rendered });
                   case 'title':
                     return Observable.of({ path, value: page.title.rendered });
+                  default:
+                    throw new Error('Unrecognized property: ' + prop);
                 }
               } catch (e) {
                 return Observable.of({ path, value: e.message });

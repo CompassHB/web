@@ -5,7 +5,7 @@ import {ContentNav} from "../components/contentNav";
 import {slice} from "../slice";
 
 export const SeriesPage = {
-  render({data}) {
+  render({data}: any) {
     return (
       <Page title="Sermon Series" nav={<ContentNav active="series" />}>
         <ol style={gallery.container}>

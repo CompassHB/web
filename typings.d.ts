@@ -39,6 +39,6 @@ declare module "react-tap-event-plugin" {
 
 // @TODO: Temporary fix. Not sure why this is missing from react-dom typings...
 declare module "react-dom/server" {
-  function renderToString(any): string;
-  function renderToStaticMarkup(any): string;
+  function renderToString(e: any): string;
+  function renderToStaticMarkup(e: any): string;
 }

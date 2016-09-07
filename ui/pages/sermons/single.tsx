@@ -3,7 +3,7 @@ import {ContentNav} from "../../components/contentNav";
 import {Page} from "../../components/page";
 
 export const SermonPage = {
-  render({data, params}) {
+  render({data, params}: any) {
     const sermon = data.sermons.bySlug[params.slug];
 
     // TODO(ewinslow): Use an HTML sanitizer or something}
@@ -14,7 +14,7 @@ export const SermonPage = {
 
   urlPattern: '/sermons/:slug',
 
-  data({slug}) {
+  data({slug}: {slug: string}) {
     return {
       sermons: {
         bySlug: {

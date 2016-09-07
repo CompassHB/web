@@ -1,28 +1,29 @@
 import * as React from "react";
 import * as express from "express";
 import * as FalcorExpress from 'falcor-express';
-import {CollegePage} from "./ui/pages/college";
-import {DistinctivesPage} from "./ui/pages/eight-distinctives";
-import {FellowshipPage} from "./ui/pages/fellowship";
-import {GivingPage} from "./ui/pages/giving";
-import {IndexPage} from "./ui/pages/index";
-import {PagesPage} from "./ui/pages/single";
-import {KidsPage} from "./ui/pages/kids";
-import {MenPage} from "./ui/pages/men";
-import {ReadPage} from "./ui/pages/read";
-import {SeriesPage} from "./ui/pages/series";
-import {SermonPage} from "./ui/pages/sermons/single";
-import {SermonsPage} from "./ui/pages/sermons";
-import {SongsPage} from "./ui/pages/songs";
-import {SundaySchoolPage} from "./ui/pages/sundayschool";
-import {VideosPage} from "./ui/pages/videos";
-import {WhatWeBelievePage} from "./ui/pages/what-we-believe";
-import {WhoWeArePage} from "./ui/pages/who-we-are";
-import {WomenPage} from "./ui/pages/women";
-import {YouthPage} from "./ui/pages/youth";
-import {getPathSets} from './ui/paths';
-import {model} from './model/model';
-import {renderHtmlPage} from './ui/render_html_page';
+import { Server } from 'http';
+import { CollegePage } from "./ui/pages/college";
+import { DistinctivesPage } from "./ui/pages/eight-distinctives";
+import { FellowshipPage } from "./ui/pages/fellowship";
+import { GivingPage } from "./ui/pages/giving";
+import { IndexPage } from "./ui/pages/index";
+import { PagesPage } from "./ui/pages/single";
+import { KidsPage } from "./ui/pages/kids";
+import { MenPage } from "./ui/pages/men";
+import { ReadPage } from "./ui/pages/read";
+import { SeriesPage } from "./ui/pages/series";
+import { SermonPage } from "./ui/pages/sermons/single";
+import { SermonsPage } from "./ui/pages/sermons";
+import { SongsPage } from "./ui/pages/songs";
+import { SundaySchoolPage } from "./ui/pages/sundayschool";
+import { VideosPage } from "./ui/pages/videos";
+import { WhatWeBelievePage } from "./ui/pages/what-we-believe";
+import { WhoWeArePage } from "./ui/pages/who-we-are";
+import { WomenPage } from "./ui/pages/women";
+import { YouthPage } from "./ui/pages/youth";
+import { getPathSets } from './ui/paths';
+import { model } from './model/model';
+import { renderHtmlPage } from './ui/render_html_page';
 
 const app = express();
 const falcorModel = model();
@@ -30,7 +31,7 @@ const falcorModel = model();
 // static js bundles
 app.use(express.static('_out/ui'));
 app.use('/model.json', FalcorExpress.dataSourceRoute(function(req, res) {
-    return falcorModel.asDataSource();
+  return falcorModel.asDataSource();
 }));
 interface PageConfig {
   title?(data: any): string;
@@ -80,7 +81,7 @@ routes.forEach(config => {
   });
 
   for (var url of Object.keys(config.redirects || {})) {
-    var status = config.redirects[url];
+    var status = config.redirects![url];
 
     app.get(url, function(req, res) {
       res.redirect(status, config.urlPattern);
@@ -91,6 +92,8 @@ routes.forEach(config => {
 app.use(express.static('_out'));
 app.use('/node_modules/bootstrap/dist', express.static('node_modules/bootstrap/dist'));
 
-const server = app.listen(process.env.PORT || 8080, function() {
+let server: Server;
+
+server = app.listen(process.env.PORT || 8080, function() {
   console.log(`CompassHB ready for requests on ${server.address().address} port ${server.address().port}!`);
 });

@@ -14,7 +14,7 @@ export interface Sermon {
 }
 
 export const SermonsPage = {
-  render({data}) {
+  render({data}: any) {
     return (
       <Page title="Sermons" nav={<ContentNav active="sermons" />}>
         <ol style={gallery.container}>

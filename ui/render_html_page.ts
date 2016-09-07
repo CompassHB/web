@@ -1,6 +1,6 @@
 import * as ReactDOMServer from "react-dom/server";
 
-export function renderHtmlPage(title: string, reactElement) {
+export function renderHtmlPage(title: string, reactElement: any) {
   return `
     <!DOCTYPE html>
     <html>

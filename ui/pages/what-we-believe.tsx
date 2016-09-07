@@ -11,7 +11,7 @@ const styles = {
 };
 
 export const WhatWeBelievePage = {
-  render({data}) {
+  render({data}: any) {
     const beliefs = slice(data.beliefs.inOrder, 0, 8);
     return (
       <Page title="What We Believe" nav={<AboutNav active="what-we-believe" />}>

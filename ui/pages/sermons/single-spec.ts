@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOMServer from 'react-dom/server';
-import {SermonPage} from './single';
+import { SermonPage } from './single';
 
 describe('SermonPage', function() {
   it('Shows the sermon title', function() {

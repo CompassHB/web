@@ -1,4 +1,4 @@
-import {PathSet} from "falcor-json-graph";
+import { PathSet } from "falcor-json-graph";
 
 function getSegment(key: string, val: { $type: string }): string | { from: number, to: number } {
   if (val.$type === 'range') {
@@ -10,7 +10,7 @@ function getSegment(key: string, val: { $type: string }): string | { from: numbe
   return key;
 }
 
-export function getPathSets(shape: Object, basePath: PathSet = []): Array<PathSet> {
+export function getPathSets(shape: any, basePath: PathSet = []): Array<PathSet> {
   return Object.keys(shape)
     .filter((key) => !!shape[key])
     .map((key): Array<PathSet> => {
