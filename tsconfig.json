@@ -8,6 +8,7 @@
     "sourceMap": true,
     "removeComments": false,
     "noImplicitAny": false,
+    "strictNullChecks": true,
     "outDir": "_out"
   },
   "filesGlob": [

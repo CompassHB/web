@@ -4,8 +4,8 @@ import fetch from 'node-fetch';
 import { Observable } from "rxjs";
 import { PathValue, ref } from "falcor-json-graph";
 
-function wpFetch(resource: string, options: { method?: 'head' } = undefined) {
-  return fetch('https://api.compasshb.com/wp-json/wp/v2' + resource);
+function wpFetch(resource: string, options: { method?: 'head' } = {}) {
+  return fetch('https://api.compasshb.com/wp-json/wp/v2' + resource, options);
 }
 
 function wpGetJson(resource: string) {
@@ -51,6 +51,8 @@ export const router = new Router([
                 return { path, value: person.name };
               case 'slug':
                 return { path, value: person.slug };
+              default:
+                throw new Error('Unrecognized property: ' + prop);
             }
           });
         });
@@ -139,10 +141,10 @@ export const router = new Router([
     get(pathSets: any) {
       return wpFetch(`/posts?categories=1`, { method: 'head' }).then((response) => {
         return response.headers.get('X-WP-Total');
-      }).then((total) => ({
+      }).then((total) => ([{
         path: ['sermons', 'recent', 'length'],
         value: total,
-      }));
+      }]));
     },
   },
   {
@@ -172,6 +174,8 @@ export const router = new Router([
                     return Observable.of({ path, value: sermon.acf.text });
                   case 'title':
                     return Observable.of({ path, value: sermon.title.rendered });
+                  default:
+                    throw new Error('Unrecognized property: ' + prop);
                 }
               } catch (e) {
                 return Observable.of({ path, value: e.message });
@@ -200,6 +204,8 @@ export const router = new Router([
                     return Observable.of({ path, value: page.content.rendered });
                   case 'title':
                     return Observable.of({ path, value: page.title.rendered });
+                  default:
+                    throw new Error('Unrecognized property: ' + prop);
                 }
               } catch (e) {
                 return Observable.of({ path, value: e.message });

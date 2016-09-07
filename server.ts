@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as express from "express";
 import * as FalcorExpress from 'falcor-express';
+import { Server } from 'http';
 import { CollegePage } from "./ui/pages/college";
 import { DistinctivesPage } from "./ui/pages/eight-distinctives";
 import { FellowshipPage } from "./ui/pages/fellowship";
@@ -80,7 +81,7 @@ routes.forEach(config => {
   });
 
   for (var url of Object.keys(config.redirects || {})) {
-    var status = config.redirects[url];
+    var status = config.redirects![url];
 
     app.get(url, function(req, res) {
       res.redirect(status, config.urlPattern);
@@ -91,6 +92,8 @@ routes.forEach(config => {
 app.use(express.static('_out'));
 app.use('/node_modules/bootstrap/dist', express.static('node_modules/bootstrap/dist'));
 
-const server = app.listen(process.env.PORT || 8080, function() {
+let server: Server;
+
+server = app.listen(process.env.PORT || 8080, function() {
   console.log(`CompassHB ready for requests on ${server.address().address} port ${server.address().port}!`);
 });

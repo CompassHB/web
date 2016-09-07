@@ -12,7 +12,7 @@ export function slice<T>(arrayLike: { [index: number]: T, length: number }, offs
     throw new Error("Object is missing 'length' property. Did you forget to request it?");
   }
 
-  let results = [];
+  let results: T[] = [];
   for (let i = offset; i < offset + limit && i < arrayLike.length; i++) {
     results.push(arrayLike[i]);
   }
