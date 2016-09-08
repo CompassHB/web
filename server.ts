@@ -1,3 +1,7 @@
+if (process.env.NEWRELIC_LICENSE_KEY) {
+  require('newrelic');
+}
+
 import * as React from "react";
 import * as express from "express";
 import * as FalcorExpress from 'falcor-express';

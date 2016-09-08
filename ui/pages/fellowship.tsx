@@ -32,7 +32,7 @@ export const FellowshipPage = {
           </div>
           <div className="panel-body">
             <p>The materials on this page are to help you prepare for home fellowship group discussions.</p>
-            <p><a href="https://www.compasshb.com/sermons" className="btn btn-primary">Latest Sermon</a></p>
+            <p><a href="/sermons" className="btn btn-primary">Latest Sermon</a></p>
           </div>
         </div>
       </Page>
