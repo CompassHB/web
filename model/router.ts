@@ -6,7 +6,11 @@ import { PathValue, Range, error, ref } from "falcor-json-graph";
 class CompassHBWordpress {
   constructor(private baseUrl: string) { }
 
-  async getJson(resource: string) {
+  private async head(resource: string) {
+    return fetch(this.baseUrl + resource, { method: 'head' });
+  }
+
+  private async getJson(resource: string) {
     const response: Response = await fetch(this.baseUrl + resource);
     const json: any = await response.json();
 
@@ -17,20 +21,30 @@ class CompassHBWordpress {
     return json;
   }
 
-  getMedia(id: number) {
+  async getMedia(id: number) {
     return this.getJson(`/media/${id}`);
   }
 
-  getSermons({offset = 0, limit = 100}): Promise<Array<{ slug: string }>> {
+  async getPageBySlug(slug: string) {
+    return (await this.getJson(`/pages?_embed&slug=${slug}`))[0];
+  }
+
+  async getSermonBySlug(slug: string) {
+    return (await this.getJson(`/posts?_embed&slug=${slug}`))[0];
+  }
+
+  async getSermons({offset = 0, limit = 100}): Promise<Array<{ slug: string }>> {
     return this.getJson(`/posts?categories=1&offset=${offset}&per_page=${limit}`);
   }
 
-  getUser(id: number): Promise<{ id: number, name: string, slug: string }> {
-    return this.getJson(`/users/${id}`);
+  async getSermonsCount() {
+    const response = await this.head(`/posts?categories=1`);
+
+    return parseInt(response.headers.get('X-WP-Total'), 10);
   }
 
-  head(resource: string) {
-    return fetch(this.baseUrl + resource, { method: 'head' });
+  async getUser(id: number): Promise<{ id: number, name: string, slug: string }> {
+    return this.getJson(`/users/${id}`);
   }
 }
 
@@ -126,7 +140,7 @@ export const router = new Router([
   },
   {
     route: 'sermons.recent[{ranges:ranges}]',
-    get([, , ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
+    async get([, , ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
       // Not sure why, but TypeScript keeps using yield here when we try to make this an async function
@@ -151,11 +165,9 @@ export const router = new Router([
   {
     route: 'sermons.recent.length',
     async get(pathSets: any): Promise<Array<PathValue>> {
-      const response: Response = await wp.head(`/posts?categories=1`);
-
       return [{
         path: ['sermons', 'recent', 'length'],
-        value: response.headers.get('X-WP-Total'),
+        value: await wp.getSermonsCount(),
       }];
     },
   },
@@ -165,7 +177,7 @@ export const router = new Router([
       const results: Array<PathValue> = [];
 
       for (const slug of slugs) {
-        const [sermon] = await wp.getJson(`/posts?_embed&slug=${slug}`);
+        const sermon = await wp.getSermonBySlug(slug);
 
         for (const prop of props) {
           const path = ['sermons', 'bySlug', slug, prop];
@@ -211,7 +223,7 @@ export const router = new Router([
       const results: Array<PathValue> = [];
 
       for (const slug of slugs) {
-        const [page] = await wp.getJson(`/pages?_embed&slug=${slug}`);
+        const page = await wp.getPageBySlug(slug);
 
         for (const prop of props) {
           const path = ['pages', 'bySlug', slug, prop];
