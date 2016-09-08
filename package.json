@@ -32,8 +32,7 @@
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.3",
     "react-dom": "^15.3.0",
-    "react-tap-event-plugin": "1.0.0",
-    "rxjs": "^5.0.0-beta.11"
+    "react-tap-event-plugin": "1.0.0"
   },
   "devDependencies": {
     "@types/browserify": "^12.0.29",
@@ -44,7 +43,7 @@
     "jasmine-core": "^2.4.1",
     "jasmine-node": "^1.14.5",
     "nsp": "^2.6.1",
-    "typescript": "^2.0",
+    "typescript": "2.1.0-dev.20160908",
     "typescript-formatter": "^2.3.0"
   },
   "engines": {
