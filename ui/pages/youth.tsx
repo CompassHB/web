@@ -9,7 +9,7 @@ export const YouthPage = {
         <img src="https://compasshb.smugmug.com/photos/i-Z6gVmwc/0/X3/i-Z6gVmwc-X3.jpg" width={75} style={{float: 'right'}} />
         <p>Jr. High and High School students meets Sundays at 11am and Thursdays at 6:30PM.</p>
         <div className="col-sm-9" style={{textAlign: 'center'}}>
-          <a className="clickable latestsermon" href="https://www.compasshb.com/sermons/what-is-love-2" style={{display: 'block', backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.ytimg.com/vi/w6DiogeW_lk/hqdefault.jpg)', backgroundPosition: 'center', minHeight: 300, paddingTop: 60, marginBottom: 40}}>
+          <a className="clickable latestsermon" href="/sermons/what-is-love-2" style={{display: 'block', backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.ytimg.com/vi/w6DiogeW_lk/hqdefault.jpg)', backgroundPosition: 'center', minHeight: 300, paddingTop: 60, marginBottom: 40}}>
             <p>Latest Sermon</p>
             <h1 className="tk-seravek-web">What Is Love? #2</h1>
             <p>Salvation Assurance</p>

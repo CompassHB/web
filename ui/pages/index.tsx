@@ -91,7 +91,7 @@ export const IndexPage = {
               <span className="participle">reaching</span> as many people as possible for Christ,
               <span className="participle">teaching</span> them to be like Christ, and
               <span className="participle">training</span> them to serve Christ.<br />
-              <a href="https://www.compasshb.com/who-we-are" className="btn btn-default">Find out more about Compass HB</a>
+              <a href="/who-we-are" className="btn btn-default">Find out more about Compass HB</a>
             </p>
           </div>
         </div>
@@ -111,13 +111,13 @@ export const IndexPage = {
             <div className="col-md-4 text-center">
               <h2 className="tk-seravek-web">Midweek</h2>
               <br />
-            <h5><a href="https://www.compasshb.com/fellowship">Home Fellowship Groups</a></h5>
+            <h5><a href="/fellowship">Home Fellowship Groups</a></h5>
             <p>Tuesday, Wednesday, Thursday, and Friday</p>
             <br />
-            <h5><a href="https://www.compasshb.com/kids#awana">Awana for kids</a></h5>
+            <h5><a href="/kids#awana">Awana for kids</a></h5>
             <p>Wednesday</p>
             <br />
-            <h5><a href="https://www.compasshb.com/youth">The United for Youth</a></h5>
+            <h5><a href="/youth">The United for Youth</a></h5>
             <p>Thursday</p>
           </div>
         </div>
@@ -127,7 +127,7 @@ export const IndexPage = {
       </div>
       <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
         <div className="col-xs-10 col-xs-offset-1">
-          <h2 className="tk-seravek-web"><a href="https://www.compasshb.com/sermons">Sermons</a></h2>
+          <h2 className="tk-seravek-web"><a href="/sermons">Sermons</a></h2>
             {slice<Sermon>(data.sermons.recent, 0, 4).map(sermon => (
               <div className="col-sm-6 col-md-3">
                 <div className="Box--shadow" style={{width: '100%'}}>
@@ -147,11 +147,11 @@ export const IndexPage = {
       </div>
       <div className="row" style={{background: 'none', backgroundColor: '#dddddd', paddingBottom: 20}}>
         <div className="col-xs-10 col-xs-offset-1">
-          <h2 className="tk-seravek-web"><a href="https://www.compasshb.com/blog">Videos</a></h2>
+          <h2 className="tk-seravek-web"><a href="/blog">Videos</a></h2>
           <div className="col-sm-6 col-md-6">
             <div className="Box--shadow" style={{width: '100%'}}>
                     <span className="Box--shadow--wrap">
-                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/blog/the-bunny-run" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'}}>
+                      <a className="clickable featuredblog boxer" href="/blog/the-bunny-run" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'}}>
                         <br /><br />
                         <h4 className="tk-seravek-web">The Bunny Run </h4>
                         <p> March 14</p>
@@ -163,7 +163,7 @@ export const IndexPage = {
           <div className="col-sm-6 col-md-6">
             <div className="Box--shadow" style={{width: '100%'}}>
                     <span className="Box--shadow--wrap">
-                      <a className="clickable featuredblog boxer" href="https://www.compasshb.com/blog/parenting-event" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'}}>
+                      <a className="clickable featuredblog boxer" href="/blog/parenting-event" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'}}>
                         <br /><br />
                         <h4 className="tk-seravek-web">Parenting Event</h4>
                         <p> March 2</p>
@@ -176,7 +176,7 @@ export const IndexPage = {
       </div>
       <div className="row">
         <div className="col-xs-10 col-xs-offset-1">
-          <h2 className="tk-seravek-web"><a href="https://www.compasshb.com/photos">Photos</a></h2>
+          <h2 className="tk-seravek-web"><a href="/photos">Photos</a></h2>
           <div className="col-md-3" style={{paddingBottom: 10}}>
             <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-44qXNQg/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-44qXNQg/0/M/160228_DED_SS-085-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
           </div>
