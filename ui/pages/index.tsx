@@ -13,6 +13,14 @@ export interface Sermon {
   title: string;
 }
 
+export interface Event {
+  slug: string;
+  title: string;
+  description: string;
+  startTime: string;
+  coverImage: string;
+}
+
 export const IndexPage = {
   title: () => 'CompassHB',
 
@@ -20,7 +28,7 @@ export const IndexPage = {
     return {
       sermons: {
         recent: {
-          length: 1,
+          length: true,
           "0..4": {
             $type: 'range',
             slug: true,
@@ -32,12 +40,25 @@ export const IndexPage = {
           },
         },
       },
+      events: {
+        upcoming: {
+          length: true,
+          "0..1": {
+            $type: 'range',
+            slug: true,
+            coverImage: true,
+            startTime: true,
+            title: true,
+            description: true,
+          },
+        },
+      },
     };
   },
 
-
   render({data}: any) {
     const sermon = data.sermons.recent[0];
+    const events: Array<Event> = [].slice.call(data.events.upcoming, 0);
 
     return <div>
         <Header/>
@@ -63,26 +84,18 @@ export const IndexPage = {
               </span>
             </div>
           </div>
+          {events.map((event) =>
           <div className="col-sm-3">
             <div className="Box--shadow" style={{width: '100%'}}>
               <span className="Box--shadow--wrap">
-                <a className="clickable featuredblog boxer" href="/events/23749515440/good-friday-service/" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://img.evbuc.com/https%3A%2F%2Fimg.evbuc.com%2Fhttp%253A%252F%252Fcdn.evbuc.com%252Fimages%252F19646568%252F143787969150%252F1%252Foriginal.jpg%3Frect%3D0%252C133%252C1600%252C800%26s%3D4ac30af77481a687ac5261098bb46b89?h=200&w=450&s=49cc083121fd46252faddf9c81e79a0d)'}}>
-                  <h4 className="tk-seravek-web">Good  Friday Service</h4>
-                  <p> March 25</p>
+                <a className="clickable featuredblog boxer" href={"/events/" + event.slug} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${event.coverImage})`}}>
+                  <h4 className="tk-seravek-web">{event.title}</h4>
+                  <p>{event.startTime}</p>
                 </a>
               </span>
             </div>
           </div>
-          <div className="col-sm-3">
-            <div className="Box--shadow" style={{width: '100%'}}>
-              <span className="Box--shadow--wrap">
-                <a className="clickable featuredblog boxer" href="/events/23750001895/easter-sunday/" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://img.evbuc.com/https%3A%2F%2Fimg.evbuc.com%2Fhttp%253A%252F%252Fcdn.evbuc.com%252Fimages%252F19646646%252F143787969150%252F1%252Foriginal.jpg%3Frect%3D0%252C133%252C1600%252C800%26s%3Db6fb23b411113aaa92eb563812291a34?h=200&w=450&s=2cf993b22bcaa8a8a97c95f8f3936f54)'}}>
-                  <h4 className="tk-seravek-web">Easter Sunday</h4>
-                  <p> March 27</p>
-                </a>
-              </span>
-           </div>
-          </div>
+          )}
         </div>
         <div className="row commission">
           <div className="col-sm-10 col-sm-offset-1">
