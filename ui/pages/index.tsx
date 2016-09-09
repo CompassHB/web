@@ -3,23 +3,7 @@ import {Header} from "../components/header";
 import {Footer} from "../components/footer";
 import {LatestSermon, latestSermonData} from "../components/latestSermon";
 import {slice} from "../slice";
-
-export interface Sermon {
-  slug: string;
-  coverImage: string;
-  date: string;
-  teacher: {name: string};
-  text: string;
-  title: string;
-}
-
-export interface Event {
-  slug: string;
-  title: string;
-  description: string;
-  startTime: string;
-  coverImage: string;
-}
+import {Event, Graph, Sermon} from '../../model/falcor';
 
 export const IndexPage = {
   title: () => 'CompassHB',
@@ -56,9 +40,9 @@ export const IndexPage = {
     };
   },
 
-  render({data}: any) {
-    const sermon = data.sermons.recent[0];
-    const events: Array<Event> = [].slice.call(data.events.upcoming, 0);
+  render({data}: {data: Graph}) {
+    const [sermon, ...sermons] = slice<Sermon>(data.sermons.recent, 0, 5);
+    const events = slice<Event>(data.events.upcoming, 0, 2);
 
     return <div>
         <Header/>
@@ -141,7 +125,7 @@ export const IndexPage = {
       <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
         <div className="col-xs-10 col-xs-offset-1">
           <h2 className="tk-seravek-web"><a href="/sermons">Sermons</a></h2>
-            {slice<Sermon>(data.sermons.recent, 0, 4).map(sermon => (
+            {sermons.map(sermon => (
               <div className="col-sm-6 col-md-3">
                 <div className="Box--shadow" style={{width: '100%'}}>
                   <span className="Box--shadow--wrap">

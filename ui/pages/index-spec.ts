@@ -17,7 +17,6 @@ describe('IndexPage', function() {
               length: 1,
             },
           },
-
           events: {
             upcoming: {
               0: {
@@ -34,7 +33,7 @@ describe('IndexPage', function() {
             },
           },
         },
-      }));
+      } as any));
 
     expect(result.includes('Foo sermon')).toBe(true);
   });
@@ -73,7 +72,7 @@ describe('IndexPage', function() {
           },
         },
       },
-    }));
+    } as any));
 
     expect(result.includes('Sermons')).toBe(true);
   });
