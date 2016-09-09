@@ -1,5 +1,7 @@
 # CompassHB.com Node frontend
 
+[![Build Status](https://travis-ci.org/CompassHB/web.svg?branch=master)](https://travis-ci.org/CompassHB/web)
+
 This will be the new website for https://compasshb.com!
 
 ## Quick start
