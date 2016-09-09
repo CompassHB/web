@@ -1,6 +1,6 @@
 import * as material from "../material";
 import * as React from "react";
-var {div, h1, img, a, span} = React.DOM;
+import {Sermon} from '../../model/falcor';
 
 const styles = {
   link: (img: string) => ({
@@ -50,7 +50,7 @@ const styles = {
 };
 
 
-export function LatestSermon({sermon}: any) {
+export function LatestSermon({sermon}: {sermon: Sermon}) {
   return <a href={'/sermons/' + sermon.slug} style={styles.link(sermon.coverImage)}>
     <span style={styles.label}>Latest sermon</span>
 
