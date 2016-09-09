@@ -68,20 +68,25 @@ var routes: Array<PageConfig> = [
 ];
 
 routes.forEach(config => {
-  app.get(config.urlPattern, function({params}, res) {
-    return Promise.resolve()
-      .then(() => {
-        return falcorModel.get(...getPathSets(config.data ? config.data(params) : {})) as any;
-      })
-      .then(({json} = { json: {} }) => {
-        return renderHtmlPage(config.title ? config.title(json) : 'CompassHB', config.render({ data: json, params }));
-      })
-      .then((content) => {
-        res.send(content);
-      })
-      .catch((e) => {
-        res.send(`<pre>${e.stack}</pre>`);
-      });
+  app.get(config.urlPattern, async function({params}, res) {
+    try {
+      const pathSets = getPathSets(config.data ? config.data(params) : {});
+      const {json: data} = await falcorModel.get(...pathSets);
+      const title = config.title ? config.title(data) : 'CompassHB';
+      const content = config.render({ data, params });
+      const html = await renderHtmlPage(title, content);
+      res.send(html);
+    } catch (errors) {
+      res.send('<pre>');
+      res.send(JSON.stringify(errors.map((e: { value: string }) => {
+        try {
+          return JSON.parse(e.value);
+        } catch (e) {
+          return e;
+        }
+      })));
+      res.send('</pre>');
+    }
   });
 
   for (var url of Object.keys(config.redirects || {})) {
