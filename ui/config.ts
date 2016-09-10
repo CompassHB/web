@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
 import { Graph } from '../model/falcor';
 
-export interface PageConfig<T> {
-  title?(data: Graph, params: T): string;
-  render(data: Graph, params: T): ReactElement<any>;
+export interface PageConfig {
+  title?(data: Graph): string;
+  render(data: Graph): ReactElement<any>;
   redirects?: 'NO!';
   urlPattern?: 'NO!';
-  data?(params: T): any; // Graph-esque?
+  data?(): any; //: Graph; <-- Not exactly...
 }

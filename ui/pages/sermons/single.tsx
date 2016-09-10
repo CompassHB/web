@@ -4,13 +4,11 @@ import {Page} from "../../components/page";
 import {PageConfig} from "../../config";
 import {Graph} from "../../../model/falcor";
 
-export interface Params {
-  slug: string;
-}
+export class SermonPage implements PageConfig {
+  constructor(private slug: string) {}
 
-export class SermonPage implements PageConfig<Params> {
-  render(data: Graph, {slug}: Params) {
-    const sermon = data.sermons.bySlug[slug];
+  render(data: Graph) {
+    const sermon = data.sermons.bySlug[this.slug];
 
     // TODO(ewinslow): Use an HTML sanitizer or something}
     return <Page title={sermon.title} nav={<ContentNav active="sermons" />}>
@@ -18,11 +16,11 @@ export class SermonPage implements PageConfig<Params> {
     </Page>;
   }
 
-  data({slug}: Params) {
+  data() {
     return {
       sermons: {
         bySlug: {
-          [slug]: {
+          [this.slug]: {
             title: true,
             content: true,
           },

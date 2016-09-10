@@ -3,7 +3,7 @@ import {Page} from "../components/page";
 import {MinistriesNav} from "../components/ministriesNav";
 import {PageConfig} from "../config";
 
-export class YouthPage implements PageConfig<{}> {
+export class YouthPage implements PageConfig {
   render() {
     return (
       <Page title="The United Student Ministry" nav={<MinistriesNav active="youth" />}>

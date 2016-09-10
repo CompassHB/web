@@ -6,7 +6,7 @@ import {slice} from "../slice";
 import {PageConfig} from "../config";
 import {Graph, Sermon} from "../../model/falcor";
 
-export class MenPage implements PageConfig<{}> {
+export class MenPage implements PageConfig {
   render(data: Graph) {
     const sermons = slice<Sermon>(data.ministries.bySlug['men'].sermons.recent, 0, 100);
 
