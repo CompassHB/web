@@ -3,7 +3,7 @@ import {Page} from "../components/page";
 import {MinistriesNav} from "../components/ministriesNav";
 import {PageConfig} from "../config";
 
-export class FellowshipPage implements PageConfig<{}> {
+export class FellowshipPage implements PageConfig {
   render() {
     return (
       <Page title="Home Fellowship Groups" nav={<MinistriesNav active="fellowship"/>}>

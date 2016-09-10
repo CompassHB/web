@@ -36,51 +36,71 @@ app.use('/model.json', FalcorExpress.dataSourceRoute(function(req, res) {
   return falcorModel.asDataSource();
 }));
 
-const routes: Array<[string, PageConfig<any>]> = [
-  ['/', new IndexPage()],
-  ['/college', new CollegePage()],
-  ['/eight-distinctives', new PagesPage('8-distinctives')],
-  ['/fellowship', new FellowshipPage()],
-  ['/giving', new PagesPage('giving')],
-  ['/ice-cream-evangelism', new PagesPage('ice-cream-evangelism')],
-  ['/kids', new KidsPage()],
-  ['/men', new MenPage()],
-  ['/read', new ReadPage()],
-  ['/series', new SeriesPage()],
-  ['/sermons', new SermonsPage()],
-  ['/sermons/:slug', new SermonPage()],
-  ['/songs', new SongsPage()],
-  ['/sundayschool', new SundaySchoolPage()],
-  ['/videos', new VideosPage()],
-  ['/what-we-believe', new PagesPage('what-we-believe')],
-  ['/who-we-are', new PagesPage('who-we-are')],
-  ['/women', new WomenPage()],
-  ['/youth', new YouthPage()],
+/**
+ * Call this function as a default parameter in order to enforce required
+ * URL parameters. It will throw an Error if the param is not provided.
+ *
+ * ```
+ * ({slug = required('slug')}) => new Page(slug)
+ * ```
+ *
+ * For optional parameters, just provide a default string value:
+ *
+ * ```
+ * ({offset = '0'}) => new OtherPage(offset);
+ * ```
+ */
+function required(name: string): string {
+  throw new Error('Missing required parameter: ' + name);
+}
+
+const routes: Array<[string, (params: any) => PageConfig]> = [
+  ['/', () => new IndexPage()],
+  ['/college', () => new CollegePage()],
+  ['/eight-distinctives', () => new PagesPage('8-distinctives')],
+  ['/fellowship', () => new FellowshipPage()],
+  ['/giving', () => new PagesPage('giving')],
+  ['/ice-cream-evangelism', () => new PagesPage('ice-cream-evangelism')],
+  ['/kids', () => new KidsPage()],
+  ['/men', () => new MenPage()],
+  ['/read', () => new ReadPage()],
+  ['/series', () => new SeriesPage()],
+  ['/sermons', () => new SermonsPage()],
+  ['/sermons/:slug', ({slug = required('slug')}) => new SermonPage(slug)],
+  ['/songs', () => new SongsPage()],
+  ['/sundayschool', () => new SundaySchoolPage()],
+  ['/videos', () => new VideosPage()],
+  ['/what-we-believe', () => new PagesPage('what-we-believe')],
+  ['/who-we-are', () => new PagesPage('who-we-are')],
+  ['/women', () => new WomenPage()],
+  ['/youth', () => new YouthPage()],
 ];
 
-routes.forEach(([urlPattern, config]) => {
-  app.get(urlPattern, async function({params}, res) {
+routes.forEach(([urlPattern, pageFactory]) => {
+  app.get(urlPattern, async function({params, url}, res) {
     try {
-      const pathSets = getPathSets(config.data ? config.data(params) : {});
+      const config = pageFactory(params);
+      const pathSets = getPathSets(config.data ? config.data() : {});
       const {json: data}: {json: Graph} = await falcorModel.get(...pathSets);
-      const title = config.title ? config.title(data, params) : 'CompassHB';
-      const content = config.render(data, params);
+      const title = config.title ? config.title(data) : 'CompassHB';
+      const content = config.render(data);
       const html = await renderHtmlPage(title, content);
       res.send(html);
     } catch (errors) {
-      res.send('<pre>');
+      res.send('<pre>Whoops, something went wrong.</pre>');
+
+      console.error(`Something went wrong while serving ${url} (pattern: ${urlPattern})`);
       if (Array.isArray(errors)) {
-        res.send(JSON.stringify(errors.map((e: { value: string }) => {
+        console.error(errors.map((e: { value: string }) => {
           try {
             return JSON.parse(e.value);
           } catch (e) {
             return e;
           }
-        })));
+        }));
       } else {
-        res.send(JSON.stringify(errors));
+        console.error(errors.stack);
       }
-      res.send('</pre>');
     }
   });
 });

@@ -3,7 +3,7 @@ import header from "../components/header";
 import footer from "../components/footer";
 import {PageConfig} from "../config";
 
-export class VideosPage implements PageConfig<{}> {
+export class VideosPage implements PageConfig {
   render() {
     return <div>
       <header />

@@ -4,7 +4,7 @@ import {Page} from "../components/page";
 import {PageConfig} from "../config";
 import {Graph} from "../../model/falcor";
 
-export class PagesPage implements PageConfig<{}> {
+export class PagesPage implements PageConfig {
   constructor(private slug: string) {}
 
   render(data: Graph) {

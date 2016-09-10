@@ -6,7 +6,7 @@ import {slice} from "../slice";
 import {Event, Graph, Sermon} from '../../model/falcor';
 import {PageConfig} from "../config";
 
-export class IndexPage implements PageConfig<{}> {
+export class IndexPage implements PageConfig {
   title() { return 'CompassHB'; }
 
   data() {

@@ -4,7 +4,7 @@ import { SermonPage } from './single';
 
 describe('SermonPage', function() {
   it('Shows the sermon title', function() {
-    const result = ReactDOMServer.renderToStaticMarkup(new SermonPage().render(
+    const result = ReactDOMServer.renderToStaticMarkup(new SermonPage('foo').render(
       {
         sermons: {
           bySlug: {
@@ -14,10 +14,7 @@ describe('SermonPage', function() {
             },
           },
         },
-      } as any,
-      {
-        slug: 'foo',
-      }
+      } as any
     ));
 
     expect(result.includes('Foobar')).toBe(true);

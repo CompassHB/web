@@ -6,7 +6,7 @@ import {slice} from "../slice";
 import {PageConfig} from "../config";
 import {Graph, Sermon} from "../../model/falcor";
 
-export class SermonsPage implements PageConfig<{}> {
+export class SermonsPage implements PageConfig {
   render(data: Graph) {
     return (
       <Page title="Sermons" nav={<ContentNav active="sermons" />}>
