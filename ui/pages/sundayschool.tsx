@@ -1,8 +1,9 @@
 import * as React from "react";
 import {Page} from "../components/page";
 import {MinistriesNav} from "../components/ministriesNav";
+import {PageConfig} from "../config";
 
-export const SundaySchoolPage = {
+export class SundaySchoolPage implements PageConfig<{}> {
   render() {
     return (
       <Page title="Sunday School" nav={<MinistriesNav active="sundayschool" />}>
@@ -73,7 +74,5 @@ export const SundaySchoolPage = {
         </div>
       </Page>
     );
-  },
-
-  urlPattern: '/sundayschool',
-};
+  }
+}

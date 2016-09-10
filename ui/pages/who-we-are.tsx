@@ -1,8 +1,9 @@
 import * as React from "react";
 import {Page} from '../components/page';
 import {AboutNav} from '../components/aboutNav';
+import {PageConfig} from "../config";
 
-export const WhoWeArePage = {
+export class WhoWeArePage implements PageConfig<{}> {
   render() {
     return (
       <Page title="Welcome to Compass Bible Church Huntington Beach" nav={<AboutNav active="who-we-are" />}>
@@ -113,7 +114,5 @@ export const WhoWeArePage = {
         </div>
       </Page>
     );
-  },
-
-  urlPattern: '/who-we-are',
+  }
 };

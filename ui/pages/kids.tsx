@@ -1,8 +1,9 @@
 import * as React from "react";
 import {Page} from "../components/page";
 import {MinistriesNav} from "../components/ministriesNav";
+import {PageConfig} from "../config";
 
-export const KidsPage = {
+export class KidsPage implements PageConfig<{}> {
   render() {
     return (
       <Page title="Kids Ministry" nav={<MinistriesNav active="kids"/>}>
@@ -88,7 +89,5 @@ export const KidsPage = {
         <style dangerouslySetInnerHTML={{__html: " .col-md-4 img { border: 6px solid #FFF; } " }} />
       </Page>
     );
-  },
-
-  urlPattern: '/kids',
-};
+  }
+}

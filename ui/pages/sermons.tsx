@@ -3,18 +3,11 @@ import * as gallery from "../components/gallery";
 import {Page} from "../components/page";
 import {ContentNav} from "../components/contentNav";
 import {slice} from "../slice";
+import {PageConfig} from "../config";
+import {Graph, Sermon} from "../../model/falcor";
 
-export interface Sermon {
-  slug: string;
-  coverImage: string;
-  date: string;
-  teacher: {name: string};
-  text: string;
-  title: string;
-}
-
-export const SermonsPage = {
-  render({data}: any) {
+export class SermonsPage implements PageConfig<{}> {
+  render(data: Graph) {
     return (
       <Page title="Sermons" nav={<ContentNav active="sermons" />}>
         <ol style={gallery.container}>
@@ -52,9 +45,7 @@ export const SermonsPage = {
         </div>
       </Page>
     );
-  },
-
-  urlPattern: '/sermons',
+  }
 
   data() {
     return {
@@ -73,5 +64,5 @@ export const SermonsPage = {
         },
       },
     };
-  },
-};
+  }
+}

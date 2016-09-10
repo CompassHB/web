@@ -1,17 +1,14 @@
 import * as React from "react";
 import header from "../components/header";
 import footer from "../components/footer";
+import {PageConfig} from "../config";
 
-const {div, ul, li, link, h1, html, head, img, body, a, meta, script, span} = React.DOM;
-
-export const VideosPage = {
+export class VideosPage implements PageConfig<{}> {
   render() {
-    return div({},
-      header(),
-      '/videos page',
-      footer()
-    );
-  },
-
-  urlPattern: '/videos',
-};
+    return <div>
+      <header />
+      /videos page,
+      <footer />
+    </div>;
+  }
+}
