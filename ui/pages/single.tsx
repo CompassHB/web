@@ -4,14 +4,12 @@ import {Page} from "../components/page";
 import {PageConfig} from "../config";
 import {Graph} from "../../model/falcor";
 
-export interface Params {
-  slug: string;
-}
+export class PagesPage implements PageConfig<{}> {
+  constructor(private slug: string) {}
 
-export class PagesPage implements PageConfig<Params> {
-  render(data: Graph, params: Params) {
+  render(data: Graph) {
     // TODO(): redirect 404 if results are undefined
-    const page = data.pages.bySlug[params.slug];
+    const page = data.pages.bySlug[this.slug];
 
     // TODO(ewinslow): Use an HTML sanitizer or something}
     return <Page title={page.title}>
@@ -19,11 +17,11 @@ export class PagesPage implements PageConfig<Params> {
     </Page>;
   }
 
-  data({slug}: Params) {
+  data() {
     return {
       pages: {
         bySlug: {
-          [slug]: {
+          [this.slug]: {
             title: true,
             content: true,
           },

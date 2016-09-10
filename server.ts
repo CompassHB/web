@@ -8,9 +8,7 @@ import * as FalcorExpress from 'falcor-express';
 import { Server } from 'http';
 import { PageConfig } from "./ui/config";
 import { CollegePage } from "./ui/pages/college";
-import { DistinctivesPage } from "./ui/pages/eight-distinctives";
 import { FellowshipPage } from "./ui/pages/fellowship";
-import { GivingPage } from "./ui/pages/giving";
 import { IndexPage } from "./ui/pages/index";
 import { PagesPage } from "./ui/pages/single";
 import { KidsPage } from "./ui/pages/kids";
@@ -22,8 +20,6 @@ import { SermonsPage } from "./ui/pages/sermons";
 import { SongsPage } from "./ui/pages/songs";
 import { SundaySchoolPage } from "./ui/pages/sundayschool";
 import { VideosPage } from "./ui/pages/videos";
-import { WhatWeBelievePage } from "./ui/pages/what-we-believe";
-import { WhoWeArePage } from "./ui/pages/who-we-are";
 import { WomenPage } from "./ui/pages/women";
 import { YouthPage } from "./ui/pages/youth";
 import { getPathSets } from './ui/paths';
@@ -43,9 +39,10 @@ app.use('/model.json', FalcorExpress.dataSourceRoute(function(req, res) {
 const routes: Array<[string, PageConfig<any>]> = [
   ['/', new IndexPage()],
   ['/college', new CollegePage()],
-  ['/eight-distinctives', new DistinctivesPage()],
+  ['/eight-distinctives', new PagesPage('8-distinctives')],
   ['/fellowship', new FellowshipPage()],
-  ['/giving', new GivingPage()],
+  ['/giving', new PagesPage('giving')],
+  ['/ice-cream-evangelism', new PagesPage('ice-cream-evangelism')],
   ['/kids', new KidsPage()],
   ['/men', new MenPage()],
   ['/read', new ReadPage()],
@@ -55,11 +52,10 @@ const routes: Array<[string, PageConfig<any>]> = [
   ['/songs', new SongsPage()],
   ['/sundayschool', new SundaySchoolPage()],
   ['/videos', new VideosPage()],
-  ['/what-we-believe', new WhatWeBelievePage()],
-  ['/who-we-are', new WhoWeArePage()],
+  ['/what-we-believe', new PagesPage('what-we-believe')],
+  ['/who-we-are', new PagesPage('who-we-are')],
   ['/women', new WomenPage()],
   ['/youth', new YouthPage()],
-  ['/:slug', new PagesPage()],
 ];
 
 routes.forEach(([urlPattern, config]) => {
