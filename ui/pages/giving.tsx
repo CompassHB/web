@@ -1,8 +1,9 @@
 import * as React from "react";
 import {Page} from "../components/page";
 import {ContentNav} from "../components/contentNav";
+import {PageConfig} from "../config";
 
-export const GivingPage = {
+export class GivingPage implements PageConfig<{}> {
   render() {
     return (
       <Page title="Give to Compass HB" nav={<ContentNav active="none" />}>
@@ -36,7 +37,5 @@ export const GivingPage = {
         </div>
       </Page>
     );
-  },
-
-  urlPattern: '/giving',
+  }
 }

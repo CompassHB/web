@@ -3,10 +3,12 @@ import * as gallery from '../components/gallery';
 import {Page} from '../components/page';
 import {AboutNav} from '../components/aboutNav';
 import {slice} from "../slice";
+import {PageConfig} from "../config";
+import {Graph, Distinctive} from "../../model/falcor";
 
-export const DistinctivesPage = {
-  render({data}: any) {
-    const distinctives = slice<any>(data.distinctives.inOrder, 0, 8);
+export class DistinctivesPage implements PageConfig<{}> {
+  render(data: Graph) {
+    const distinctives = slice<Distinctive>(data.distinctives.inOrder, 0, 8);
 
     return (
       <Page title="8 Distinctives" nav={<AboutNav active="eight-distinctives" />}>
@@ -26,9 +28,7 @@ export const DistinctivesPage = {
         </ol>
       </Page>
     );
-  },
-
-  urlPattern: '/eight-distinctives',
+  }
 
   data() {
     return {
@@ -44,5 +44,5 @@ export const DistinctivesPage = {
         },
       },
     };
-  },
-};
+  }
+}

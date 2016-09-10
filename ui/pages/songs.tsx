@@ -1,15 +1,14 @@
 import * as React from "react";
 import header from "../components/header";
 import footer from "../components/footer";
+import {PageConfig} from "../config";
 
-export const SongsPage = {
+export class SongsPage implements PageConfig<{}> {
   render() {
-    return React.DOM.div({},
-      header(),
-      '/songs page',
-      footer()
-    );
-  },
-
-  urlPattern: '/songs',
-};
+    return <div>
+      <header />
+      /songs page
+      <footer />
+    </div>;
+  }
+}

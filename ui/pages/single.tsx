@@ -1,9 +1,15 @@
 import * as React from "react";
 import {ContentNav} from "../components/contentNav";
 import {Page} from "../components/page";
+import {PageConfig} from "../config";
+import {Graph} from "../../model/falcor";
 
-export const PagesPage = {
-  render({data, params}: any) {
+export interface Params {
+  slug: string;
+}
+
+export class PagesPage implements PageConfig<Params> {
+  render(data: Graph, params: Params) {
     // TODO(): redirect 404 if results are undefined
     const page = data.pages.bySlug[params.slug];
 
@@ -11,11 +17,9 @@ export const PagesPage = {
     return <Page title={page.title}>
       <div dangerouslySetInnerHTML={{__html: page.content}}></div>
     </Page>;
-  },
+  }
 
-  urlPattern: '/:slug',
-
-  data({slug}: {slug: string}) {
+  data({slug}: Params) {
     return {
       pages: {
         bySlug: {
@@ -26,5 +30,5 @@ export const PagesPage = {
         },
       },
     };
-  },
-};
+  }
+}

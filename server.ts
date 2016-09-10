@@ -6,6 +6,7 @@ import * as React from "react";
 import * as express from "express";
 import * as FalcorExpress from 'falcor-express';
 import { Server } from 'http';
+import { PageConfig } from "./ui/config";
 import { CollegePage } from "./ui/pages/college";
 import { DistinctivesPage } from "./ui/pages/eight-distinctives";
 import { FellowshipPage } from "./ui/pages/fellowship";
@@ -28,6 +29,7 @@ import { YouthPage } from "./ui/pages/youth";
 import { getPathSets } from './ui/paths';
 import { model } from './model/model';
 import { renderHtmlPage } from './ui/render_html_page';
+import { Graph } from './model/falcor';
 
 const app = express();
 const falcorModel = model();
@@ -37,65 +39,54 @@ app.use(express.static('_out/ui'));
 app.use('/model.json', FalcorExpress.dataSourceRoute(function(req, res) {
   return falcorModel.asDataSource();
 }));
-interface PageConfig {
-  title?(data: any): string;
-  render(props: { data: any, params: any }): React.ReactElement<any>;
-  redirects?: { [url: string]: number };
-  urlPattern: string;
-  data?(params: any): any,
-}
 
-var routes: Array<PageConfig> = [
-  CollegePage,
-  DistinctivesPage,
-  FellowshipPage,
-  GivingPage,
-  IndexPage,
-  PagesPage,
-  KidsPage,
-  MenPage,
-  ReadPage,
-  SeriesPage,
-  SermonsPage,
-  SermonPage,
-  SongsPage,
-  SundaySchoolPage,
-  VideosPage,
-  WhatWeBelievePage,
-  WhoWeArePage,
-  WomenPage,
-  YouthPage,
+const routes: Array<[string, PageConfig<any>]> = [
+  ['/', new IndexPage()],
+  ['/college', new CollegePage()],
+  ['/eight-distinctives', new DistinctivesPage()],
+  ['/fellowship', new FellowshipPage()],
+  ['/giving', new GivingPage()],
+  ['/kids', new KidsPage()],
+  ['/men', new MenPage()],
+  ['/read', new ReadPage()],
+  ['/series', new SeriesPage()],
+  ['/sermons', new SermonsPage()],
+  ['/sermons/:slug', new SermonPage()],
+  ['/songs', new SongsPage()],
+  ['/sundayschool', new SundaySchoolPage()],
+  ['/videos', new VideosPage()],
+  ['/what-we-believe', new WhatWeBelievePage()],
+  ['/who-we-are', new WhoWeArePage()],
+  ['/women', new WomenPage()],
+  ['/youth', new YouthPage()],
+  ['/:slug', new PagesPage()],
 ];
 
-routes.forEach(config => {
-  app.get(config.urlPattern, async function({params}, res) {
+routes.forEach(([urlPattern, config]) => {
+  app.get(urlPattern, async function({params}, res) {
     try {
       const pathSets = getPathSets(config.data ? config.data(params) : {});
-      const {json: data} = await falcorModel.get(...pathSets);
-      const title = config.title ? config.title(data) : 'CompassHB';
-      const content = config.render({ data, params });
+      const {json: data}: {json: Graph} = await falcorModel.get(...pathSets);
+      const title = config.title ? config.title(data, params) : 'CompassHB';
+      const content = config.render(data, params);
       const html = await renderHtmlPage(title, content);
       res.send(html);
     } catch (errors) {
       res.send('<pre>');
-      res.send(JSON.stringify(errors.map((e: { value: string }) => {
-        try {
-          return JSON.parse(e.value);
-        } catch (e) {
-          return e;
-        }
-      })));
+      if (Array.isArray(errors)) {
+        res.send(JSON.stringify(errors.map((e: { value: string }) => {
+          try {
+            return JSON.parse(e.value);
+          } catch (e) {
+            return e;
+          }
+        })));
+      } else {
+        res.send(JSON.stringify(errors));
+      }
       res.send('</pre>');
     }
   });
-
-  for (var url of Object.keys(config.redirects || {})) {
-    var status = config.redirects![url];
-
-    app.get(url, function(req, res) {
-      res.redirect(status, config.urlPattern);
-    });
-  }
 });
 
 app.use(express.static('_out'));

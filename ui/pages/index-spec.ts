@@ -5,8 +5,8 @@ import { IndexPage } from './index';
 describe('IndexPage', function() {
   it("shows the latest sermon's title", function() {
     const result = ReactDOMServer.renderToStaticMarkup(
-      IndexPage.render({
-        data: {
+      new IndexPage().render(
+        {
           sermons: {
             recent: {
               0: {
@@ -32,15 +32,14 @@ describe('IndexPage', function() {
               length: 2,
             },
           },
-        },
-      } as any));
+        } as any));
 
     expect(result.includes('Foo sermon')).toBe(true);
   });
 
   it('Has a section for "Latest sermons"', function() {
-    const result = ReactDOMServer.renderToStaticMarkup(IndexPage.render({
-      data: {
+    const result = ReactDOMServer.renderToStaticMarkup(new IndexPage().render(
+      {
         sermons: {
           recent: {
             0: {
@@ -71,8 +70,8 @@ describe('IndexPage', function() {
             length: 2,
           },
         },
-      },
-    } as any));
+      } as any
+    ));
 
     expect(result.includes('Sermons')).toBe(true);
   });

@@ -4,9 +4,10 @@ import {Footer} from "../components/footer";
 import {LatestSermon, latestSermonData} from "../components/latestSermon";
 import {slice} from "../slice";
 import {Event, Graph, Sermon} from '../../model/falcor';
+import {PageConfig} from "../config";
 
-export const IndexPage = {
-  title: () => 'CompassHB',
+export class IndexPage implements PageConfig<{}> {
+  title() { return 'CompassHB'; }
 
   data() {
     return {
@@ -38,9 +39,9 @@ export const IndexPage = {
         },
       },
     };
-  },
+  }
 
-  render({data}: {data: Graph}) {
+  render(data: Graph) {
     const [sermon, ...sermons] = slice<Sermon>(data.sermons.recent, 0, 5);
     const events = slice<Event>(data.events.upcoming, 0, 2);
 
@@ -252,7 +253,5 @@ export const IndexPage = {
       </div></div></div>
       <Footer/>
     </div>
-  },
-
-  urlPattern: '/',
-};
+  }
+}

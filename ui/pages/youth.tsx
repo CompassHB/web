@@ -1,8 +1,9 @@
 import * as React from "react";
 import {Page} from "../components/page";
 import {MinistriesNav} from "../components/ministriesNav";
+import {PageConfig} from "../config";
 
-export const YouthPage = {
+export class YouthPage implements PageConfig<{}> {
   render() {
     return (
       <Page title="The United Student Ministry" nav={<MinistriesNav active="youth" />}>
@@ -43,7 +44,5 @@ export const YouthPage = {
         <style dangerouslySetInnerHTML={{__html: " .col-md-4 img { border: 6px solid #FFF; } .col-md-4 { color: #fff; } " }} />
       </Page>
     );
-  },
-
-  urlPattern: '/youth',
-};
+  }
+}

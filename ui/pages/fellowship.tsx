@@ -1,8 +1,9 @@
 import * as React from "react";
 import {Page} from "../components/page";
 import {MinistriesNav} from "../components/ministriesNav";
+import {PageConfig} from "../config";
 
-export const FellowshipPage = {
+export class FellowshipPage implements PageConfig<{}> {
   render() {
     return (
       <Page title="Home Fellowship Groups" nav={<MinistriesNav active="fellowship"/>}>
@@ -37,7 +38,5 @@ export const FellowshipPage = {
         </div>
       </Page>
     );
-  },
-
-  urlPattern: '/fellowship',
-};
+  }
+}
