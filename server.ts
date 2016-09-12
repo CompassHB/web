@@ -30,8 +30,34 @@ import { Graph } from './model/falcor';
 const app = express();
 const falcorModel = model();
 
-// static js bundles
-app.use(express.static('_out/ui'));
+process.env.HOSTNAME = process.env.C9_HOSTNAME ? 'https://' + process.env.C9_HOSTNAME : (process.env.HOSTNAME || 'https://www.compasshb.com');
+
+// publicly available files
+// TODO(ewinslow): Put all source files into _out directory too...
+app.use('/manifest.json', (req, res) => {
+  res.send(JSON.stringify({
+    short_name: "Compass HB",
+    name: "Compass Bible Church Huntington Beach",
+    icons: [
+      {
+        src: "https://compasshb.smugmug.com/photos/i-thfGZ3w/0/L/i-thfGZ3w-L.jpg",
+        sizes: "144x144",
+        type: "image/png"
+      }
+    ],
+    start_url: `${process.env.HOSTNAME}/read?webapp=1`,
+    display: "standalone"
+  }));
+});
+app.use('/offline.html', express.static('../offline.html'));
+app.use('/service-worker.js', express.static('service-worker.js'));
+app.use('/service-worker.js.map', express.static('service-worker.js.map'));
+app.use('/service-worker.ts', express.static('../service-worker.ts'));
+app.use('/ui/common.js', express.static('ui/common.js'));
+app.use('/ui/common.js.map', express.static('ui/common.js.map'));
+app.use('/ui/common.ts', express.static('../ui/common.ts'));
+
+// falcor data model
 app.use('/model.json', FalcorExpress.dataSourceRoute(function(req, res) {
   return falcorModel.asDataSource();
 }));
@@ -105,11 +131,8 @@ routes.forEach(([urlPattern, pageFactory]) => {
   });
 });
 
-app.use(express.static('_out'));
-app.use('/node_modules/bootstrap/dist', express.static('node_modules/bootstrap/dist'));
-
 let server: Server;
 
 server = app.listen(process.env.PORT || 8080, function() {
-  console.log(`CompassHB ready for requests on ${server.address().address} port ${server.address().port}!`);
+  console.log(`CompassHB ready for requests on ${process.env.HOSTNAME}`);
 });

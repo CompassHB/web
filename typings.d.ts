@@ -42,3 +42,44 @@ declare module "react-dom/server" {
   function renderToString(e: any): string;
   function renderToStaticMarkup(e: any): string;
 }
+
+// SERVICE WORKER TYPES
+// These are necessary because the publicly available ones (service_worker_api)
+// conflict with the existing WhatWG types.
+
+interface ExtendableEvent {
+  waitUntil(promise: Promise<void>): void;
+}
+
+interface InstallEvent extends ExtendableEvent {
+
+}
+
+interface FetchEvent extends ExtendableEvent {
+  request: Request;
+  respondWith(promise: Promise<Response>): void;
+}
+
+interface Cache {
+  add(request: Request): Promise<Response>;
+  match(request: Request): Promise<Response>;
+}
+
+interface Caches {
+  open(name: string): Cache;
+}
+
+interface Window {
+  addEventListener(type: 'install', listener: (event: InstallEvent) => void): void;
+  addEventListener(type: 'fetch', listener: (event: FetchEvent) => void): void;
+}
+
+declare var caches: Caches;
+
+interface Navigator {
+  serviceWorker?: ServiceWorker;
+}
+
+interface ServiceWorker {
+  register(url: string): Promise<void>;
+}

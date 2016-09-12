@@ -40,12 +40,15 @@
     "@types/jasmine": "^2.2.33",
     "@types/jasmine-node": "^1.14.29",
     "@types/node-sass": "0.0.28",
+    "@types/service_worker_api": "0.0.3",
+    "@types/whatwg-fetch": "0.0.30",
     "browserify": "^13.1.0",
     "jasmine-core": "^2.4.1",
     "jasmine-node": "^1.14.5",
     "nsp": "^2.6.1",
     "typescript": "2.1.0-dev.20160908",
-    "typescript-formatter": "^2.3.0"
+    "typescript-formatter": "^2.3.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "engines": {
     "node": "^6.5"
