@@ -30,8 +30,6 @@ import { Graph } from './model/falcor';
 const app = express();
 const falcorModel = model();
 
-process.env.HOSTNAME = process.env.C9_HOSTNAME ? 'https://' + process.env.C9_HOSTNAME : (process.env.HOSTNAME || 'https://www.compasshb.com');
-
 // publicly available files
 // TODO(ewinslow): Put all source files into _out directory too...
 app.use('/manifest.json', (req, res) => {
@@ -45,7 +43,7 @@ app.use('/manifest.json', (req, res) => {
         type: "image/png"
       }
     ],
-    start_url: `${process.env.HOSTNAME}/read?webapp=1`,
+    start_url: `/read?webapp=1`,
     display: "standalone"
   }));
 });
@@ -134,5 +132,5 @@ routes.forEach(([urlPattern, pageFactory]) => {
 let server: Server;
 
 server = app.listen(process.env.PORT || 8080, function() {
-  console.log(`CompassHB ready for requests on ${process.env.HOSTNAME}`);
+  console.log(`CompassHB ready for requests on ${server.address().address} port ${server.address().port}!`);
 });
