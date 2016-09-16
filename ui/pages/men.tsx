@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as gallery from "../components/gallery";
 import {Page} from "../components/page";
-import {MinistriesNav} from "../components/ministriesNav";
 import {slice} from "../slice";
 import {PageConfig} from "../config";
 import {Graph, Sermon} from "../../model/falcor";
@@ -11,7 +10,7 @@ export class MenPage implements PageConfig {
     const sermons = slice<Sermon>(data.ministries.bySlug['men'].sermons.recent, 0, 100);
 
     return (
-      <Page title="Men" nav={<MinistriesNav active="men" />}>
+      <Page title="Men">
         <ol style={gallery.container}>
           {sermons.map((sermon) => (
           <li style={gallery.item}>

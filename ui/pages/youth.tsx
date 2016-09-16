@@ -1,12 +1,11 @@
 import * as React from "react";
 import {Page} from "../components/page";
-import {MinistriesNav} from "../components/ministriesNav";
 import {PageConfig} from "../config";
 
 export class YouthPage implements PageConfig {
   render() {
     return (
-      <Page title="The United Student Ministry" nav={<MinistriesNav active="youth" />}>
+      <Page title="The United Student Ministry">
         <img src="https://compasshb.smugmug.com/photos/i-Z6gVmwc/0/X3/i-Z6gVmwc-X3.jpg" width={75} style={{float: 'right'}} />
         <p>Jr. High and High School students meets Sundays at 11am and Thursdays at 6:30PM.</p>
         <div className="col-sm-9" style={{textAlign: 'center'}}>

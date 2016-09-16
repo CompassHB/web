@@ -1,12 +1,11 @@
 import * as React from "react";
 import {Page} from "../components/page";
-import {MinistriesNav} from "../components/ministriesNav";
 import {PageConfig} from "../config";
 
 export class KidsPage implements PageConfig {
   render() {
     return (
-      <Page title="Kids Ministry" nav={<MinistriesNav active="kids"/>}>
+      <Page title="Kids Ministry">
         <p>
           Kids Ministry is a safe and fun environment for your child.
           Kids Ministry meets at both our services Sunday morning for relevant Bible instruction, worship, and crafts.
