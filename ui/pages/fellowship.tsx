@@ -1,12 +1,11 @@
 import * as React from "react";
 import {Page} from "../components/page";
-import {MinistriesNav} from "../components/ministriesNav";
 import {PageConfig} from "../config";
 
 export class FellowshipPage implements PageConfig {
   render() {
     return (
-      <Page title="Home Fellowship Groups" nav={<MinistriesNav active="fellowship"/>}>
+      <Page title="Home Fellowship Groups">
         <p>
           We want every adult in our church to be part of a home fellowship group! We have groups Tuesday, Wednesday, Thursday and Friday nights ready for you to join!
           Stop by the Compass Connect table for more information or email info@compasshb.com

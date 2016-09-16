@@ -1,12 +1,11 @@
 import * as React from "react";
-import {MinistriesNav} from "../components/ministriesNav";
 import {Page} from "../components/page";
 import {PageConfig} from "../config";
 
 export class CollegePage implements PageConfig {
   render() {
     return (
-      <Page title="The Underground College Ministry" nav={<MinistriesNav active="college"/>}>
+      <Page title="The Underground College Ministry">
         <p>
           The college ministry meets Sundays at 7PM for dinner, teaching and small groups at the church.
           For more information contact info@compashb.com.

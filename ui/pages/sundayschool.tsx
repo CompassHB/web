@@ -1,12 +1,11 @@
 import * as React from "react";
 import {Page} from "../components/page";
-import {MinistriesNav} from "../components/ministriesNav";
 import {PageConfig} from "../config";
 
 export class SundaySchoolPage implements PageConfig {
   render() {
     return (
-      <Page title="Sunday School" nav={<MinistriesNav active="sundayschool" />}>
+      <Page title="Sunday School">
         <p>Meets Sundays at 9AM at church for breakfast and teaching.</p>
         <br />
         <h3 className="tk-seravek-web">Current Series: Parables</h3>

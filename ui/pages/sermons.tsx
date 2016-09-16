@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as gallery from "../components/gallery";
 import {Page} from "../components/page";
-import {ContentNav} from "../components/contentNav";
 import {slice} from "../slice";
 import {PageConfig} from "../config";
 import {Graph, Sermon} from "../../model/falcor";
@@ -9,7 +8,7 @@ import {Graph, Sermon} from "../../model/falcor";
 export class SermonsPage implements PageConfig {
   render(data: Graph) {
     return (
-      <Page title="Sermons" nav={<ContentNav active="sermons" />}>
+      <Page title="Sermons">
         <ol style={gallery.container}>
         {slice<Sermon>(data.sermons.recent, 0, 100).map(sermon => (
           <li key={sermon.slug} style={gallery.item}>
