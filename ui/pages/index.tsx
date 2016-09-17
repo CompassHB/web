@@ -45,7 +45,7 @@ export class IndexPage implements PageConfig {
     const [sermon, ...sermons] = slice<Sermon>(data.sermons.recent, 0, 5);
     const events = slice<Event>(data.events.upcoming, 0, 2);
 
-    return <div>
+    return <div className="page-container">
         <Header/>
         <style dangerouslySetInnerHTML={{__html: "\n        .boxer {\n          display: block;\n          text-transform: uppercase;\n          color: #fff;\n          padding: 10px;\n          width: 100%;\n          min-height: 129px;\n          background-size: cover;\n          background-position: center;\n        }\n        " }} />
         <div className="container-fluid">

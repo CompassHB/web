@@ -19,9 +19,9 @@ export interface PageProps {children?: React.ReactElement<any>[]; title: string;
 
 export function Page({children = undefined, title}: PageProps) {
   return (
-    <div>
+    <div className="page-container">
       <Header/>
-      <div className="row">
+      <div className="row" style={{backgroundColor: '#EEE'}}>
         <main className="col-md-8 col-md-push-2" style={styles.main}>
           <h1 style={styles.heading}>{title}</h1>
           {children}
