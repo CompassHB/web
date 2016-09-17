@@ -30,6 +30,17 @@ export interface Page {
   title: string;
 }
 
+export interface Passage {
+  title: string;
+  slug: string;
+  content: string;
+  overview: string;
+  activity: {
+    today: number,
+    now: number,
+  };
+}
+
 export interface Person {
   name: string;
   slug: string;
@@ -83,6 +94,11 @@ export interface Graph {
 
   pages: {
     bySlug: { [slug: string]: Page },
+  };
+
+  passages: {
+    recent: List<Passage>,
+    bySlug: { [slug: string]: Passage },
   };
 
   people: {
