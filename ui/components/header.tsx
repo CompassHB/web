@@ -99,7 +99,3 @@ export class Header extends React.Component<{}, { isLeftNavOpen: boolean }> {
     );
   }
 }
-
-export default function header() {
-  return React.createElement(Header);
-};

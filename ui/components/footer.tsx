@@ -80,10 +80,6 @@ export class Footer extends React.Component<{}, {}> {
   }
 }
 
-export default function footer() {
-  return React.createElement(Footer);
-};
-
 //TODO: include third party javascript code
 // <div id="fb-root"></div>
 // <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=386571371526429" id="facebook-jssdk" async defer></script>
