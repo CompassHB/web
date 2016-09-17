@@ -1,82 +1,62 @@
 import * as React from 'react';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
-import logo from './logo';
-
-const {a, div, h4, img, li, ul} = React.DOM;
-
-function raisedButton(props: any, ...children: Array<any>) {
-  return React.createElement(Button, props, ...children);
-}
-
-function grid(props: any, ...children: Array<any>) {
-  return React.createElement(Grid, props, ...children);
-}
-
-function row(props: any, ...children: Array<any>) {
-  return React.createElement(Row, props, ...children);
-}
-
-function col(props: any, ...children: Array<any>) {
-  return React.createElement(Col, props, ...children);
-}
+import Logo from './logo';
 
 export class Footer extends React.Component<{}, {}> {
   render() {
-    return React.DOM.footer({},
+    return <footer>
+      <Grid fluid={true} style={{ paddingTop: 40, borderTop: '1px solid #EEE', lineHeight: '2em' }}>
+        <Row>
+          <Col md={2}>
+            <Logo />
+          </Col>
+          <Col md={2}>
+            <h4>Ministries</h4>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              <li><a href='/kids'>Kids</a></li>
+              <li><a href='/youth'>Youth</a></li>
+              <li><a href='/college'>College</a></li>
+              <li><a href='/sundayschool'>Sunday School</a></li>
+            </ul>
+          </Col>
+          <Col md={2}>
+            <h4>Resources</h4>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              <li><a href='/read'>Scripture of the Day</a></li>
+              <li><a href='/sermons'>Sermons</a></li>
+              <li><a href='/songs'>Worship</a></li>
+              <li><a href='/videos'>Videos</a></li>
+            </ul>
+          </Col>
+          <Col md={2}>
+            <h4>Social</h4>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              <li><a href='https://www.facebook.com/compasshb'>Facebook</a></li>
+              <li><a href='https://instagram.com/compasshb'>Instagram</a></li>
+              <li><a href='https://twitter.com/compasshb'>Twitter</a></li>
+              <li><a href='https://vimeo.com/compasshb'>Vimeo</a></li>
+              <li><a href='https://appsto.re/us/n_WA6.i'>iPhone App</a></li>
+              <li><a href='https://play.google.com/store/apps/details?id=com.compasshb.mobile'>Android App</a></li>
+            </ul>
+          </Col>
+          <Col md={4}>
+            <h4>Contact</h4>
+            <a href="/giving">
+              <Button label="Give" style={{ margin: 12, padding: '0 50px' }} />
+            </a>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              <li>5082 Argosy, Huntington Beach, CA 92649</li>
+              <li>(714) 895-0034</li>
+              <li>info@compasshb.com</li>
+            </ul>
+          </Col>
+        </Row>
 
-      grid({ fluid: true, style: { paddingTop: 40, borderTop: '1px solid #EEE', lineHeight: '2em' } },
-
-        row({},
-          col({ md: 2 },
-            logo()
-          ),
-          col({ md: 2 },
-            h4({}, 'Ministries'),
-            ul({ style: { listStyle: 'none', padding: 0 } },
-              li({}, a({ href: '/kids' }, 'Kids')),
-              li({}, a({ href: '/youth' }, 'Youth')),
-              li({}, a({ href: '/college' }, 'College')),
-              li({}, a({ href: '/sundayschool' }, 'Adult Sunday School'))
-            )
-          ),
-          col({ md: 2 },
-            h4({}, 'Resources'),
-            ul({ style: { listStyle: 'none', padding: 0 } },
-              li({}, a({ href: '/read' }, 'Scripture of the Day')),
-              li({}, a({ href: '/sermons' }, 'Sermons')),
-              li({}, a({ href: '/songs' }, 'Worship')),
-              li({}, a({ href: '/videos' }, 'Videos'))
-            )
-          ),
-          col({ md: 2 },
-            h4({}, 'Social'),
-            ul({ style: { listStyle: 'none', padding: 0 } },
-              li({}, a({ href: 'https://www.facebook.com/compasshb' }, 'Facebook')),
-              li({}, a({ href: 'https://instagram.com/compasshb' }, 'Instagram')),
-              li({}, a({ href: 'https://twitter.com/compasshb' }, 'Twitter')),
-              li({}, a({ href: 'https://vimeo.com/compasshb' }, 'Vimeo')),
-              li({}, a({ href: 'https://appsto.re/us/n_WA6.i' }, 'iPhone App')),
-              li({}, a({ href: 'https://play.google.com/store/apps/details?id=com.compasshb.mobile' }, 'Android App'))
-            )
-          ),
-          col({ md: 4 },
-            h4({}, 'Contact'),
-            a({ href: "/giving" },
-              raisedButton({ label: "Give", style: { margin: 12, padding: '0 50px' } })
-            ),
-            ul({ style: { listStyle: 'none', padding: 0 } },
-              li({}, '5082 Argosy, Huntington Beach, CA 92649'),
-              li({}, '(714) 895-0034'),
-              li({}, 'info@compasshb.com')
-            )
-          )
-        ),
-
-        row({ style: { padding: 10, textAlign: "right", backgroundColor: "#222222", color: "#A9A9A9" } },
-          'Copyright 2014-2016 Compass Bible Church Huntington Beach'
-        )
-      )
-    );
+        <Row style={{ padding: 10, textAlign: "right", backgroundColor: "#222222", color: "#A9A9A9" }}>
+          Copyright 2014-2016 Compass Bible Church Huntington Beach
+        </Row>
+      </Grid>
+    </footer>;
   }
 }
 
