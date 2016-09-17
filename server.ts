@@ -105,7 +105,7 @@ routes.forEach(([urlPattern, pageFactory]) => {
     try {
       const config = pageFactory(params);
       const pathSets = getPathSets(config.data ? config.data() : {});
-      const {json: data}: {json: Graph} = await falcorModel.get(...pathSets);
+      const {json: data}: {json: Graph} = await falcorModel.get(...pathSets) || {json: {}};
       const title = config.title ? config.title(data) : 'CompassHB';
       const content = config.render(data);
       const html = await renderHtmlPage(title, content);
