@@ -39,7 +39,7 @@ export interface User {
 }
 
 export class Site {
-  constructor(private baseUrl: string) { }
+  constructor(private baseUrl: string, private id = 0) { }
 
   private async head(resource: string) {
     return fetch(this.baseUrl + resource, { method: 'head' });
@@ -48,6 +48,17 @@ export class Site {
   private async getJson(resource: string) {
     const response: Response = await fetch(this.baseUrl + resource);
     const json: any = await response.json();
+
+    if (response.status >= 400) {
+      throw new Error(json.message);
+    }
+
+    return json;
+  }
+
+  async getLogo() {
+    const response = await fetch('https://api.compasshb.com/wp-json/compasshb/v1/site_logo/' + this.id);
+    const json = await response.json();
 
     if (response.status >= 400) {
       throw new Error(json.message);

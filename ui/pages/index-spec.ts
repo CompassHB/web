@@ -7,6 +7,14 @@ describe('IndexPage', function() {
     const result = ReactDOMServer.renderToStaticMarkup(
       new IndexPage().render(
         {
+          passages: {
+            logo: {},
+            recent: {
+              0: {
+                title: 'John 12',
+              },
+            },
+          },
           sermons: {
             recent: {
               0: {
@@ -40,6 +48,14 @@ describe('IndexPage', function() {
   it('Has a section for "Latest sermons"', function() {
     const result = ReactDOMServer.renderToStaticMarkup(new IndexPage().render(
       {
+        passages: {
+          logo: {},
+          recent: {
+            0: {
+              title: 'John 12',
+            },
+          },
+        },
         sermons: {
           recent: {
             0: {

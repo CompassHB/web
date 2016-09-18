@@ -68,6 +68,12 @@ export interface List<T> {
   length: number;
 }
 
+export interface Image {
+  src: string; // url
+  height: number; // pixels
+  width: number; // pixels
+}
+
 /**
  * Gives the fullest overview of what is available via the falcor API.
  */
@@ -97,6 +103,7 @@ export interface Graph {
   };
 
   passages: {
+    logo: Image,
     recent: List<Passage>,
     bySlug: { [slug: string]: Passage },
   };
