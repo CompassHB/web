@@ -5,7 +5,7 @@
     "clean": "rm -rf _out/*",
     "fix": "tsfmt -r",
     "start": "npm run build && node _out/server.js",
-    "test": "npm run build && jasmine-node _out/ui/ --junitreport",
+    "test": "npm run build && jasmine-node _out/ --junitreport",
     "watch": "tsc -w",
     "posttest": "nsp check"
   },

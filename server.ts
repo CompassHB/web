@@ -88,6 +88,7 @@ const routes: Array<[string, (params: any) => PageConfig]> = [
   ['/kids', () => new KidsPage()],
   ['/men', () => new MenPage()],
   ['/read', () => new ReadPage()],
+  ['/read/:slug', ({slug = require('slug')}) => new ReadPage(slug)],
   ['/series', () => new SeriesPage()],
   ['/sermons', () => new SermonsPage()],
   ['/sermons/:slug', ({slug = required('slug')}) => new SermonPage(slug)],
