@@ -6,5 +6,5 @@ export interface PageConfig {
   render(data: Graph): ReactElement<any>;
   redirects?: 'NO!';
   urlPattern?: 'NO!';
-  data?(): any; //: Graph; <-- Not exactly...
+  data?(): {}; // Must return something if implemented (TODO: Use `Graph`)
 }

@@ -57,7 +57,7 @@ export class ReadPage implements PageConfig {
       },
     };
 
-    const data = {
+    return {
       passages: {
         bySlug: {
           [this.slug]: this.slug && passageDetails,
