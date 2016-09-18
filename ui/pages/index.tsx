@@ -11,6 +11,16 @@ export class IndexPage implements PageConfig {
 
   data() {
     return {
+      passages: {
+        logo: {
+          src: true,
+        },
+        recent: {
+          "0": {
+            title: true,
+          },
+        },
+      },
       sermons: {
         recent: {
           length: true,
@@ -56,14 +66,14 @@ export class IndexPage implements PageConfig {
                   <div className="Box--shadow--big" style={{width: '100%'}}>
                     <span className="Box--shadow--wrap">
                       <LatestSermon sermon={sermon} />
-                  </span>
+                    </span>
+                  </div>
                 </div>
-              </div>
           <div className="col-sm-3">
             <div className="Box--shadow" style={{width: '100%'}}>
               <span className="Box--shadow--wrap">
-                <a className="clickable boxer" href="/read" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://compasshb.smugmug.com/photos/i-w6dnZK2/0/S/i-w6dnZK2-S.jpg)'}}>
-                  <h4 className="tk-seravek-web">1 Peter 5</h4>
+                <a className="clickable boxer" href="/read" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${data.passages.logo.src})`}}>
+                  <h4 className="tk-seravek-web">{data.passages.recent[0].title}</h4>
                   <p>Scripture of the Day</p>
                 </a>
               </span>

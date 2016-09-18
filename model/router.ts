@@ -7,7 +7,7 @@ import { assert, pathValue } from './debug';
 const LONG_DATE = 'dddd, MMMM D, YYYY';
 
 const wp = new Site('https://api.compasshb.com/wp-json/wp/v2');
-const reading = new Site('https://api.compasshb.com/reading/wp-json/wp/v2');
+const reading = new Site('https://api.compasshb.com/reading/wp-json/wp/v2', 8);
 
 function getPassagePaths(passage: Sermon) {
   return [
@@ -226,6 +226,18 @@ export const router = new Router([
       }
 
       return promise;
+    },
+  },
+  {
+    route: 'passages.logo["src","width","height"]',
+    async get(): Promise<Array<PathValue>> {
+      const [src,width,height] = await reading.getLogo();
+
+      return [
+        pathValue(['passages', 'logo', 'src'], () => src),
+        pathValue(['passages', 'logo', 'width'], () => width),
+        pathValue(['passages', 'logo', 'height'], () => height),
+      ];
     },
   },
   {
