@@ -51,7 +51,7 @@ const styles = {
 
 
 export function LatestSermon({sermon}: {sermon: Sermon}) {
-  return <a href={'/sermons/' + sermon.slug} style={styles.link(sermon.coverImage)}>
+  return <a href={'/sermons/' + sermon.slug} style={styles.link(sermon.coverImage!)}>
     <span style={styles.label}>Latest sermon</span>
 
     <div style={styles.aligner}>
@@ -72,11 +72,11 @@ export function LatestSermon({sermon}: {sermon: Sermon}) {
 
 export const latestSermonData = {
   sermon: {
-    coverImage: true,
-    slug: true,
-    teacher: true,
-    text: true,
-    title: true,
-    date: true,
+    coverImage: 'true',
+    slug: 'true',
+    teacher: 'true',
+    text: 'true',
+    title: 'true',
+    date: 'true',
   },
 };

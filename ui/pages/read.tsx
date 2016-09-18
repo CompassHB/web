@@ -14,24 +14,24 @@ export class ReadPage implements PageConfig {
   }
 
   render(data: Graph) {
-    const passage = this.slug ? data.passages.bySlug[this.slug] : data.passages.recent[0];
+    const passage = this.slug ? data.passages!.bySlug![this.slug]! : data.passages!.recent![0]!;
 
     return this.renderPassage(data, passage);
   }
 
   renderPassage(data: Graph, passage: Passage) {
-    const recent = slice<Passage>(data.passages.recent, 0, 7);
+    const recent = slice<Passage>(data.passages!.recent!, 0, 7);
 
-    return <Page title={passage.title}>
+    return <Page title={passage.title!}>
       {passage.slug === recent[0].slug ||
       <div className="alert alert-info" role="alert">
         <strong>New Post!</strong> You are reading an old post. <a href="/read">Click here to read today's post.</a>
       </div>}
-      <div dangerouslySetInnerHTML={{__html: passage.content}}></div>
+      <div dangerouslySetInnerHTML={{__html: passage.content!}}></div>
       <h3>Bible Overview</h3>
-      <div dangerouslySetInnerHTML={{__html: passage.overview}}></div>
+      <div dangerouslySetInnerHTML={{__html: passage.overview!}}></div>
       <br/>
-      <p> {passage.activity.today} people have read today. {passage.activity.now} active users. </p>
+      <p> {passage!.activity!.today} people have read today. {passage!.activity!.now} active users. </p>
       {/* TODO(ewinslow): Pull this from the ESV API */}
       <audio src="https://audio.esvbible.org/hw/43012001-43012050.mp3" controls />
       <h5 className="tk-seravek-web">This Week</h5>
@@ -45,31 +45,31 @@ export class ReadPage implements PageConfig {
     </Page>
   }
 
-  data() {
+  data(): Graph {
     const passageDetails = {
-      title: true,
-      content: true,
-      overview: true,
-      slug: true,
+      title: 'true',
+      content: 'true',
+      overview: 'true',
+      slug: 'true',
       activity: {
-        today: true,
-        now: true,
+        today: 1,
+        now: 1,
       },
     };
 
     return {
       passages: {
         bySlug: {
-          [this.slug]: this.slug && passageDetails,
+          [this.slug]: this.slug ? passageDetails : {},
         },
         recent: {
-          '0': this.slug || passageDetails,
+          '0': this.slug ? {} : passageDetails,
           "0..7": {
             $type: 'range',
-            title: true,
-            slug: true,
+            title: 'true',
+            slug: 'true',
           },
-          length: true,
+          length: 1,
         },
       },
     };

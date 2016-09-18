@@ -10,7 +10,7 @@ export class SermonsPage implements PageConfig {
     return (
       <Page title="Sermons">
         <ol style={gallery.container}>
-        {slice<Sermon>(data.sermons.recent, 0, 100).map(sermon => (
+        {slice<Sermon>(data.sermons!.recent!, 0, 100).map(sermon => (
           <li key={sermon.slug} style={gallery.item}>
             <a href={`/sermons/${sermon.slug}`} style={{display: 'block'}}>
               <img src={sermon.coverImage} width="200" height="125" alt={sermon.title} />
@@ -53,12 +53,12 @@ export class SermonsPage implements PageConfig {
           length: 1,
           "0..100": {
             $type: 'range',
-            slug: true,
-            coverImage: true,
-            date: true,
-            text: true,
-            title: true,
-            teacher: true,
+            slug: 'true',
+            coverImage: 'true',
+            date: 'true',
+            text: 'true',
+            title: 'true',
+            teacher: 'true',
           },
         },
       },

@@ -13,38 +13,39 @@ export class IndexPage implements PageConfig {
     return {
       passages: {
         logo: {
-          src: true,
+          src: 'true',
         },
         recent: {
           "0": {
-            title: true,
+            title: 'true',
           },
+          length: 1,
         },
       },
       sermons: {
         recent: {
-          length: true,
+          length: 1,
           "0..4": {
             $type: 'range',
-            slug: true,
-            coverImage: true,
-            date: true,
-            text: true,
-            title: true,
-            teacher: true,
+            slug: 'true',
+            coverImage: 'true',
+            date: 'true',
+            text: 'true',
+            title: 'true',
+            teacher: 'true',
           },
         },
       },
       events: {
         upcoming: {
-          length: true,
+          length: 1,
           "0..1": {
             $type: 'range',
-            slug: true,
-            coverImage: true,
-            startTime: true,
-            title: true,
-            description: true,
+            slug: 'true',
+            coverImage: 'true',
+            startTime: 'true',
+            title: 'true',
+            description: 'true',
           },
         },
       },
@@ -52,8 +53,8 @@ export class IndexPage implements PageConfig {
   }
 
   render(data: Graph) {
-    const [sermon, ...sermons] = slice<Sermon>(data.sermons.recent, 0, 5);
-    const events = slice<Event>(data.events.upcoming, 0, 2);
+    const [sermon, ...sermons] = slice<Sermon>(data.sermons!.recent!, 0, 5);
+    const events = slice<Event>(data.events!.upcoming!, 0, 2);
 
     return <div className="page-container">
         <Header/>
@@ -72,8 +73,8 @@ export class IndexPage implements PageConfig {
           <div className="col-sm-3">
             <div className="Box--shadow" style={{width: '100%'}}>
               <span className="Box--shadow--wrap">
-                <a className="clickable boxer" href="/read" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${data.passages.logo.src})`}}>
-                  <h4 className="tk-seravek-web">{data.passages.recent[0].title}</h4>
+                <a className="clickable boxer" href="/read" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${data.passages!.logo!.src})`}}>
+                  <h4 className="tk-seravek-web">{data.passages!.recent![0]!.title}</h4>
                   <p>Scripture of the Day</p>
                 </a>
               </span>

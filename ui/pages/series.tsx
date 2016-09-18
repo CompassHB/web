@@ -10,7 +10,7 @@ export class SeriesPage implements PageConfig {
     return (
       <Page title="Sermon Series">
         <ol style={gallery.container}>
-          {slice<any>(data.series.recent, 0, 200).map(series => (
+          {slice<any>(data.series!.recent!, 0, 200).map(series => (
             <li key={series.slug} style={gallery.item}>
               <a href={`/series/${series.slug}`}>
                 <img src={series.coverImage} width="200" height="125" alt={series.title} />
@@ -26,10 +26,20 @@ export class SeriesPage implements PageConfig {
     );
   }
 
-  data() {
-    return [
-      ['series', 'recent', {from: 0, to: 200}, ['alias', 'coverImage', 'description', 'title']],
-      ['series', 'recent', 'length'],
-    ];
+  data(): Graph {
+    return {
+      series: {
+        recent: {
+          '0..200': {
+            $type: 'range',
+            slug: 'true',
+            coverImage: 'true',
+            description: 'true',
+            title: 'true',
+          },
+          length: 1,
+        },
+      },
+    };
   }
 }
