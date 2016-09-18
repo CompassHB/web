@@ -11,6 +11,7 @@ const reading = new Site('https://api.compasshb.com/reading/wp-json/wp/v2', 8);
 
 function getPassagePaths(passage: Sermon) {
   return [
+    pathValue(['passages', 'bySlug', passage.slug, 'id'], () => passage.id),
     pathValue(['passages', 'bySlug', passage.slug, 'overview'], () => passage.content.rendered),
     pathValue(['passages', 'bySlug', passage.slug, 'slug'], () => passage.slug),
     pathValue(['passages', 'bySlug', passage.slug, 'title'], () => passage.title.rendered),
@@ -276,7 +277,7 @@ export const router = new Router([
     },
   },
   {
-    route: 'passages.bySlug[{keys}]["slug","title","content","overview"]',
+    route: 'passages.bySlug[{keys}]["slug","title","content","overview","id"]',
     async get([,,slugs,props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 

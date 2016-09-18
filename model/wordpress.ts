@@ -19,6 +19,7 @@ export interface Page {
 }
 
 export interface Sermon {
+  id: number;
   slug: string;
   title: { rendered: string };
   content: { rendered: string };
