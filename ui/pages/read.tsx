@@ -4,16 +4,29 @@ import {PageConfig} from "../config";
 import {Graph, Passage} from "../../model/falcor";
 import {slice} from "../slice";
 
+
+
 export class ReadPage implements PageConfig {
+  constructor(private slug = '') {}
+
   title(data: Graph) {
     return "Scripture of the Day";
   }
 
   render(data: Graph) {
-    const passage = data.passages.recent[0];
-    const passages = slice<Passage>(data.passages.recent, 0, 7);
+    const passage = this.slug ? data.passages.bySlug[this.slug] : data.passages.recent[0];
+
+    return this.renderPassage(data, passage);
+  }
+
+  renderPassage(data: Graph, passage: Passage) {
+    const recent = slice<Passage>(data.passages.recent, 0, 7);
 
     return <Page title={passage.title}>
+      {passage.slug === recent[0].slug ||
+      <div className="alert alert-info" role="alert">
+        <strong>New Post!</strong> You are reading an old post. <a href="/read">Click here to read today's post.</a>
+      </div>}
       <div dangerouslySetInnerHTML={{__html: passage.content}}></div>
       <h3>Bible Overview</h3>
       <div dangerouslySetInnerHTML={{__html: passage.overview}}></div>
@@ -23,7 +36,7 @@ export class ReadPage implements PageConfig {
       <audio src="https://audio.esvbible.org/hw/43012001-43012050.mp3" controls />
       <h5 className="tk-seravek-web">This Week</h5>
       <ul>
-        {passages.map(({slug, title}) => (
+        {recent.map(({slug, title}) => (
         <li><a href={`/read/${slug}`}>{title}</a></li>
         ))}
       </ul>
@@ -33,19 +46,24 @@ export class ReadPage implements PageConfig {
   }
 
   data() {
-    return {
+    const passageDetails = {
+      title: true,
+      content: true,
+      overview: true,
+      slug: true,
+      activity: {
+        today: true,
+        now: true,
+      },
+    };
+
+    const data = {
       passages: {
+        bySlug: {
+          [this.slug]: this.slug && passageDetails,
+        },
         recent: {
-          "0": {
-            title: true,
-            content: true,
-            overview: true,
-            slug: true,
-            activity: {
-              today: true,
-              now: true,
-            },
-          },
+          '0': this.slug || passageDetails,
           "0..7": {
             $type: 'range',
             title: true,
