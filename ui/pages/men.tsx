@@ -7,7 +7,7 @@ import {Graph, Sermon} from "../../model/falcor";
 
 export class MenPage implements PageConfig {
   render(data: Graph) {
-    const sermons = slice<Sermon>(data.ministries.bySlug['men'].sermons.recent, 0, 100);
+    const sermons = slice<Sermon>(data.ministries!.bySlug!['men']!.sermons!.recent!, 0, 100);
 
     return (
       <Page title="Men">
@@ -20,7 +20,7 @@ export class MenPage implements PageConfig {
             </h4>
             <p>
               <span style={{display: 'block'}}>{sermon.date}</span>
-              <span style={{display: 'block'}}>{sermon.teacher.name}</span>
+              <span style={{display: 'block'}}>{sermon.teacher!.name}</span>
             </p>
           </li>
           ))}
@@ -29,24 +29,24 @@ export class MenPage implements PageConfig {
     );
   }
 
-  data() {
+  data(): Graph {
     return {
       ministries: {
         bySlug: {
-          ['men']: {
+          men: {
             sermons: {
               recent: {
                 '0..99': {
                   $type: 'range',
-                  slug: true,
-                  coverImage: true,
-                  title: true,
-                  date: true,
+                  slug: 'true',
+                  coverImage: 'true',
+                  title: 'true',
+                  date: 'true',
                   teacher: {
-                    name: true,
+                    name: 'true',
                   },
                 },
-                length: true,
+                length: 1,
               },
             },
           },
