@@ -107,7 +107,10 @@ export class IndexPage implements PageConfig {
         <div className="row" style={{background: 'none', backgroundColor: '#f7f7f7', paddingTop: 30, paddingBottom: 30}}>
           <div className="col-sm-10 col-sm-offset-1">
             <div className="col-md-4 text-center">
-              <h2 className="tk-seravek-web">Sundays at<br /> 9am and 11am</h2>
+              <h2 className="tk-seravek-web">
+                Saturdays at 6:30pm <br/>
+                Sundays at 9am and 11am
+              </h2>
               <br />
               <p>5082 Argosy Avenue<br />Huntington Beach, CA 92649</p>
               <br />
