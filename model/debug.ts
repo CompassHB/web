@@ -8,9 +8,9 @@ export function assert<T>(message: string, truthy: T) {
   return truthy;
 }
 
-export function pathValue<T>(path: Array<string | number>, get: () => T, defaultValue?: T): PathValue {
+export async function pathValue<T>(path: Array<string | number>, get: () => T, defaultValue?: T): Promise<PathValue> {
   try {
-    return { path, value: get() };
+    return { path, value: await get() };
   } catch (e) {
     if (defaultValue == null) {
       return { path, value: error(JSON.stringify({ path, getter: get.toString(), stack: e && e.stack })) };
