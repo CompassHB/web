@@ -44,7 +44,7 @@ export class ReadPage implements PageConfig {
       <div id="disqus_thread"></div>
       <script dangerouslySetInnerHTML={{__html: `
           /* * * CONFIGURATION VARIABLES * * */
-          var disqus_url = 'https://www.compasshb.com/read/${passage.slug}/';
+          var disqus_url = 'https://www.compasshb.com/read/${passage.slug}';
           var disqus_title = '${passage.title} - Scripture of the Day - Compass HB';
           var disqus_identifier = 'read-${passage.id}';
       `}}></script>
@@ -53,7 +53,8 @@ export class ReadPage implements PageConfig {
   }
 
   data(): Graph {
-    const passageDetails = {
+    const passageDetails: Passage = {
+      id: 1,
       title: 'true',
       content: 'true',
       overview: 'true',
