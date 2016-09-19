@@ -3,11 +3,14 @@ import * as moment from "moment";
 import { PathValue, Range, ref } from "falcor-json-graph";
 import { Site, Sermon } from './wordpress';
 import { assert, pathValue } from './debug';
+import {EsvApi} from './esvapi';
 
 const LONG_DATE = 'dddd, MMMM D, YYYY';
 
 const wp = new Site('https://api.compasshb.com/wp-json/wp/v2');
 const reading = new Site('https://api.compasshb.com/reading/wp-json/wp/v2', 8);
+// TODO(ewinslow): Fail the prod server if this env is not available
+const esvApi = new EsvApi(process.env.ESV_API_KEY);
 
 function getPassagePaths(passage: Sermon) {
   return [
@@ -18,11 +21,12 @@ function getPassagePaths(passage: Sermon) {
   ];
 }
 
+
 export const router = new Router([
   {
     route: 'people.byId[{integers:ids}]["name","slug"]',
     async get([, , ids, props]: [any, any, Array<number>, Array<string>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var id of ids) {
         await (async function() {
@@ -34,27 +38,24 @@ export const router = new Router([
         })();
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
   {
     route: 'events.featured[{ranges}]',
     async get([, , ranges]: any): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var {from, to} of ranges) {
         await (async function() {
           const events = await wp.getFeaturedEvents({ offset: from, limit: to - from + 1 });
           events.forEach((event, i) => {
-            results.push({
-              path: ['events', 'featured', from + i],
-              value: ref(['events', 'bySlug', event.slug]),
-            });
+            results.push(pathValue(['events', 'featured', from + i], () => ref(['events', 'bySlug', event.slug])));
           });
         })();
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
   {
@@ -69,21 +70,18 @@ export const router = new Router([
   {
     route: 'events.upcoming[{ranges}]',
     async get([, , ranges]: [any,any,Array<Range>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var {from = 0, to} of ranges) {
         await (async function() {
           const events = await wp.getUpcomingEvents({ offset: from, limit: to - from + 1 });
           events.forEach((event, i) => {
-            results.push({
-              path: ['events', 'upcoming', from + i],
-              value: ref(['events', 'bySlug', event.slug]),
-            });
+            results.push(pathValue(['events', 'upcoming', from + i], () => ref(['events', 'bySlug', event.slug])));
           });
         })();
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
   {
@@ -98,7 +96,7 @@ export const router = new Router([
   {
     route: 'events.bySlug[{keys}]["coverImage","description","endTime","slug","startTime","title"]',
     async get([, , slugs, props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var slug of slugs) {
         await (async function() {
@@ -115,7 +113,7 @@ export const router = new Router([
         })();
       }
 
-      return results;
+      return Promise.all(results);
     }
   },
   {
@@ -143,21 +141,18 @@ export const router = new Router([
   {
     route: 'sermons.recent[{ranges:ranges}]',
     async get([, , ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var {from = 0, to} of ranges) {
         await (async function() {
           const sermons = await wp.getSermons({ offset: from, limit: to - from + 1 });
           sermons.forEach(({slug}, i) => {
-            results.push({
-              path: ['sermons', 'recent', from + i],
-              value: ref(['sermons', 'bySlug', slug]),
-            });
+            results.push(pathValue(['sermons', 'recent', from + i], () => ref(['sermons', 'bySlug', slug])));
           });
         })();
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
   {
@@ -172,7 +167,7 @@ export const router = new Router([
   {
     route: 'sermons.bySlug[{keys}]["content","coverImage","date","slug","teacher","text","title"]',
     async get([, , slugs, props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var slug of slugs) {
         await (async function() {
@@ -190,13 +185,13 @@ export const router = new Router([
         })();
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
   {
     route: 'pages.bySlug[{keys:slugs}]["content","slug","title"]',
     async get([, , slugs, props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var slug of slugs) {
         await (async function() {
@@ -209,7 +204,7 @@ export const router = new Router([
         })();
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
   {
@@ -217,33 +212,29 @@ export const router = new Router([
     async get(): Promise<Array<PathValue>> {
       const [src,width,height] = await reading.getLogo();
 
-      return [
+      return Promise.all([
         pathValue(['passages', 'logo', 'src'], () => src),
         pathValue(['passages', 'logo', 'width'], () => width),
         pathValue(['passages', 'logo', 'height'], () => height),
-      ];
+      ]);
     },
   },
   {
     route: 'passages.recent[{ranges}]',
     async get([,,ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var {from = 0, to} of ranges) {
         await (async function() {
           const passages = await reading.getSermons({ offset: from, limit: to - from + 1 });
           passages.forEach((passage, i) => {
-            results.push({
-              path: ['passages', 'recent', from + i],
-              value: ref(['passages', 'bySlug', passage.slug]),
-            });
-
+            results.push(pathValue(['passages', 'recent', from + i], () => ref(['passages', 'bySlug', passage.slug])));
             results.push(...getPassagePaths(passage));
           });
         })();
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
   {
@@ -258,32 +249,32 @@ export const router = new Router([
   {
     route: 'passages.bySlug[{keys}]["slug","title","content","overview","id","audio"]',
     async get([,,slugs,props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (var slug of slugs) {
         await (async function() {
           const passage = await reading.getSermonBySlug(slug);
           results.push(...getPassagePaths(passage));
 
-          const esvUrl = 'http://www.esvapi.org/v2/rest/passageQuery?key=TEST&passage=' + encodeURIComponent(passage.title.rendered);
+          const title = passage.title.rendered
 
-          results.push(pathValue(['passages', 'bySlug', passage.slug, 'audio'], () => esvUrl + '&output-format=mp3'));
+          if (props.indexOf('audio') >= 0) {
+            results.push(pathValue(['passages', 'bySlug', passage.slug, 'audio'], () => esvApi.getPassageAudio(title)));
+          }
 
           if (props.indexOf('content') >= 0) {
-            const response = await fetch(esvUrl + '&include-footnotes=false&include-audio-link=false&audio-format=mp3&include-passage-references=false');
-            const text = await response.text();
-            results.push(pathValue(['passages', 'bySlug', passage.slug, 'content'], () => text));
+            results.push(pathValue(['passages', 'bySlug', passage.slug, 'content'], () => esvApi.getPassageText(title)));
           }
         })();
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
   {
     route: 'passages.bySlug[{keys}].activity["today","now"]',
     async get([,,slugs]: [any,any,Array<string>]): Promise<Array<PathValue>> {
-      const results: Array<PathValue> = [];
+      const results: Array<Promise<PathValue>> = [];
 
       for (const slug of slugs) {
         // TODO(ewinslow): Get real numbers from Google Analytics?
@@ -291,7 +282,7 @@ export const router = new Router([
         results.push(pathValue(['passages', 'bySlug', slug, 'activity', 'now'], () => 2));
       }
 
-      return results;
+      return Promise.all(results);
     },
   },
 ]);

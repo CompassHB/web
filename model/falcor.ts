@@ -31,6 +31,7 @@ export interface Page {
 }
 
 export interface Passage {
+  audio?: string;
   id?: number;
   title?: string;
   slug?: string;

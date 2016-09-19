@@ -31,9 +31,9 @@ export class ReadPage implements PageConfig {
       <h3>Bible Overview</h3>
       <div dangerouslySetInnerHTML={{__html: passage.overview!}}></div>
       <br/>
-      <p> {passage!.activity!.today} people have read today. {passage!.activity!.now} active users. </p>
+      <p> {passage.activity!.today} people have read today. {passage!.activity!.now} active users. </p>
       {/* TODO(ewinslow): Pull this from the ESV API */}
-      <audio src="https://audio.esvbible.org/hw/43012001-43012050.mp3" controls />
+      <audio src={passage.audio} controls />
       <h5 className="tk-seravek-web">This Week</h5>
       <ul>
         {recent.map(({slug, title}) => (
