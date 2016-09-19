@@ -24,20 +24,17 @@ export const router = new Router([
     async get([, , ids, props]: [any, any, Array<number>, Array<string>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      let promise = Promise.resolve(results);
-      for (const id of ids) {
-        promise = promise.then(() => wp.getUser(id)).then((person) => {
+      for (var id of ids) {
+        await (async function() {
+          const person = await wp.getUser(id);
           results.push(...[
             pathValue(['people', 'byId', id, 'name'], () => person.name),
             pathValue(['people', 'byId', id, 'slug'], () => person.slug),
           ]);
-
-          return results;
-        });
-
+        })();
       }
 
-      return promise;
+      return results;
     },
   },
   {
@@ -45,21 +42,19 @@ export const router = new Router([
     async get([, , ranges]: any): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      let promise = Promise.resolve(results);
-      for (const {from, to} of ranges) {
-        promise = promise.then(() => wp.getFeaturedEvents({ offset: from, limit: to - from + 1 })).then((events) => {
+      for (var {from, to} of ranges) {
+        await (async function() {
+          const events = await wp.getFeaturedEvents({ offset: from, limit: to - from + 1 });
           events.forEach((event, i) => {
             results.push({
               path: ['events', 'featured', from + i],
               value: ref(['events', 'bySlug', event.slug]),
             });
           });
-
-          return results;
-        });
+        })();
       }
 
-      return promise;
+      return results;
     },
   },
   {
@@ -73,24 +68,22 @@ export const router = new Router([
   },
   {
     route: 'events.upcoming[{ranges}]',
-    async get([, , ranges]: any): Promise<Array<PathValue>> {
+    async get([, , ranges]: [any,any,Array<Range>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      let promise = Promise.resolve(results);
-      for (const {from, to} of ranges) {
-        promise = promise.then(() => wp.getUpcomingEvents({ offset: from, limit: to - from + 1 })).then((events) => {
+      for (var {from = 0, to} of ranges) {
+        await (async function() {
+          const events = await wp.getUpcomingEvents({ offset: from, limit: to - from + 1 });
           events.forEach((event, i) => {
             results.push({
               path: ['events', 'upcoming', from + i],
               value: ref(['events', 'bySlug', event.slug]),
             });
           });
-
-          return results;
-        });
+        })();
       }
 
-      return promise;
+      return results;
     },
   },
   {
@@ -107,9 +100,10 @@ export const router = new Router([
     async get([, , slugs, props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      let promise = Promise.resolve(results);
-      for (const slug of slugs) {
-        promise = promise.then(() => wp.getEventBySlug(slug)).then((event) => {
+      for (var slug of slugs) {
+        await (async function() {
+          const event = await wp.getEventBySlug(slug);
+
           results.push(...[
             pathValue(['events', 'bySlug', slug, 'coverImage'], () => event._embedded['wp:featuredmedia'][0].source_url, ''),
             pathValue(['events', 'bySlug', slug, 'description'], () => event.content.rendered),
@@ -118,13 +112,10 @@ export const router = new Router([
             pathValue(['events', 'bySlug', slug, 'startTime'], () => moment(event._EventStartDate).format(LONG_DATE)),
             pathValue(['events', 'bySlug', slug, 'title'], () => event.title.rendered),
           ]);
-
-          return results;
-        });
-
+        })();
       }
 
-      return promise;
+      return results;
     }
   },
   {
@@ -154,23 +145,19 @@ export const router = new Router([
     async get([, , ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      // Not sure why, but TypeScript keeps using yield here when we try to make this an async function
-      // For now, we'll have to use this promise-chaining approach which is still nicer than Observables IMO
-      let promise = Promise.resolve(results);
-      for (const {from = 0, to} of ranges) {
-        promise = promise.then(() => wp.getSermons({ offset: from, limit: to - from + 1 })).then((sermons) => {
+      for (var {from = 0, to} of ranges) {
+        await (async function() {
+          const sermons = await wp.getSermons({ offset: from, limit: to - from + 1 });
           sermons.forEach(({slug}, i) => {
             results.push({
               path: ['sermons', 'recent', from + i],
               value: ref(['sermons', 'bySlug', slug]),
             });
           });
-
-          return results;
-        });
+        })();
       }
 
-      return promise;
+      return results;
     },
   },
   {
@@ -187,9 +174,9 @@ export const router = new Router([
     async get([, , slugs, props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      let promise = Promise.resolve(results);
-      for (const slug of slugs) {
-        promise = promise.then(() => wp.getSermonBySlug(slug)).then((sermon) => {
+      for (var slug of slugs) {
+        await (async function() {
+          const sermon = await wp.getSermonBySlug(slug);
 
           results.push(...[
             pathValue(['sermons', 'bySlug', slug, 'content'], () => sermon.content.rendered),
@@ -200,12 +187,10 @@ export const router = new Router([
             pathValue(['sermons', 'bySlug', slug, 'text'], () => sermon.acf.text),
             pathValue(['sermons', 'bySlug', slug, 'title'], () => sermon.title.rendered),
           ]);
-
-          return results;
-        });
+        })();
       }
 
-      return promise;
+      return results;
     },
   },
   {
@@ -213,20 +198,18 @@ export const router = new Router([
     async get([, , slugs, props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      let promise = Promise.resolve(results);
-      for (const slug of slugs) {
-        promise = promise.then(() => wp.getPageBySlug(slug)).then((page) => {
+      for (var slug of slugs) {
+        await (async function() {
+          const page = await wp.getPageBySlug(slug);
           results.push(...[
             pathValue(['pages', 'bySlug', slug, 'content'], () => page.content.rendered),
             pathValue(['pages', 'bySlug', slug, 'slug'], () => page.slug),
             pathValue(['pages', 'bySlug', slug, 'title'], () => page.title.rendered),
           ]);
-
-          return results;
-        });
+        })();
       }
 
-      return promise;
+      return results;
     },
   },
   {
@@ -243,14 +226,12 @@ export const router = new Router([
   },
   {
     route: 'passages.recent[{ranges}]',
-    async get([,,ranges]: [any, any, Array<{from:number,to:number}>]): Promise<Array<PathValue>> {
+    async get([,,ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      // Not sure why, but TypeScript keeps using yield here when we try to make this an async function
-      // For now, we'll have to use this promise-chaining approach which is still nicer than Observables IMO
-      let promise = Promise.resolve(results);
-      for (const {from = 0, to} of ranges) {
-        promise = promise.then(() => reading.getSermons({ offset: from, limit: to - from + 1 })).then((passages) => {
+      for (var {from = 0, to} of ranges) {
+        await (async function() {
+          const passages = await reading.getSermons({ offset: from, limit: to - from + 1 });
           passages.forEach((passage, i) => {
             results.push({
               path: ['passages', 'recent', from + i],
@@ -259,12 +240,10 @@ export const router = new Router([
 
             results.push(...getPassagePaths(passage));
           });
-
-          return results;
-        });
+        })();
       }
 
-      return promise;
+      return results;
     },
   },
   {
