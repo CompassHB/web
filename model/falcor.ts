@@ -37,10 +37,6 @@ export interface Passage {
   slug?: string;
   content?: string;
   overview?: string;
-  activity?: {
-    today?: number,
-    now?: number,
-  };
 }
 
 export interface Person {

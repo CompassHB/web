@@ -271,18 +271,4 @@ export const router = new Router([
       return Promise.all(results);
     },
   },
-  {
-    route: 'passages.bySlug[{keys}].activity["today","now"]',
-    async get([,,slugs]: [any,any,Array<string>]): Promise<Array<PathValue>> {
-      const results: Array<Promise<PathValue>> = [];
-
-      for (const slug of slugs) {
-        // TODO(ewinslow): Get real numbers from Google Analytics?
-        results.push(pathValue(['passages', 'bySlug', slug, 'activity', 'today'], () => 86));
-        results.push(pathValue(['passages', 'bySlug', slug, 'activity', 'now'], () => 2));
-      }
-
-      return Promise.all(results);
-    },
-  },
 ]);
