@@ -51,7 +51,7 @@ export class SermonsPage implements PageConfig {
       sermons: {
         recent: {
           length: 1,
-          "0..100": {
+          "0..99": {
             $type: 'range',
             slug: 'true',
             coverImage: 'true',

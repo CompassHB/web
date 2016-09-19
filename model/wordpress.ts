@@ -105,7 +105,7 @@ export class Site {
   }
 
   async getSermons({offset = 0, limit = 100}): Promise<Array<Sermon>> {
-    return this.getJson(`/posts?categories=1&offset=${offset}&per_page=${limit}`);
+    return this.getJson(`/posts?_embed&categories=1&offset=${offset}&per_page=${limit}`);
   }
 
   async getSermonsCount(): Promise<number> {

@@ -1,7 +1,7 @@
 import * as Router from "falcor-router";
 import * as moment from "moment";
 import { PathValue, Range, ref } from "falcor-json-graph";
-import { Site, Sermon } from './wordpress';
+import { Site, Sermon, Event } from './wordpress';
 import { assert, pathValue } from './debug';
 import {EsvApi} from './esvapi';
 
@@ -12,12 +12,35 @@ const reading = new Site('https://api.compasshb.com/reading/wp-json/wp/v2', 8);
 // TODO(ewinslow): Fail the prod server if this env is not available
 const esvApi = new EsvApi(process.env.ESV_API_KEY);
 
+function getEventPaths(event: Event) {
+  return [
+    pathValue(['events', 'bySlug', event.slug, 'coverImage'], () => event._embedded['wp:featuredmedia'][0].source_url, ''),
+    pathValue(['events', 'bySlug', event.slug, 'description'], () => event.content.rendered),
+    pathValue(['events', 'bySlug', event.slug, 'endTime'], () => moment(event._EventEndDate).format(LONG_DATE)),
+    pathValue(['events', 'bySlug', event.slug, 'slug'], () => event.slug),
+    pathValue(['events', 'bySlug', event.slug, 'startTime'], () => moment(event._EventStartDate).format(LONG_DATE)),
+    pathValue(['events', 'bySlug', event.slug, 'title'], () => event.title.rendered),
+  ];
+}
+
 function getPassagePaths(passage: Sermon) {
   return [
     pathValue(['passages', 'bySlug', passage.slug, 'id'], () => passage.id),
     pathValue(['passages', 'bySlug', passage.slug, 'overview'], () => passage.content.rendered),
     pathValue(['passages', 'bySlug', passage.slug, 'slug'], () => passage.slug),
     pathValue(['passages', 'bySlug', passage.slug, 'title'], () => passage.title.rendered),
+  ];
+}
+
+function getSermonPaths(sermon: Sermon) {
+  return [
+    pathValue(['sermons', 'bySlug', sermon.slug, 'content'], () => sermon.content.rendered),
+    pathValue(['sermons', 'bySlug', sermon.slug, 'coverImage'], () => sermon._embedded['wp:featuredmedia'][0].source_url, ''),
+    pathValue(['sermons', 'bySlug', sermon.slug, 'date'], () => moment(sermon.date).format(LONG_DATE)),
+    pathValue(['sermons', 'bySlug', sermon.slug, 'slug'], () => sermon.slug),
+    pathValue(['sermons', 'bySlug', sermon.slug, 'teacher'], () => sermon._embedded.author[0].name),
+    pathValue(['sermons', 'bySlug', sermon.slug, 'text'], () => sermon.acf.text),
+    pathValue(['sermons', 'bySlug', sermon.slug, 'title'], () => sermon.title.rendered),
   ];
 }
 
@@ -51,6 +74,7 @@ export const router = new Router([
           const events = await wp.getFeaturedEvents({ offset: from, limit: to - from + 1 });
           events.forEach((event, i) => {
             results.push(pathValue(['events', 'featured', from + i], () => ref(['events', 'bySlug', event.slug])));
+            results.push(...getEventPaths(event));
           });
         })();
       }
@@ -77,6 +101,7 @@ export const router = new Router([
           const events = await wp.getUpcomingEvents({ offset: from, limit: to - from + 1 });
           events.forEach((event, i) => {
             results.push(pathValue(['events', 'upcoming', from + i], () => ref(['events', 'bySlug', event.slug])));
+            results.push(...getEventPaths(event));
           });
         })();
       }
@@ -102,14 +127,7 @@ export const router = new Router([
         await (async function() {
           const event = await wp.getEventBySlug(slug);
 
-          results.push(...[
-            pathValue(['events', 'bySlug', slug, 'coverImage'], () => event._embedded['wp:featuredmedia'][0].source_url, ''),
-            pathValue(['events', 'bySlug', slug, 'description'], () => event.content.rendered),
-            pathValue(['events', 'bySlug', slug, 'endTime'], () => moment(event._EventEndDate).format(LONG_DATE)),
-            pathValue(['events', 'bySlug', slug, 'slug'], () => event.slug),
-            pathValue(['events', 'bySlug', slug, 'startTime'], () => moment(event._EventStartDate).format(LONG_DATE)),
-            pathValue(['events', 'bySlug', slug, 'title'], () => event.title.rendered),
-          ]);
+          results.push(...getEventPaths(event));
         })();
       }
 
@@ -146,8 +164,9 @@ export const router = new Router([
       for (var {from = 0, to} of ranges) {
         await (async function() {
           const sermons = await wp.getSermons({ offset: from, limit: to - from + 1 });
-          sermons.forEach(({slug}, i) => {
-            results.push(pathValue(['sermons', 'recent', from + i], () => ref(['sermons', 'bySlug', slug])));
+          sermons.forEach((sermon, i) => {
+            results.push(pathValue(['sermons', 'recent', from + i], () => ref(['sermons', 'bySlug', sermon.slug])));
+            results.push(...getSermonPaths(sermon));
           });
         })();
       }
@@ -173,15 +192,7 @@ export const router = new Router([
         await (async function() {
           const sermon = await wp.getSermonBySlug(slug);
 
-          results.push(...[
-            pathValue(['sermons', 'bySlug', slug, 'content'], () => sermon.content.rendered),
-            pathValue(['sermons', 'bySlug', slug, 'coverImage'], () => sermon._embedded['wp:featuredmedia'][0].source_url, ''),
-            pathValue(['sermons', 'bySlug', slug, 'date'], () => moment(sermon.date).format(LONG_DATE)),
-            pathValue(['sermons', 'bySlug', slug, 'slug'], () => sermon.slug),
-            pathValue(['sermons', 'bySlug', slug, 'teacher'], () => sermon._embedded.author[0].name),
-            pathValue(['sermons', 'bySlug', slug, 'text'], () => sermon.acf.text),
-            pathValue(['sermons', 'bySlug', slug, 'title'], () => sermon.title.rendered),
-          ]);
+          results.push(...getSermonPaths(sermon));
         })();
       }
 
