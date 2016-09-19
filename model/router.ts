@@ -277,24 +277,28 @@ export const router = new Router([
     },
   },
   {
-    route: 'passages.bySlug[{keys}]["slug","title","content","overview","id"]',
+    route: 'passages.bySlug[{keys}]["slug","title","content","overview","id","audio"]',
     async get([,,slugs,props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
       const results: Array<PathValue> = [];
 
-      let promise = Promise.resolve(results);
-      for (const slug of slugs) {
-        promise = promise.then(() => reading.getSermonBySlug(slug)).then((passage) => {
+      for (var slug of slugs) {
+        await (async function() {
+          const passage = await reading.getSermonBySlug(slug);
           results.push(...getPassagePaths(passage));
 
-          if (props.indexOf('content') >= 0) {
-            results.push(pathValue(['passages', 'bySlug', passage.slug, 'content'], () => 'TODO: Fetch from ESV API'));
-          }
+          const esvUrl = 'http://www.esvapi.org/v2/rest/passageQuery?key=TEST&passage=' + encodeURIComponent(passage.title.rendered);
 
-          return results;
-        });
+          results.push(pathValue(['passages', 'bySlug', passage.slug, 'audio'], () => esvUrl + '&output-format=mp3'));
+
+          if (props.indexOf('content') >= 0) {
+            const response = await fetch(esvUrl + '&include-footnotes=false&include-audio-link=false&audio-format=mp3&include-passage-references=false');
+            const text = await response.text();
+            results.push(pathValue(['passages', 'bySlug', passage.slug, 'content'], () => text));
+          }
+        })();
       }
 
-      return promise;
+      return results;
     },
   },
   {

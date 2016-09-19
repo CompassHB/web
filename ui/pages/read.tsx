@@ -58,6 +58,7 @@ export class ReadPage implements PageConfig {
       content: 'true',
       overview: 'true',
       slug: 'true',
+      audio: 'true',
       activity: {
         today: 1,
         now: 1,
