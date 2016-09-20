@@ -93,14 +93,18 @@ export class IndexPage implements PageConfig {
           </div>
           )}
         </div>
-        <div className="row commission">
+        <div className="row" style={{backgroundColor: '#497f9e', padding: '0 0 15px 0', borderTop: '3px solid #F9F9F9'}}>
           <div className="col-sm-10 col-sm-offset-1">
-            <p>
-              <span className="title">Compass HB exists to make disciples of Jesus Christ</span><br />by
-              <span className="participle">reaching</span> as many people as possible for Christ,
-              <span className="participle">teaching</span> them to be like Christ, and
-              <span className="participle">training</span> them to serve Christ.<br />
-              <a href="/who-we-are" className="btn btn-default">Find out more about Compass HB</a>
+            <p style={{color: '#FFF', fontSize: '1.3em', marginTop: 20, lineHeight: '1.6em', textAlign: 'center'}}>
+              <span style={{fontSize: '1.5em', fontWeight: 'bold'}}>Compass HB exists to make disciples of Jesus Christ</span>
+              <br />by&nbsp;
+              <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>reaching</span> as many people as possible for Christ,&nbsp;
+              <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>teaching</span> them to be like Christ, and&nbsp;
+              <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>training</span> them to serve Christ.
+              <br />
+              <a href="/who-we-are" className="btn btn-default" style={{fontSize: '1em', marginTop: 20}}>
+                Find out more about Compass HB
+              </a>
             </p>
           </div>
         </div>
