@@ -44,6 +44,11 @@ export interface Person {
   slug?: string;
 }
 
+export interface Photo {
+  url?: string; // url to webpage for viewing the image
+  thumbnail?: string; // url to preview image
+}
+
 export interface Series {
   coverImage?: string;
   description?: string;
@@ -112,6 +117,10 @@ export interface Graph {
 
   people?: {
     byId?: Map<Person>,
+  };
+
+  photos?: {
+    recent?: List<Photo>,
   };
 
   series?: {
