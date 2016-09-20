@@ -3,7 +3,7 @@ import {Header} from "../components/header";
 import {Footer} from "../components/footer";
 import {LatestSermon, latestSermonData} from "../components/latestSermon";
 import {slice} from "../slice";
-import {Event, Graph, Sermon} from '../../model/falcor';
+import {Event, Graph, Photo, Sermon} from '../../model/falcor';
 import {PageConfig} from "../config";
 
 export class IndexPage implements PageConfig {
@@ -18,6 +18,16 @@ export class IndexPage implements PageConfig {
         recent: {
           "0": {
             title: 'true',
+          },
+          length: 1,
+        },
+      },
+      photos: {
+        recent: {
+          '0..7': {
+            $type: 'range',
+            url: 'true',
+            thumbnail: 'true',
           },
           length: 1,
         },
@@ -193,30 +203,11 @@ export class IndexPage implements PageConfig {
       <div className="row">
         <div className="col-xs-10 col-xs-offset-1">
           <h2 className="tk-seravek-web"><a href="/photos">Photos</a></h2>
+          {slice<Photo>(data.photos!.recent!, 0, 8).map((photo) => (
           <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-44qXNQg/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-44qXNQg/0/M/160228_DED_SS-085-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
+            <a href={photo.url}><img src={photo.thumbnail} style={{height: 175}} /></a>
           </div>
-          <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-js2tQ9G/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-js2tQ9G/0/M/160228_DED_SS-077-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
-          </div>
-          <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-73Vc9pn/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-73Vc9pn/0/M/160228_DED_SS-063-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
-          </div>
-          <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-2SD9Bdb/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-2SD9Bdb/0/M/160228_DED_SS-062-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
-          </div>
-          <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-WZphmPD/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-WZphmPD/0/M/160228_DED_SS-022-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
-          </div>
-          <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-JLs3MXT/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-JLs3MXT/0/M/160228_DED_SS-044-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
-          </div>
-          <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-N6gBk9S/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-N6gBk9S/0/M/160228_DED_SS-018-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
-          </div>
-          <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-6rb2q5j/"><img data-src="https://compasshb.smugmug.com/PhotoArchive/Child-Dedications/Child-Dedications-021816/i-6rb2q5j/0/M/160228_DED_SS-008-M.jpg" className="lazyload" style={{height: 175}} alt="photos.compasshb.com" /></a>
-          </div>
+          ))}
         </div>
       </div>
       <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 40}}>

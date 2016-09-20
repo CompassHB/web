@@ -15,6 +15,9 @@ describe('IndexPage', function() {
               },
             },
           },
+          photos: {
+            recent: {length: 0},
+          },
           sermons: {
             recent: {
               0: {
@@ -55,6 +58,9 @@ describe('IndexPage', function() {
               title: 'John 12',
             },
           },
+        },
+        photos: {
+          recent: {length: 0},
         },
         sermons: {
           recent: {

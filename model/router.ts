@@ -4,6 +4,7 @@ import { PathValue, Range, ref } from "falcor-json-graph";
 import { Site, Sermon, Event } from './wordpress';
 import { assert, pathValue } from './debug';
 import {EsvApi} from './esvapi';
+import {Smugmug} from './smugmug';
 
 const LONG_DATE = 'dddd, MMMM D, YYYY';
 
@@ -11,6 +12,7 @@ const wp = new Site('https://api.compasshb.com/wp-json/wp/v2');
 const reading = new Site('https://api.compasshb.com/reading/wp-json/wp/v2', 8);
 // TODO(ewinslow): Fail the prod server if this env is not available
 const esvApi = new EsvApi(process.env.ESV_API_KEY);
+const smugmug = new Smugmug(process.env.SMUGMUG_API_KEY);
 
 function getEventPaths(event: Event) {
   return [
@@ -132,6 +134,36 @@ export const router = new Router([
       }
 
       return Promise.all(results);
+    }
+  },
+  {
+    route: 'photos.recent[{ranges}]["url","thumnail"]',
+    async get([,,ranges]: [any,any,Array<Range>]): Promise<Array<PathValue>> {
+      const results: Array<Promise<PathValue>> = [];
+
+      for (var {from = 0, to} of ranges) {
+        await (async function() {
+          const photos = await smugmug.getRecentImages({ offset: from, limit: to - from + 1 });
+
+          results.push(pathValue(['photos', 'recent', 'length'], () => photos.Pages.Total));
+
+          photos.Image.forEach((photo, i) => {
+            results.push(pathValue(['photos', 'recent', from + i, 'url'], () => photo.WebUri));
+            results.push(pathValue(['photos', 'recent', from + i, 'thumbnail'], () => photo.ThumbnailUrl));
+          });
+        })();
+      }
+
+      return Promise.all(results);
+    }
+  },
+  {
+    route: 'photos.recent.length',
+    async get() {
+      return [{
+        path: ['photos', 'recent', 'length'],
+        value: (await smugmug.getRecentImages({offset: 0, limit: 1})).Pages.Total,
+      }];
     }
   },
   {

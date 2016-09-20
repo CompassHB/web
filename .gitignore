@@ -6,3 +6,4 @@ npm-debug.log
 _out
 newrelic_agent.log
 .idea
+.env

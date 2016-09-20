@@ -1,10 +1,9 @@
-if (process.env.NEWRELIC_LICENSE_KEY) {
-  require('newrelic');
-}
+require('dotenv').config({path: __dirname + '/../.env'});
 
 import * as React from "react";
 import * as express from "express";
 import * as FalcorExpress from 'falcor-express';
+import { assert } from './model/debug';
 import { Server } from 'http';
 import { PageConfig } from "./ui/config";
 import { CollegePage } from "./ui/pages/college";
@@ -26,6 +25,13 @@ import { getPathSets } from './ui/paths';
 import { model } from './model/model';
 import { renderHtmlPage } from './ui/render_html_page';
 import { Graph } from './model/falcor';
+
+if (process.env.NEWRELIC_LICENSE_KEY) {
+  require('newrelic');
+}
+
+assert('A SmugMug APIKey is required', process.env.SMUGMUG_API_KEY);
+
 
 const app = express();
 const falcorModel = model();
@@ -119,7 +125,7 @@ routes.forEach(([urlPattern, pageFactory]) => {
         console.error(errors.map((e: { value: string }) => {
           try {
             return JSON.parse(e.value);
-          } catch (e) {
+          } catch (error) {
             return e;
           }
         }));
