@@ -30,9 +30,6 @@ if (process.env.NEWRELIC_LICENSE_KEY) {
   require('newrelic');
 }
 
-assert('A SmugMug APIKey is required', process.env.SMUGMUG_API_KEY);
-
-
 const app = express();
 const falcorModel = model();
 
