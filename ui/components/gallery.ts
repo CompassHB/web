@@ -1,6 +1,6 @@
+import {CSSProperties} from 'react';
 
-
-export const container = {
+export const container: CSSProperties = {
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'space-around',
@@ -9,7 +9,7 @@ export const container = {
   padding: 0,
 };
 
-export const item = {
+export const item: CSSProperties = {
   flexGrow: 1,
   margin: '.5em',
   width: '20em',
