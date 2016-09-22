@@ -46,7 +46,7 @@
     "jasmine-core": "^2.4.1",
     "jasmine-node": "^1.14.5",
     "nsp": "^2.6.1",
-    "typescript": "2.1.0-dev.20160908",
+    "typescript": "2.1.0-dev.20160921",
     "typescript-formatter": "^2.3.0",
     "whatwg-fetch": "^1.0.0"
   },
