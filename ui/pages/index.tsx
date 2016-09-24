@@ -6,6 +6,21 @@ import {slice} from "../slice";
 import {Event, Graph, Photo, Sermon} from '../../model/falcor';
 import {PageConfig} from "../config";
 
+const boxerStyles: React.CSSProperties = {
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  color: '#fff',
+  display: 'block',
+  minHeight: 129,
+  padding: 10,
+  textTransform: 'uppercase',
+  width: '100%',
+};
+
+const clickableStyles: React.CSSProperties = {
+  textDecoration: 'none',
+};
+
 export class IndexPage implements PageConfig {
   title() { return 'CompassHB'; }
 
@@ -68,7 +83,6 @@ export class IndexPage implements PageConfig {
 
     return <div className="page-container">
         <Header/>
-        <style dangerouslySetInnerHTML={{__html: "\n        .boxer {\n          display: block;\n          text-transform: uppercase;\n          color: #fff;\n          padding: 10px;\n          width: 100%;\n          min-height: 129px;\n          background-size: cover;\n          background-position: center;\n        }\n        " }} />
         <div className="container-fluid">
           <div className="row">
             <div className="col-sm-12">
@@ -83,7 +97,7 @@ export class IndexPage implements PageConfig {
           <div className="col-sm-3">
             <div className="Box--shadow" style={{width: '100%'}}>
               <span className="Box--shadow--wrap">
-                <a className="clickable boxer" href="/read" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${data.passages!.logo!.src})`}}>
+                <a href="/read" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${data.passages!.logo!.src})`})}>
                   <h4 className="tk-seravek-web">{data.passages!.recent![0]!.title}</h4>
                   <p>Scripture of the Day</p>
                 </a>
@@ -94,7 +108,7 @@ export class IndexPage implements PageConfig {
           <div className="col-sm-3">
             <div className="Box--shadow" style={{width: '100%'}}>
               <span className="Box--shadow--wrap">
-                <a className="clickable featuredblog boxer" href={"/events/" + event.slug} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${event.coverImage})`}}>
+                <a className="featuredblog" href={"/events/" + event.slug} style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${event.coverImage})`})}>
                   <h4 className="tk-seravek-web">{event.title}</h4>
                   <p>{event.startTime}</p>
                 </a>
@@ -129,7 +143,7 @@ export class IndexPage implements PageConfig {
               <p>5082 Argosy Avenue<br />Huntington Beach, CA 92649</p>
               <br />
             </div>
-            <div className="col-md-4 text-center" style={{}}>
+            <div className="col-md-4 text-center">
               <h2 className="tk-seravek-web">Directions</h2>
               <br />
               <a href="https://www.google.com/maps?ll=33.74078,-118.040232&z=10&t=m&hl=en-US&gl=US&mapclient=embed&q=5082+Argosy+Ave+Huntington+Beach,+CA+92649"><img data-src="https://compasshb.smugmug.com/photos/i-WWb58Jn/0/M/i-WWb58Jn-M.png" width={300} height={262} alt="Map to Compass HB" className="lazyload" /></a>
@@ -158,9 +172,9 @@ export class IndexPage implements PageConfig {
               <div className="col-sm-6 col-md-3">
                 <div className="Box--shadow" style={{width: '100%'}}>
                   <span className="Box--shadow--wrap">
-                    <a className="clickable featuredblog boxer"
+                    <a className="featuredblog"
                       href={`/sermons/${sermon.slug}`}
-                      style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + sermon.coverImage + ')'}}>
+                      style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + sermon.coverImage + ')'})}>
                       <h4 className="tk-seravek-web">{sermon.title}</h4>
                       <p>{sermon.date}<br />{sermon.text}</p>
                       <br /><br />
@@ -177,7 +191,7 @@ export class IndexPage implements PageConfig {
           <div className="col-sm-6 col-md-6">
             <div className="Box--shadow" style={{width: '100%'}}>
                     <span className="Box--shadow--wrap">
-                      <a className="clickable featuredblog boxer" href="/blog/the-bunny-run" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'}}>
+                      <a className="featuredblog" href="/blog/the-bunny-run" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'})}>
                         <br /><br />
                         <h4 className="tk-seravek-web">The Bunny Run </h4>
                         <p> March 14</p>
@@ -189,7 +203,7 @@ export class IndexPage implements PageConfig {
           <div className="col-sm-6 col-md-6">
             <div className="Box--shadow" style={{width: '100%'}}>
                     <span className="Box--shadow--wrap">
-                      <a className="clickable featuredblog boxer" href="/blog/parenting-event" style={{backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'}}>
+                      <a className="featuredblog" href="/blog/parenting-event" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'})}>
                         <br /><br />
                         <h4 className="tk-seravek-web">Parenting Event</h4>
                         <p> March 2</p>
