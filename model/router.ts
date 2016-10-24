@@ -3,8 +3,8 @@ import * as moment from "moment";
 import { PathValue, Range, ref } from "falcor-json-graph";
 import { Site, Sermon, Event } from './wordpress';
 import { assert, pathValue } from './debug';
-import {EsvApi} from './esvapi';
-import {Smugmug} from './smugmug';
+import { EsvApi } from './esvapi';
+import { Smugmug } from './smugmug';
 
 const LONG_DATE = 'dddd, MMMM D, YYYY';
 
@@ -95,7 +95,7 @@ export const router = new Router([
   },
   {
     route: 'events.upcoming[{ranges}]',
-    async get([, , ranges]: [any,any,Array<Range>]): Promise<Array<PathValue>> {
+    async get([, , ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
       const results: Array<Promise<PathValue>> = [];
 
       for (var {from = 0, to} of ranges) {
@@ -138,7 +138,7 @@ export const router = new Router([
   },
   {
     route: 'photos.recent[{ranges}]["url","thumnail"]',
-    async get([,,ranges]: [any,any,Array<Range>]): Promise<Array<PathValue>> {
+    async get([, , ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
       const results: Array<Promise<PathValue>> = [];
 
       for (var {from = 0, to} of ranges) {
@@ -162,7 +162,7 @@ export const router = new Router([
     async get() {
       return [{
         path: ['photos', 'recent', 'length'],
-        value: (await smugmug.getRecentImages({offset: 0, limit: 1})).Pages.Total,
+        value: (await smugmug.getRecentImages({ offset: 0, limit: 1 })).Pages.Total,
       }];
     }
   },
@@ -253,7 +253,7 @@ export const router = new Router([
   {
     route: 'passages.logo["src","width","height"]',
     async get(): Promise<Array<PathValue>> {
-      const [src,width,height] = await reading.getLogo();
+      const [src, width, height] = await reading.getLogo();
 
       return Promise.all([
         pathValue(['passages', 'logo', 'src'], () => src),
@@ -264,7 +264,7 @@ export const router = new Router([
   },
   {
     route: 'passages.recent[{ranges}]',
-    async get([,,ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
+    async get([, , ranges]: [any, any, Array<Range>]): Promise<Array<PathValue>> {
       const results: Array<Promise<PathValue>> = [];
 
       for (var {from = 0, to} of ranges) {
@@ -291,7 +291,7 @@ export const router = new Router([
   },
   {
     route: 'passages.bySlug[{keys}]["slug","title","content","overview","id","audio"]',
-    async get([,,slugs,props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
+    async get([, , slugs, props]: [any, any, Array<string>, Array<string>]): Promise<Array<PathValue>> {
       const results: Array<Promise<PathValue>> = [];
 
       for (var slug of slugs) {
