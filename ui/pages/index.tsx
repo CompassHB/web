@@ -152,7 +152,7 @@ export class IndexPage implements PageConfig {
                 <div className="col-md-4 text-center">
                   <h2 className="tk-seravek-web">Directions</h2>
                   <br />
-                  <a href="https://www.google.com/maps?ll=33.74078,-118.040232&z=10&t=m&hl=en-US&gl=US&mapclient=embed&q=5082+Argosy+Ave+Huntington+Beach,+CA+92649"><img data-src="https://compasshb.smugmug.com/photos/i-WWb58Jn/0/M/i-WWb58Jn-M.png" width={300} height={262} alt="Map to Compass HB" className="lazyload" /></a>
+                  <a href="https://www.google.com/maps?ll=33.74078,-118.040232&z=10&t=m&hl=en-US&gl=US&mapclient=embed&q=5082+Argosy+Ave+Huntington+Beach,+CA+92649"><img src="https://compasshb.smugmug.com/photos/i-WWb58Jn/0/M/i-WWb58Jn-M.png" width={300} height={262} alt="Map to Compass HB" /></a>
                 </div>
                 <div className="col-md-4 text-center">
                   <h2 className="tk-seravek-web">Midweek</h2>
@@ -245,49 +245,18 @@ export class IndexPage implements PageConfig {
               <div className="col-md-5">
                 <h2 className="tk-seravek-web"><a href="https://www.facebook.com/CompassHB">Facebook</a></h2>
                 <div className="fb-like-box" data-href="https://www.facebook.com/CompassHB" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="true" data-show-border="false" />
+                <div id="fb-root"></div>
+                <script src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=386571371526429" id="facebook-jssdk" async defer></script>
               </div>
               <div className="col-md-7">
-                <h2 className="tk-seravek-web"><a href="https://www.twitter.com/compasshb">Tweets</a></h2><br />
-                <a className="twitter-timeline" data-dnt="true" href="https://twitter.com/BradMSmith/lists/compasshb" data-widget-id={566872417012690945} data-chrome="noheader">Tweets from https://twitter.com/BradMSmith/lists/compasshb</a>   </div>
+                <h2 className="tk-seravek-web"><a href="https://www.twitter.com/compasshb">Tweets</a></h2>
+                <a className="twitter-timeline" data-dnt="true" href="https://twitter.com/BradMSmith/lists/compasshb" data-widget-id="566872417012690945" data-chrome="noheader">
+                  Tweets from https://twitter.com/BradMSmith/lists/compasshb
+                </a>
+                <script src="https://platform.twitter.com/widgets.js" id="twitter-wjs" async defer></script>
+                </div>
               </div>
               <br /><br />&nbsp;<br /><br />
-            </div>
-            <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
-              <div className="col-xs-10 col-xs-offset-1">
-                <h2 className="tk-seravek-web"><a href="https://www.instagram.com/compasshb">Instagram</a></h2>
-                <div className="col-sm-6 col-md-3">
-                  <div className="thumbnail">
-                    <a href="https://www.instagram.com/p/BDGk9FDTXcW/">
-                      <img data-src="https://scontent.cdninstagram.com/t51.2885-15/e15/12822567_1684502881815900_874786318_n.jpg?ig_cache_key=MTIwODgxNjA3Njk4MjE1NTAzMA%3D%3D.2" className="lazyload" alt="Compass HB Instagram" />
-                    </a>
-                    <p style={{padding: 10}}>The Bunny Run is TOMORROW!  Sign up today! </p>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-3">
-                  <div className="thumbnail">
-                    <a href="https://www.instagram.com/p/BCrr-d1TXX_/">
-                      <img data-src="https://scontent.cdninstagram.com/t51.2885-15/e35/11373758_518652378317471_2137181717_n.jpg?ig_cache_key=MTIwMTI0NzEzNDI2NDY4NjA3OQ%3D%3D.2" className="lazyload" alt="Compass HB Instagram" />
-                    </a>
-                    <p style={{padding: 10}}>The Bunny Run is a week and a half away. Sign up today. Link in profile. #5k #egghunt </p>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-3">
-                  <div className="thumbnail">
-                    <a href="https://www.instagram.com/p/BAIMr9wTXWf/">
-                      <img data-src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/1172298_1011539018903437_4968945_n.jpg?ig_cache_key=MTE1NTIyOTEwMjIyNDc5OTEzNQ%3D%3D.2.l" className="lazyload" alt="Compass HB Instagram" />
-                    </a>
-                    <p style={{padding: 10}}>Praise the Lord for answering our prayers and bringing @billblakey to be our new pastor! Now that 2016 is here let's ask God: SHOW ME YOUR GLORY! </p>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-md-3">
-                  <div className="thumbnail">
-                    <a href="https://www.instagram.com/p/-XDNzbTXbD/">
-                      <img data-src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/11917839_174590899555911_1386563803_n.jpg?ig_cache_key=MTEyMzM4MDc3NDc2Mzg1MzUwNw%3D%3D.2.l" className="lazyload" alt="Compass HB Instagram" />
-                    </a>
-                    <p style={{padding: 10}}>Do people still want ice cream in November? Why yes, yes they do!!! #icecreamevangelism </p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
