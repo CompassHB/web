@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 export class EsvApi {
-  constructor(private key = 'TEST') {}
+  constructor(private key = 'TEST') { }
 
   private getPassageQueryBaseUrl(passage: string): string {
     return `http://www.esvapi.org/v2/rest/passageQuery?key=${encodeURIComponent(this.key)}&passage=${encodeURIComponent(passage)}`;

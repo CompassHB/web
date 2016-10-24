@@ -16,7 +16,7 @@ describe('IndexPage', function() {
             },
           },
           photos: {
-            recent: {length: 0},
+            recent: { length: 0 },
           },
           sermons: {
             recent: {
@@ -60,7 +60,7 @@ describe('IndexPage', function() {
           },
         },
         photos: {
-          recent: {length: 0},
+          recent: { length: 0 },
         },
         sermons: {
           recent: {

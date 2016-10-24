@@ -1,4 +1,4 @@
-import {getPathSets} from './paths';
+import { getPathSets } from './paths';
 
 describe('getPathSets', () => {
   it('handles a single shallow property', () => {
@@ -34,7 +34,7 @@ describe('getPathSets', () => {
     });
 
     expect(actual).toEqual([
-      ['foo', {from: 0, to: 9}, 'bar'],
+      ['foo', { from: 0, to: 9 }, 'bar'],
     ]);
   });
 });

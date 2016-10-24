@@ -1,4 +1,4 @@
-require('dotenv').config({path: __dirname + '/../.env'});
+require('dotenv').config({ path: __dirname + '/../.env' });
 
 import * as React from "react";
 import * as express from "express";
@@ -91,10 +91,10 @@ const routes: Array<[string, (params: any) => PageConfig]> = [
   ['/kids', () => new KidsPage()],
   ['/men', () => new MenPage()],
   ['/read', () => new ReadPage()],
-  ['/read/:slug', ({slug = require('slug')}) => new ReadPage(slug)],
+  ['/read/:slug', ({slug = require('slug') }) => new ReadPage(slug)],
   ['/series', () => new SeriesPage()],
   ['/sermons', () => new SermonsPage()],
-  ['/sermons/:slug', ({slug = required('slug')}) => new SermonPage(slug)],
+  ['/sermons/:slug', ({slug = required('slug') }) => new SermonPage(slug)],
   ['/songs', () => new SongsPage()],
   ['/sundayschool', () => new SundaySchoolPage()],
   ['/videos', () => new VideosPage()],
@@ -109,7 +109,7 @@ routes.forEach(([urlPattern, pageFactory]) => {
     try {
       const config = pageFactory(params);
       const pathSets = getPathSets(config.data ? config.data() : {});
-      const {json: data}: {json: Graph} = await falcorModel.get(...pathSets) || {json: {}};
+      const {json: data}: { json: Graph } = await falcorModel.get(...pathSets) || { json: {} };
       const title = config.title ? config.title(data) : 'CompassHB';
       const content = config.render(data);
       const html = await renderHtmlPage(title, content);
