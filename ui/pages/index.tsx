@@ -5,6 +5,7 @@ import {LatestSermon, latestSermonData} from "../components/latestSermon";
 import {slice} from "../slice";
 import {Event, Graph, Photo, Sermon} from '../../model/falcor';
 import {PageConfig} from "../config";
+import {BoxShadow, Size} from "../components/boxShadow";
 
 const boxerStyles: React.CSSProperties = {
   backgroundPosition: 'center',
@@ -96,25 +97,25 @@ export class IndexPage implements PageConfig {
             {/* Announcements */}
             <div className="row" style={Object.assign({}, drawerStyles)}>
               <div className="col-sm-9">
-                <div style={{width: '100%'}}>
+                <BoxShadow size={Size.LARGE}>
                   <LatestSermon sermon={sermon} />
-                </div>
+                </BoxShadow>
               </div>
               <div className="col-sm-3">
                 <div style={{display: 'flex', flexDirection:'column', justifyContent: 'space-between'}}>
-                  <div style={{width: '100%'}}>
+                  <BoxShadow>
                     <a href="/read" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${data.passages!.logo!.src})`})}>
                       <h4 className="tk-seravek-web">{data.passages!.recent![0]!.title}</h4>
                       <p>Scripture of the Day</p>
                     </a>
-                  </div>
+                  </BoxShadow>
                   {events.map((event) =>
-                  <div style={{width: '100%'}}>
+                  <BoxShadow>
                     <a className="featuredblog" href={"/events/" + event.slug} style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${event.coverImage})`})}>
                       <h4 className="tk-seravek-web">{event.title}</h4>
                       <p>{event.startTime}</p>
                     </a>
-                  </div>
+                  </BoxShadow>
                   )}
                 </div>
               </div>
@@ -179,19 +180,17 @@ export class IndexPage implements PageConfig {
             <div className="col-xs-10 col-xs-offset-1">
               <h2 className="tk-seravek-web"><a href="/sermons">Sermons</a></h2>
                 {sermons.map(sermon => (
-                  <div className="col-sm-6 col-md-3">
-                    <div className="Box--shadow" style={{width: '100%'}}>
-                      <span className="Box--shadow--wrap">
-                        <a className="featuredblog"
-                          href={`/sermons/${sermon.slug}`}
-                          style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + sermon.coverImage + ')'})}>
-                          <h4 className="tk-seravek-web">{sermon.title}</h4>
-                          <p>{sermon.date}<br />{sermon.text}</p>
-                          <br /><br />
-                        </a>
-                      </span>
-                    </div>
-                  </div>
+                <div className="col-sm-6 col-md-3">
+                  <BoxShadow>
+                    <a className="featuredblog"
+                      href={`/sermons/${sermon.slug}`}
+                      style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + sermon.coverImage + ')'})}>
+                      <h4 className="tk-seravek-web">{sermon.title}</h4>
+                      <p>{sermon.date}<br />{sermon.text}</p>
+                      <br /><br />
+                    </a>
+                  </BoxShadow>
+                </div>
                 ))}
             </div>
           </div>
@@ -201,28 +200,24 @@ export class IndexPage implements PageConfig {
             <div className="col-xs-10 col-xs-offset-1">
               <h2 className="tk-seravek-web"><a href="/blog">Videos</a></h2>
               <div className="col-sm-6 col-md-6">
-                <div className="Box--shadow" style={{width: '100%'}}>
-                  <span className="Box--shadow--wrap">
-                    <a className="featuredblog" href="/blog/the-bunny-run" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'})}>
-                      <br /><br />
-                      <h4 className="tk-seravek-web">The Bunny Run </h4>
-                      <p> March 14</p>
-                      <br /><br /><br /><br />
-                    </a>
-                  </span>
-                </div>
+                <BoxShadow>
+                  <a className="featuredblog" href="/blog/the-bunny-run" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'})}>
+                    <br /><br />
+                    <h4 className="tk-seravek-web">The Bunny Run </h4>
+                    <p> March 14</p>
+                    <br /><br /><br /><br />
+                  </a>
+                </BoxShadow>
               </div>
               <div className="col-sm-6 col-md-6">
-                <div className="Box--shadow" style={{width: '100%'}}>
-                  <span className="Box--shadow--wrap">
-                    <a className="featuredblog" href="/blog/parenting-event" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'})}>
-                      <br /><br />
-                      <h4 className="tk-seravek-web">Parenting Event</h4>
-                      <p> March 2</p>
-                      <br /><br /><br /><br />
-                    </a>
-                  </span>
-                </div>
+                <BoxShadow>
+                  <a className="featuredblog" href="/blog/parenting-event" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'})}>
+                    <br /><br />
+                    <h4 className="tk-seravek-web">Parenting Event</h4>
+                    <p> March 2</p>
+                    <br /><br /><br /><br />
+                  </a>
+                </BoxShadow>
               </div>
             </div>
           </div>
