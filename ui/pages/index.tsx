@@ -21,6 +21,12 @@ const clickableStyles: React.CSSProperties = {
   textDecoration: 'none',
 };
 
+const drawerStyles: React.CSSProperties = {
+  backgroundImage: 'url("https://compasshb.smugmug.com/photos/i-dVdWJ7B/0/S/i-dVdWJ7B-S.jpg")',
+  padding: '20px 10px',
+  textAlign: 'center',
+};
+
 export class IndexPage implements PageConfig {
   title() { return 'CompassHB'; }
 
@@ -82,199 +88,211 @@ export class IndexPage implements PageConfig {
     const events = slice<Event>(data.events!.upcoming!, 0, 2);
 
     return <div className="page-container">
-        <Header/>
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-sm-12">
-              <div className="drawer row">
-                <div className="col-sm-9">
-                  <div className="Box--shadow--big" style={{width: '100%'}}>
-                    <span className="Box--shadow--wrap">
-                      <LatestSermon sermon={sermon} />
-                    </span>
-                  </div>
+      <Header/>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-12">
+
+            {/* Announcements */}
+            <div className="row" style={Object.assign({}, drawerStyles)}>
+              <div className="col-sm-9">
+                <div style={{width: '100%'}}>
+                  <LatestSermon sermon={sermon} />
                 </div>
-          <div className="col-sm-3">
-            <div className="Box--shadow" style={{width: '100%'}}>
-              <span className="Box--shadow--wrap">
-                <a href="/read" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${data.passages!.logo!.src})`})}>
-                  <h4 className="tk-seravek-web">{data.passages!.recent![0]!.title}</h4>
-                  <p>Scripture of the Day</p>
-                </a>
-              </span>
+              </div>
+              <div className="col-sm-3">
+                <div style={{display: 'flex', flexDirection:'column', justifyContent: 'space-between'}}>
+                  <div style={{width: '100%'}}>
+                    <a href="/read" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${data.passages!.logo!.src})`})}>
+                      <h4 className="tk-seravek-web">{data.passages!.recent![0]!.title}</h4>
+                      <p>Scripture of the Day</p>
+                    </a>
+                  </div>
+                  {events.map((event) =>
+                  <div style={{width: '100%'}}>
+                    <a className="featuredblog" href={"/events/" + event.slug} style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${event.coverImage})`})}>
+                      <h4 className="tk-seravek-web">{event.title}</h4>
+                      <p>{event.startTime}</p>
+                    </a>
+                  </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Mission statement */}
+            <div className="row" style={{backgroundColor: '#497f9e', padding: '0 0 15px 0', borderTop: '3px solid #F9F9F9'}}>
+              <div className="col-sm-10 col-sm-offset-1">
+                <p style={{color: '#FFF', fontSize: '1.3em', marginTop: 20, lineHeight: '1.6em', textAlign: 'center'}}>
+                  <span style={{fontSize: '1.5em', fontWeight: 'bold'}}>Compass HB exists to make disciples of Jesus Christ</span>
+                  <br />by&nbsp;
+                  <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>reaching</span> as many people as possible for Christ,&nbsp;
+                  <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>teaching</span> them to be like Christ, and&nbsp;
+                  <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>training</span> them to serve Christ.
+                  <br />
+                  <a href="/who-we-are" className="btn btn-default" style={{fontSize: '1em', marginTop: 20}}>
+                    Find out more about Compass HB
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            {/* Metadata */}
+            <div className="row" style={{background: 'none', backgroundColor: '#f7f7f7', paddingTop: 30, paddingBottom: 30}}>
+              <div className="col-sm-10 col-sm-offset-1">
+                <div className="col-md-4 text-center">
+                  <h2 className="tk-seravek-web">
+                    Saturdays at 6:30pm <br/>
+                    Sundays at 9am and 11am
+                  </h2>
+                  <br />
+                  <p>5082 Argosy Avenue<br />Huntington Beach, CA 92649</p>
+                  <br />
+                </div>
+                <div className="col-md-4 text-center">
+                  <h2 className="tk-seravek-web">Directions</h2>
+                  <br />
+                  <a href="https://www.google.com/maps?ll=33.74078,-118.040232&z=10&t=m&hl=en-US&gl=US&mapclient=embed&q=5082+Argosy+Ave+Huntington+Beach,+CA+92649"><img data-src="https://compasshb.smugmug.com/photos/i-WWb58Jn/0/M/i-WWb58Jn-M.png" width={300} height={262} alt="Map to Compass HB" className="lazyload" /></a>
+                </div>
+                <div className="col-md-4 text-center">
+                  <h2 className="tk-seravek-web">Midweek</h2>
+                  <br />
+                <h5><a href="/fellowship">Home Fellowship Groups</a></h5>
+                <p>Tuesday, Wednesday, Thursday, and Friday</p>
+                <br />
+                <h5><a href="/kids#awana">Awana for kids</a></h5>
+                <p>Wednesday</p>
+                <br />
+                <h5><a href="/youth">The United for Youth</a></h5>
+                <p>Thursday</p>
+              </div>
             </div>
           </div>
-          {events.map((event) =>
-          <div className="col-sm-3">
-            <div className="Box--shadow" style={{width: '100%'}}>
-              <span className="Box--shadow--wrap">
-                <a className="featuredblog" href={"/events/" + event.slug} style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${event.coverImage})`})}>
-                  <h4 className="tk-seravek-web">{event.title}</h4>
-                  <p>{event.startTime}</p>
-                </a>
-              </span>
+
+          {/* Spacer */}
+          <div className="row">
+            <div style={{backgroundImage: 'url(https://compasshb.smugmug.com/photos/i-WMM77kp/0/X3/i-WMM77kp-X3.jpg)', paddingTop: 250, backgroundAttachment: 'fixed', backgroundPosition: '50% 0', WebkitBackgroundSize: 'cover', MozBackgroundSize: 'cover', OBackgroundSize: 'cover', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} />
+          </div>
+
+          {/* Latest sermons */}
+          <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
+            <div className="col-xs-10 col-xs-offset-1">
+              <h2 className="tk-seravek-web"><a href="/sermons">Sermons</a></h2>
+                {sermons.map(sermon => (
+                  <div className="col-sm-6 col-md-3">
+                    <div className="Box--shadow" style={{width: '100%'}}>
+                      <span className="Box--shadow--wrap">
+                        <a className="featuredblog"
+                          href={`/sermons/${sermon.slug}`}
+                          style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + sermon.coverImage + ')'})}>
+                          <h4 className="tk-seravek-web">{sermon.title}</h4>
+                          <p>{sermon.date}<br />{sermon.text}</p>
+                          <br /><br />
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
-          )}
-        </div>
-        <div className="row" style={{backgroundColor: '#497f9e', padding: '0 0 15px 0', borderTop: '3px solid #F9F9F9'}}>
-          <div className="col-sm-10 col-sm-offset-1">
-            <p style={{color: '#FFF', fontSize: '1.3em', marginTop: 20, lineHeight: '1.6em', textAlign: 'center'}}>
-              <span style={{fontSize: '1.5em', fontWeight: 'bold'}}>Compass HB exists to make disciples of Jesus Christ</span>
-              <br />by&nbsp;
-              <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>reaching</span> as many people as possible for Christ,&nbsp;
-              <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>teaching</span> them to be like Christ, and&nbsp;
-              <span style={{fontWeight: 'bold', fontStyle: 'italic'}}>training</span> them to serve Christ.
-              <br />
-              <a href="/who-we-are" className="btn btn-default" style={{fontSize: '1em', marginTop: 20}}>
-                Find out more about Compass HB
-              </a>
-            </p>
-          </div>
-        </div>
-        <div className="row" style={{background: 'none', backgroundColor: '#f7f7f7', paddingTop: 30, paddingBottom: 30}}>
-          <div className="col-sm-10 col-sm-offset-1">
-            <div className="col-md-4 text-center">
-              <h2 className="tk-seravek-web">
-                Saturdays at 6:30pm <br/>
-                Sundays at 9am and 11am
-              </h2>
-              <br />
-              <p>5082 Argosy Avenue<br />Huntington Beach, CA 92649</p>
-              <br />
-            </div>
-            <div className="col-md-4 text-center">
-              <h2 className="tk-seravek-web">Directions</h2>
-              <br />
-              <a href="https://www.google.com/maps?ll=33.74078,-118.040232&z=10&t=m&hl=en-US&gl=US&mapclient=embed&q=5082+Argosy+Ave+Huntington+Beach,+CA+92649"><img data-src="https://compasshb.smugmug.com/photos/i-WWb58Jn/0/M/i-WWb58Jn-M.png" width={300} height={262} alt="Map to Compass HB" className="lazyload" /></a>
-            </div>
-            <div className="col-md-4 text-center">
-              <h2 className="tk-seravek-web">Midweek</h2>
-              <br />
-            <h5><a href="/fellowship">Home Fellowship Groups</a></h5>
-            <p>Tuesday, Wednesday, Thursday, and Friday</p>
-            <br />
-            <h5><a href="/kids#awana">Awana for kids</a></h5>
-            <p>Wednesday</p>
-            <br />
-            <h5><a href="/youth">The United for Youth</a></h5>
-            <p>Thursday</p>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div style={{backgroundImage: 'url(https://compasshb.smugmug.com/photos/i-WMM77kp/0/X3/i-WMM77kp-X3.jpg)', paddingTop: 250, backgroundAttachment: 'fixed', backgroundPosition: '50% 0', WebkitBackgroundSize: 'cover', MozBackgroundSize: 'cover', OBackgroundSize: 'cover', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} />
-      </div>
-      <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
-        <div className="col-xs-10 col-xs-offset-1">
-          <h2 className="tk-seravek-web"><a href="/sermons">Sermons</a></h2>
-            {sermons.map(sermon => (
-              <div className="col-sm-6 col-md-3">
+
+          {/* Videos */}
+          <div className="row" style={{background: 'none', backgroundColor: '#dddddd', paddingBottom: 20}}>
+            <div className="col-xs-10 col-xs-offset-1">
+              <h2 className="tk-seravek-web"><a href="/blog">Videos</a></h2>
+              <div className="col-sm-6 col-md-6">
                 <div className="Box--shadow" style={{width: '100%'}}>
                   <span className="Box--shadow--wrap">
-                    <a className="featuredblog"
-                      href={`/sermons/${sermon.slug}`}
-                      style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(' + sermon.coverImage + ')'})}>
-                      <h4 className="tk-seravek-web">{sermon.title}</h4>
-                      <p>{sermon.date}<br />{sermon.text}</p>
+                    <a className="featuredblog" href="/blog/the-bunny-run" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'})}>
                       <br /><br />
+                      <h4 className="tk-seravek-web">The Bunny Run </h4>
+                      <p> March 14</p>
+                      <br /><br /><br /><br />
                     </a>
                   </span>
                 </div>
               </div>
-            ))}
+              <div className="col-sm-6 col-md-6">
+                <div className="Box--shadow" style={{width: '100%'}}>
+                  <span className="Box--shadow--wrap">
+                    <a className="featuredblog" href="/blog/parenting-event" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'})}>
+                      <br /><br />
+                      <h4 className="tk-seravek-web">Parenting Event</h4>
+                      <p> March 2</p>
+                      <br /><br /><br /><br />
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Photos */}
+          <div className="row">
+            <div className="col-xs-10 col-xs-offset-1">
+              <h2 className="tk-seravek-web"><a href="/photos">Photos</a></h2>
+              {slice<Photo>(data.photos!.recent!, 0, 8).map((photo) => (
+              <div className="col-md-3" style={{paddingBottom: 10}}>
+                <a href={photo.url}><img src={photo.thumbnail} style={{height: 175}} /></a>
+              </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Social networks */}
+          <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 40}}>
+            <div className="col-xs-10 col-xs-offset-1">
+              <div className="col-md-5">
+                <h2 className="tk-seravek-web"><a href="https://www.facebook.com/CompassHB">Facebook</a></h2>
+                <div className="fb-like-box" data-href="https://www.facebook.com/CompassHB" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="true" data-show-border="false" />
+              </div>
+              <div className="col-md-7">
+                <h2 className="tk-seravek-web"><a href="https://www.twitter.com/compasshb">Tweets</a></h2><br />
+                <a className="twitter-timeline" data-dnt="true" href="https://twitter.com/BradMSmith/lists/compasshb" data-widget-id={566872417012690945} data-chrome="noheader">Tweets from https://twitter.com/BradMSmith/lists/compasshb</a>   </div>
+              </div>
+              <br /><br />&nbsp;<br /><br />
+            </div>
+            <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
+              <div className="col-xs-10 col-xs-offset-1">
+                <h2 className="tk-seravek-web"><a href="https://www.instagram.com/compasshb">Instagram</a></h2>
+                <div className="col-sm-6 col-md-3">
+                  <div className="thumbnail">
+                    <a href="https://www.instagram.com/p/BDGk9FDTXcW/">
+                      <img data-src="https://scontent.cdninstagram.com/t51.2885-15/e15/12822567_1684502881815900_874786318_n.jpg?ig_cache_key=MTIwODgxNjA3Njk4MjE1NTAzMA%3D%3D.2" className="lazyload" alt="Compass HB Instagram" />
+                    </a>
+                    <p style={{padding: 10}}>The Bunny Run is TOMORROW!  Sign up today! </p>
+                  </div>
+                </div>
+                <div className="col-sm-6 col-md-3">
+                  <div className="thumbnail">
+                    <a href="https://www.instagram.com/p/BCrr-d1TXX_/">
+                      <img data-src="https://scontent.cdninstagram.com/t51.2885-15/e35/11373758_518652378317471_2137181717_n.jpg?ig_cache_key=MTIwMTI0NzEzNDI2NDY4NjA3OQ%3D%3D.2" className="lazyload" alt="Compass HB Instagram" />
+                    </a>
+                    <p style={{padding: 10}}>The Bunny Run is a week and a half away. Sign up today. Link in profile. #5k #egghunt </p>
+                  </div>
+                </div>
+                <div className="col-sm-6 col-md-3">
+                  <div className="thumbnail">
+                    <a href="https://www.instagram.com/p/BAIMr9wTXWf/">
+                      <img data-src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/1172298_1011539018903437_4968945_n.jpg?ig_cache_key=MTE1NTIyOTEwMjIyNDc5OTEzNQ%3D%3D.2.l" className="lazyload" alt="Compass HB Instagram" />
+                    </a>
+                    <p style={{padding: 10}}>Praise the Lord for answering our prayers and bringing @billblakey to be our new pastor! Now that 2016 is here let's ask God: SHOW ME YOUR GLORY! </p>
+                  </div>
+                </div>
+                <div className="col-sm-6 col-md-3">
+                  <div className="thumbnail">
+                    <a href="https://www.instagram.com/p/-XDNzbTXbD/">
+                      <img data-src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/11917839_174590899555911_1386563803_n.jpg?ig_cache_key=MTEyMzM4MDc3NDc2Mzg1MzUwNw%3D%3D.2.l" className="lazyload" alt="Compass HB Instagram" />
+                    </a>
+                    <p style={{padding: 10}}>Do people still want ice cream in November? Why yes, yes they do!!! #icecreamevangelism </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="row" style={{background: 'none', backgroundColor: '#dddddd', paddingBottom: 20}}>
-        <div className="col-xs-10 col-xs-offset-1">
-          <h2 className="tk-seravek-web"><a href="/blog">Videos</a></h2>
-          <div className="col-sm-6 col-md-6">
-            <div className="Box--shadow" style={{width: '100%'}}>
-                    <span className="Box--shadow--wrap">
-                      <a className="featuredblog" href="/blog/the-bunny-run" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/560428840_1280.jpg)'})}>
-                        <br /><br />
-                        <h4 className="tk-seravek-web">The Bunny Run </h4>
-                        <p> March 14</p>
-                        <br /><br /><br /><br />
-                      </a>
-                    </span>
-            </div>
-          </div>
-          <div className="col-sm-6 col-md-6">
-            <div className="Box--shadow" style={{width: '100%'}}>
-                    <span className="Box--shadow--wrap">
-                      <a className="featuredblog" href="/blog/parenting-event" style={Object.assign({}, clickableStyles, boxerStyles, {backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.vimeocdn.com/video/558788268_640.jpg)'})}>
-                        <br /><br />
-                        <h4 className="tk-seravek-web">Parenting Event</h4>
-                        <p> March 2</p>
-                        <br /><br /><br /><br />
-                      </a>
-                    </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-xs-10 col-xs-offset-1">
-          <h2 className="tk-seravek-web"><a href="/photos">Photos</a></h2>
-          {slice<Photo>(data.photos!.recent!, 0, 8).map((photo) => (
-          <div className="col-md-3" style={{paddingBottom: 10}}>
-            <a href={photo.url}><img src={photo.thumbnail} style={{height: 175}} /></a>
-          </div>
-          ))}
-        </div>
-      </div>
-      <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 40}}>
-        <div className="col-xs-10 col-xs-offset-1">
-          <div className="col-md-5">
-            <h2 className="tk-seravek-web"><a href="https://www.facebook.com/CompassHB">Facebook</a></h2>
-            <div className="fb-like-box" data-href="https://www.facebook.com/CompassHB" data-colorscheme="light" data-show-faces="false" data-header="false" data-stream="true" data-show-border="false" />
-          </div>
-          <div className="col-md-7">
-            <h2 className="tk-seravek-web"><a href="https://www.twitter.com/compasshb">Tweets</a></h2><br />
-            <a className="twitter-timeline" data-dnt="true" href="https://twitter.com/BradMSmith/lists/compasshb" data-widget-id={566872417012690945} data-chrome="noheader">Tweets from https://twitter.com/BradMSmith/lists/compasshb</a>   </div>
-          </div>
-          <br /><br />&nbsp;<br /><br />
-        </div>
-        <div className="row" style={{background: 'none', backgroundColor: '#fff', paddingBottom: 20}}>
-          <div className="col-xs-10 col-xs-offset-1">
-            <h2 className="tk-seravek-web"><a href="https://www.instagram.com/compasshb">Instagram</a></h2>
-            <div className="col-sm-6 col-md-3">
-              <div className="thumbnail">
-                <a href="https://www.instagram.com/p/BDGk9FDTXcW/">
-                  <img data-src="https://scontent.cdninstagram.com/t51.2885-15/e15/12822567_1684502881815900_874786318_n.jpg?ig_cache_key=MTIwODgxNjA3Njk4MjE1NTAzMA%3D%3D.2" className="lazyload" alt="Compass HB Instagram" />
-                </a>
-                <p style={{padding: 10}}>The Bunny Run is TOMORROW!  Sign up today! </p>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-3">
-              <div className="thumbnail">
-                <a href="https://www.instagram.com/p/BCrr-d1TXX_/">
-                  <img data-src="https://scontent.cdninstagram.com/t51.2885-15/e35/11373758_518652378317471_2137181717_n.jpg?ig_cache_key=MTIwMTI0NzEzNDI2NDY4NjA3OQ%3D%3D.2" className="lazyload" alt="Compass HB Instagram" />
-                </a>
-                <p style={{padding: 10}}>The Bunny Run is a week and a half away. Sign up today. Link in profile. #5k #egghunt </p>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-3">
-              <div className="thumbnail">
-                <a href="https://www.instagram.com/p/BAIMr9wTXWf/">
-                  <img data-src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/1172298_1011539018903437_4968945_n.jpg?ig_cache_key=MTE1NTIyOTEwMjIyNDc5OTEzNQ%3D%3D.2.l" className="lazyload" alt="Compass HB Instagram" />
-                </a>
-                <p style={{padding: 10}}>Praise the Lord for answering our prayers and bringing @billblakey to be our new pastor! Now that 2016 is here let's ask God: SHOW ME YOUR GLORY! </p>
-              </div>
-            </div>
-            <div className="col-sm-6 col-md-3">
-              <div className="thumbnail">
-                <a href="https://www.instagram.com/p/-XDNzbTXbD/">
-                  <img data-src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/11917839_174590899555911_1386563803_n.jpg?ig_cache_key=MTEyMzM4MDc3NDc2Mzg1MzUwNw%3D%3D.2.l" className="lazyload" alt="Compass HB Instagram" />
-                </a>
-                <p style={{padding: 10}}>Do people still want ice cream in November? Why yes, yes they do!!! #icecreamevangelism </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div></div></div>
       <Footer/>
-    </div>
+    </div>;
   }
 }
