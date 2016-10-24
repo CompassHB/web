@@ -26,6 +26,19 @@ export function renderHtmlPage(title: string, reactElement: any) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
         <script src="/ui/common.js" crossorigin="anonymous"></script>
+
+        <!-- Analytics comes last because it is not user-facing -->
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+        <script>
+          (function (i, r) {
+              i['GoogleAnalyticsObject'] = r;
+              i[r] = i[r] || function () {
+                  (i[r].q = i[r].q || []).push(arguments)
+              }, i[r].l = 1 * new Date();
+          })(window, 'ga');
+          ga('create', 'UA-53384235-1', 'auto');
+          ga('send', 'pageview');
+        </script>
       </body>
     </html>
   `;
