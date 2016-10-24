@@ -1,4 +1,4 @@
-import { PathValue, error } from "falcor-json-graph";
+import * as jsong from "falcor-json-graph";
 
 export function assert<T>(message: string, truthy: T) {
   if (!truthy) {
@@ -8,14 +8,17 @@ export function assert<T>(message: string, truthy: T) {
   return truthy;
 }
 
-export async function pathValue<T>(path: Array<string | number>, get: () => T, defaultValue?: T): Promise<PathValue> {
+const FIVE_MINUTES_MILLIS = 5 * 60 * 1000;
+
+export async function atom<T>(path: jsong.Path, value: () => T | Promise<T>, defaultValue?: T): Promise<jsong.PathValue> {
   try {
-    return { path, value: await get() };
+    return { path, value: jsong.atom(await value(), { $expires: -FIVE_MINUTES_MILLIS }) };
   } catch (e) {
-    if (defaultValue == null) {
-      return { path, value: error(JSON.stringify({ path, getter: get.toString(), stack: e && e.stack })) };
-    } else {
-      return { path, value: defaultValue };
-    }
+    console.error(e);
+    return { path, value: jsong.atom(defaultValue, { $expires: -FIVE_MINUTES_MILLIS }) };
   }
+}
+
+export async function ref(path: jsong.Path, value: jsong.Path): Promise<jsong.PathValue> {
+  return { path, value: jsong.ref(value, { $expires: -FIVE_MINUTES_MILLIS }) };
 }

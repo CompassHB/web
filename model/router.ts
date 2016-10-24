@@ -1,8 +1,8 @@
 import * as Router from "falcor-router";
 import * as moment from "moment";
-import { PathValue, Range, ref } from "falcor-json-graph";
+import { PathValue, Range } from "falcor-json-graph";
 import { Site, Sermon, Event } from './wordpress';
-import { assert, pathValue } from './debug';
+import { atom, ref } from './debug';
 import { EsvApi } from './esvapi';
 import { Smugmug } from './smugmug';
 
@@ -14,35 +14,42 @@ const reading = new Site('https://api.compasshb.com/reading/wp-json/wp/v2', 8);
 const esvApi = new EsvApi(process.env.ESV_API_KEY);
 const smugmug = new Smugmug(process.env.SMUGMUG_API_KEY);
 
+const ONE_MINUTE_IN_MILLIS = 60 * 1000;
+const ONE_DAY_IN_MILLIS = 24 * 60 * ONE_MINUTE_IN_MILLIS;
+
 function getEventPaths(event: Event) {
+  function property(name: string, value: () => string, defaultValue = '') {
+    return atom(['events', 'bySlug', event.slug, name], value, defaultValue);
+  }
+
   return [
-    pathValue(['events', 'bySlug', event.slug, 'coverImage'], () => event._embedded['wp:featuredmedia'][0].source_url, ''),
-    pathValue(['events', 'bySlug', event.slug, 'description'], () => event.content.rendered),
-    pathValue(['events', 'bySlug', event.slug, 'endTime'], () => moment(event._EventEndDate).format(LONG_DATE)),
-    pathValue(['events', 'bySlug', event.slug, 'slug'], () => event.slug),
-    pathValue(['events', 'bySlug', event.slug, 'startTime'], () => moment(event._EventStartDate).format(LONG_DATE)),
-    pathValue(['events', 'bySlug', event.slug, 'title'], () => event.title.rendered),
+    property('coverImage', () => event._embedded['wp:featuredmedia'][0].source_url),
+    property('description', () => event.content.rendered),
+    property('endTime', () => moment(event._EventEndDate).format(LONG_DATE)),
+    property('slug', () => event.slug),
+    property('startTime', () => moment(event._EventStartDate).format(LONG_DATE)),
+    property('title', () => event.title.rendered),
   ];
 }
 
 function getPassagePaths(passage: Sermon) {
   return [
-    pathValue(['passages', 'bySlug', passage.slug, 'id'], () => passage.id),
-    pathValue(['passages', 'bySlug', passage.slug, 'overview'], () => passage.content.rendered),
-    pathValue(['passages', 'bySlug', passage.slug, 'slug'], () => passage.slug),
-    pathValue(['passages', 'bySlug', passage.slug, 'title'], () => passage.title.rendered),
+    atom(['passages', 'bySlug', passage.slug, 'id'], () => passage.id),
+    atom(['passages', 'bySlug', passage.slug, 'overview'], () => passage.content.rendered),
+    atom(['passages', 'bySlug', passage.slug, 'slug'], () => passage.slug),
+    atom(['passages', 'bySlug', passage.slug, 'title'], () => passage.title.rendered),
   ];
 }
 
 function getSermonPaths(sermon: Sermon) {
   return [
-    pathValue(['sermons', 'bySlug', sermon.slug, 'content'], () => sermon.content.rendered),
-    pathValue(['sermons', 'bySlug', sermon.slug, 'coverImage'], () => sermon._embedded['wp:featuredmedia'][0].source_url, ''),
-    pathValue(['sermons', 'bySlug', sermon.slug, 'date'], () => moment(sermon.date).format(LONG_DATE)),
-    pathValue(['sermons', 'bySlug', sermon.slug, 'slug'], () => sermon.slug),
-    pathValue(['sermons', 'bySlug', sermon.slug, 'teacher'], () => sermon._embedded.author[0].name),
-    pathValue(['sermons', 'bySlug', sermon.slug, 'text'], () => sermon.acf.text),
-    pathValue(['sermons', 'bySlug', sermon.slug, 'title'], () => sermon.title.rendered),
+    atom(['sermons', 'bySlug', sermon.slug, 'content'], () => sermon.content.rendered),
+    atom(['sermons', 'bySlug', sermon.slug, 'coverImage'], () => sermon._embedded['wp:featuredmedia'][0].source_url, ''),
+    atom(['sermons', 'bySlug', sermon.slug, 'date'], () => moment(sermon.date).format(LONG_DATE)),
+    atom(['sermons', 'bySlug', sermon.slug, 'slug'], () => sermon.slug),
+    atom(['sermons', 'bySlug', sermon.slug, 'teacher'], () => sermon._embedded.author[0].name),
+    atom(['sermons', 'bySlug', sermon.slug, 'text'], () => sermon.acf.text),
+    atom(['sermons', 'bySlug', sermon.slug, 'title'], () => sermon.title.rendered),
   ];
 }
 
@@ -57,8 +64,8 @@ export const router = new Router([
         await (async function() {
           const person = await wp.getUser(id);
           results.push(...[
-            pathValue(['people', 'byId', id, 'name'], () => person.name),
-            pathValue(['people', 'byId', id, 'slug'], () => person.slug),
+            atom(['people', 'byId', id, 'name'], () => person.name),
+            atom(['people', 'byId', id, 'slug'], () => person.slug),
           ]);
         })();
       }
@@ -75,7 +82,7 @@ export const router = new Router([
         await (async function() {
           const events = await wp.getFeaturedEvents({ offset: from, limit: to - from + 1 });
           events.forEach((event, i) => {
-            results.push(pathValue(['events', 'featured', from + i], () => ref(['events', 'bySlug', event.slug])));
+            results.push(ref(['events', 'featured', from + i], ['events', 'bySlug', event.slug]));
             results.push(...getEventPaths(event));
           });
         })();
@@ -102,7 +109,7 @@ export const router = new Router([
         await (async function() {
           const events = await wp.getUpcomingEvents({ offset: from, limit: to - from + 1 });
           events.forEach((event, i) => {
-            results.push(pathValue(['events', 'upcoming', from + i], () => ref(['events', 'bySlug', event.slug])));
+            results.push(ref(['events', 'upcoming', from + i], ['events', 'bySlug', event.slug]));
             results.push(...getEventPaths(event));
           });
         })();
@@ -145,11 +152,11 @@ export const router = new Router([
         await (async function() {
           const photos = await smugmug.getRecentImages({ offset: from, limit: to - from + 1 });
 
-          results.push(pathValue(['photos', 'recent', 'length'], () => photos.Pages.Total));
+          results.push(atom(['photos', 'recent', 'length'], () => photos.Pages.Total));
 
           photos.Image.forEach((photo, i) => {
-            results.push(pathValue(['photos', 'recent', from + i, 'url'], () => photo.WebUri));
-            results.push(pathValue(['photos', 'recent', from + i, 'thumbnail'], () => photo.ThumbnailUrl));
+            results.push(atom(['photos', 'recent', from + i, 'url'], () => photo.WebUri));
+            results.push(atom(['photos', 'recent', from + i, 'thumbnail'], () => photo.ThumbnailUrl));
           });
         })();
       }
@@ -197,7 +204,7 @@ export const router = new Router([
         await (async function() {
           const sermons = await wp.getSermons({ offset: from, limit: to - from + 1 });
           sermons.forEach((sermon, i) => {
-            results.push(pathValue(['sermons', 'recent', from + i], () => ref(['sermons', 'bySlug', sermon.slug])));
+            results.push(ref(['sermons', 'recent', from + i], ['sermons', 'bySlug', sermon.slug]));
             results.push(...getSermonPaths(sermon));
           });
         })();
@@ -240,9 +247,9 @@ export const router = new Router([
         await (async function() {
           const page = await wp.getPageBySlug(slug);
           results.push(...[
-            pathValue(['pages', 'bySlug', slug, 'content'], () => page.content.rendered),
-            pathValue(['pages', 'bySlug', slug, 'slug'], () => page.slug),
-            pathValue(['pages', 'bySlug', slug, 'title'], () => page.title.rendered),
+            atom(['pages', 'bySlug', slug, 'content'], () => page.content.rendered),
+            atom(['pages', 'bySlug', slug, 'slug'], () => page.slug),
+            atom(['pages', 'bySlug', slug, 'title'], () => page.title.rendered),
           ]);
         })();
       }
@@ -256,9 +263,9 @@ export const router = new Router([
       const [src, width, height] = await reading.getLogo();
 
       return Promise.all([
-        pathValue(['passages', 'logo', 'src'], () => src),
-        pathValue(['passages', 'logo', 'width'], () => width),
-        pathValue(['passages', 'logo', 'height'], () => height),
+        atom(['passages', 'logo', 'src'], () => src),
+        atom(['passages', 'logo', 'width'], () => width),
+        atom(['passages', 'logo', 'height'], () => height),
       ]);
     },
   },
@@ -271,7 +278,7 @@ export const router = new Router([
         await (async function() {
           const passages = await reading.getSermons({ offset: from, limit: to - from + 1 });
           passages.forEach((passage, i) => {
-            results.push(pathValue(['passages', 'recent', from + i], () => ref(['passages', 'bySlug', passage.slug])));
+            results.push(ref(['passages', 'recent', from + i], ['passages', 'bySlug', passage.slug]));
             results.push(...getPassagePaths(passage));
           });
         })();
@@ -302,11 +309,11 @@ export const router = new Router([
           const title = passage.title.rendered
 
           if (props.indexOf('audio') >= 0) {
-            results.push(pathValue(['passages', 'bySlug', passage.slug, 'audio'], () => esvApi.getPassageAudio(title)));
+            results.push(atom(['passages', 'bySlug', passage.slug, 'audio'], () => esvApi.getPassageAudio(title)));
           }
 
           if (props.indexOf('content') >= 0) {
-            results.push(pathValue(['passages', 'bySlug', passage.slug, 'content'], () => esvApi.getPassageText(title)));
+            results.push(atom(['passages', 'bySlug', passage.slug, 'content'], () => esvApi.getPassageText(title)));
           }
         })();
       }

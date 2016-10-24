@@ -47,7 +47,9 @@ export class Site {
   }
 
   private async getJson(resource: string) {
-    const response: Response = await fetch(this.baseUrl + resource);
+    const url = this.baseUrl + resource;
+    console.log(`Fetching resource: ${url}`);
+    const response: Response = await fetch(url);
     const json: any = await response.json();
 
     if (response.status >= 400) {

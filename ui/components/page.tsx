@@ -2,17 +2,24 @@ import * as React from "react";
 import {Header} from "./header";
 import {Footer} from "./footer";
 
-const styles = {
-  main: {
-    marginTop: '1em',
-    padding: '1em',
-  },
-  nav: {
-    marginTop: '1em',
-  },
-  heading: {
-    marginTop: 0,
-  },
+const mainStyles: React.CSSProperties = {
+  marginTop: '1em',
+  padding: '1em',
+  width: '66.6666666%',
+};
+
+const navStyles: React.CSSProperties = {
+  marginTop: '1em',
+};
+
+const outerMainStyles: React.CSSProperties = {
+  backgroundColor: '#EEE',
+  display: 'flex',
+  justifyContent: 'center',
+};
+
+const headingStyles: React.CSSProperties = {
+  marginTop: 0,
 };
 
 export interface PageProps {children?: React.ReactElement<any>[]; title: string;}
@@ -21,9 +28,9 @@ export function Page({children = undefined, title}: PageProps) {
   return (
     <div className="page-container">
       <Header/>
-      <div className="row" style={{backgroundColor: '#EEE'}}>
-        <main className="col-md-8 col-md-push-2" style={styles.main}>
-          <h1 style={styles.heading}>{title}</h1>
+      <div style={outerMainStyles}>
+        <main style={mainStyles}>
+          <h1 style={headingStyles}>{title}</h1>
           {children}
         </main>
       </div>

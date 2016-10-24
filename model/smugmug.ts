@@ -90,7 +90,9 @@ export class Smugmug {
       };
     }
 
-    const response = await fetch(`https://www.smugmug.com/api/v2/user/compasshb!recentimages?APIKey=${this.key}&start=${offset + 1}&count=${limit}`, {
+    const url = `https://www.smugmug.com/api/v2/user/compasshb!recentimages?APIKey=${this.key}&start=${offset + 1}&count=${limit}`;
+    console.log(`Fetching resource: ${url}`);
+    const response = await fetch(url, {
       headers: {
         "Accept": "application/json",
       },
