@@ -2,6 +2,7 @@
   "exceptions": [
   	// waiting for upstream to fix per https://github.com/Netflix/falcor-express/pull/36
   	"https://nodesecurity.io/advisories/46",
-  	"https://nodesecurity.io/advisories/106"
+  	"https://nodesecurity.io/advisories/106",
+  	"https://nodesecurity.io/advisories/134"
   ]
 }

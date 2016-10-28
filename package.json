@@ -6,7 +6,8 @@
     "fix": "tsfmt -r",
     "start": "npm run build && node _out/server.js",
     "test": "npm run build && jasmine-node _out/ --junitreport",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "posttest": "nsp check"
   },
   "dependencies": {
     "dotenv": "^2.0.0",
